@@ -1,0 +1,717 @@
+﻿[
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          66
+        ]
+      }
+    ],
+    "elements": [
+      66
+    ],
+    "variant_num": 1
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          29,
+          30
+        ]
+      },
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          25,
+          32
+        ]
+      }
+    ],
+    "elements": [
+      29,
+      30,
+      25,
+      32
+    ],
+    "variant_num": 2
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "single_chicken",
+        "elements": [
+          47
+        ]
+      }
+    ],
+    "elements": [
+      47
+    ],
+    "variant_num": 3
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          64
+        ]
+      }
+    ],
+    "elements": [
+      64
+    ],
+    "variant_num": 4
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          69
+        ]
+      }
+    ],
+    "elements": [
+      69
+    ],
+    "variant_num": 5
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          76
+        ]
+      }
+    ],
+    "elements": [
+      76
+    ],
+    "variant_num": 6
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "single_bone",
+        "elements": [
+          18
+        ]
+      },
+      {
+        "type": "red_pepper",
+        "elements": [
+          58
+        ]
+      }
+    ],
+    "elements": [
+      18,
+      58
+    ],
+    "variant_num": 7
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          19,
+          20
+        ]
+      },
+      {
+        "type": "single_chicken",
+        "elements": [
+          41
+        ]
+      }
+    ],
+    "elements": [
+      19,
+      20,
+      41
+    ],
+    "variant_num": 8
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "green_onion",
+        "elements": [
+          15
+        ]
+      },
+      {
+        "type": "green_onion",
+        "elements": [
+          11
+        ]
+      }
+    ],
+    "elements": [
+      15,
+      11
+    ],
+    "variant_num": 9
+  },
+  {
+    "type": "chicken_pepper",
+    "units": [
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          27,
+          54
+        ]
+      },
+      {
+        "type": "red_pepper",
+        "elements": [
+          62
+        ]
+      }
+    ],
+    "elements": [
+      27,
+      54,
+      62
+    ],
+    "variant_num": 10
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "green_onion",
+        "elements": [
+          7
+        ]
+      }
+    ],
+    "elements": [
+      7
+    ],
+    "variant_num": 11
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          53,
+          23
+        ]
+      },
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          51,
+          52
+        ]
+      }
+    ],
+    "elements": [
+      53,
+      23,
+      51,
+      52
+    ],
+    "variant_num": 12
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "single_chicken",
+        "elements": [
+          38
+        ]
+      },
+      {
+        "type": "red_pepper",
+        "elements": [
+          63
+        ]
+      }
+    ],
+    "elements": [
+      38,
+      63
+    ],
+    "variant_num": 13
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          60
+        ]
+      },
+      {
+        "type": "single_bone",
+        "elements": [
+          24
+        ]
+      }
+    ],
+    "elements": [
+      60,
+      24
+    ],
+    "variant_num": 14
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          71
+        ]
+      }
+    ],
+    "elements": [
+      71
+    ],
+    "variant_num": 15
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          57
+        ]
+      },
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          43,
+          44
+        ]
+      }
+    ],
+    "elements": [
+      57,
+      43,
+      44
+    ],
+    "variant_num": 16
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          40,
+          48
+        ]
+      },
+      {
+        "type": "red_pepper",
+        "elements": [
+          65
+        ]
+      }
+    ],
+    "elements": [
+      40,
+      48,
+      65
+    ],
+    "variant_num": 17
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          73
+        ]
+      },
+      {
+        "type": "red_pepper",
+        "elements": [
+          72
+        ]
+      }
+    ],
+    "elements": [
+      73,
+      72
+    ],
+    "variant_num": 18
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          70
+        ]
+      },
+      {
+        "type": "green_onion",
+        "elements": [
+          5
+        ]
+      }
+    ],
+    "elements": [
+      70,
+      5
+    ],
+    "variant_num": 19
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          34,
+          50
+        ]
+      }
+    ],
+    "elements": [
+      34,
+      50
+    ],
+    "variant_num": 20
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "green_onion",
+        "elements": [
+          13
+        ]
+      }
+    ],
+    "elements": [
+      13
+    ],
+    "variant_num": 21
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "green_onion",
+        "elements": [
+          10
+        ]
+      }
+    ],
+    "elements": [
+      10
+    ],
+    "variant_num": 22
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          67
+        ]
+      }
+    ],
+    "elements": [
+      67
+    ],
+    "variant_num": 23
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          75
+        ]
+      },
+      {
+        "type": "red_pepper",
+        "elements": [
+          56
+        ]
+      }
+    ],
+    "elements": [
+      75,
+      56
+    ],
+    "variant_num": 24
+  },
+  {
+    "type": "chicken_onion",
+    "units": [
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          17,
+          26
+        ]
+      },
+      {
+        "type": "green_onion",
+        "elements": [
+          16
+        ]
+      }
+    ],
+    "elements": [
+      17,
+      26,
+      16
+    ],
+    "variant_num": 25
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "single_chicken",
+        "elements": [
+          33
+        ]
+      },
+      {
+        "type": "green_onion",
+        "elements": [
+          8
+        ]
+      }
+    ],
+    "elements": [
+      33,
+      8
+    ],
+    "variant_num": 26
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "single_chicken",
+        "elements": [
+          46
+        ]
+      },
+      {
+        "type": "red_pepper",
+        "elements": [
+          74
+        ]
+      }
+    ],
+    "elements": [
+      46,
+      74
+    ],
+    "variant_num": 27
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          49,
+          42
+        ]
+      },
+      {
+        "type": "single_chicken",
+        "elements": [
+          45
+        ]
+      }
+    ],
+    "elements": [
+      49,
+      42,
+      45
+    ],
+    "variant_num": 28
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "green_onion",
+        "elements": [
+          12
+        ]
+      }
+    ],
+    "elements": [
+      12
+    ],
+    "variant_num": 29
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          55
+        ]
+      },
+      {
+        "type": "green_onion",
+        "elements": [
+          14
+        ]
+      }
+    ],
+    "elements": [
+      55,
+      14
+    ],
+    "variant_num": 30
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          61
+        ]
+      }
+    ],
+    "elements": [
+      61
+    ],
+    "variant_num": 31
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "green_onion",
+        "elements": [
+          9
+        ]
+      }
+    ],
+    "elements": [
+      9
+    ],
+    "variant_num": 32
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          68
+        ]
+      }
+    ],
+    "elements": [
+      68
+    ],
+    "variant_num": 33
+  },
+  {
+    "type": "random",
+    "units": [
+      {
+        "type": "red_pepper",
+        "elements": [
+          77
+        ]
+      },
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          31,
+          28
+        ]
+      }
+    ],
+    "elements": [
+      77,
+      31,
+      28
+    ],
+    "variant_num": 34
+  },
+  {
+    "type": "chicken_pepper",
+    "units": [
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          37,
+          39
+        ]
+      },
+      {
+        "type": "red_pepper",
+        "elements": [
+          59
+        ]
+      }
+    ],
+    "elements": [
+      37,
+      39,
+      59
+    ],
+    "variant_num": 35
+  },
+  {
+    "type": "chicken_onion",
+    "units": [
+      {
+        "type": "chicken_bone_pair",
+        "elements": [
+          35,
+          36
+        ]
+      },
+      {
+        "type": "green_onion",
+        "elements": [
+          6
+        ]
+      }
+    ],
+    "elements": [
+      35,
+      36,
+      6
+    ],
+    "variant_num": 45
+  }
+]

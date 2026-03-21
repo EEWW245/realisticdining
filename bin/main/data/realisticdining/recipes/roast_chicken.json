@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " O ",
+    " B "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:cooked_chicken"
+    },
+    "O": {
+      "item": "realisticdining:chopped_green_onion"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "realisticdining:roast_chicken",
+    "count": 1
+  }
+}

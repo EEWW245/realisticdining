@@ -1,0 +1,26 @@
+{
+  "pour_oil": {
+    "category": "block",
+    "sounds": [
+      "realisticdining:pour_oil"
+    ]
+  },
+  "saute": {
+    "category": "block",
+    "sounds": [
+      "realisticdining:saute"
+    ]
+  },
+  "meat_in_the_pot": {
+    "category": "block",
+    "sounds": [
+      "realisticdining:meat_in_the_pot"
+    ]
+  },
+  "green_vegetables_in_the_pot": {
+    "category": "block",
+    "sounds": [
+      "realisticdining:green_vegetables_in_the_pot"
+    ]
+  }
+}

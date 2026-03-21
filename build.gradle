@@ -1,0 +1,90 @@
+plugins {
+    id 'net.minecraftforge.gradle' version '6.0.+'
+    id 'eclipse'
+    id 'idea'
+}
+
+version = '1.0.0'
+group = 'com.realisticdining'
+archivesBaseName = 'realisticdining'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                realisticdining {
+                    source sourceSets.main
+                }
+            }
+        }
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                realisticdining {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven {
+        name = "CurseMaven"
+        url = "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.10'
+    
+    // Kaleidoscope Cookery - 仅编译时依赖
+    // 开发环境不运行主模组（Mixin映射不兼容）
+    // 测试时请构建jar后放入普通Minecraft实例
+    compileOnly fg.deobf("curse.maven:kaleidoscope-cookery-1309203:6801805")
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title": "realisticdining",
+                "Specification-Vendor": "realisticdining",
+                "Specification-Version": "1",
+                "Implementation-Title": project.name,
+                "Implementation-Version": project.version,
+                "Implementation-Vendor": "realisticdining",
+                "Implementation-Timestamp": new java.util.Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "ForgeGradle-Version": "6.0.+"
+        ])
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'mcversion', '1.20.1'
+    filesMatching('META-INF/mods.toml') {
+        expand 'version': project.version, 'mcversion': '1.20.1'
+    }
+}

@@ -1,0 +1,194 @@
+﻿{
+	"credit": "Auto-generated fly variant 11",
+	"texture_size": [
+		32,
+		32
+	],
+	"textures": {
+		"1": "realisticdining:item/red_pepper",
+		"white": "block/white_wool",
+		"green": "block/lime_wool",
+		"particle": "realisticdining:block/chicken",
+		"meat": "realisticdining:block/chicken",
+		"bone": "realisticdining:block/chicken_bone"
+	},
+	"display": {
+		"fixed": {
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"translation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				0.65,
+				0.65,
+				0.65
+			]
+		}
+	},
+	"elements": [
+		{
+			"name": "red_chili_0",
+			"from": [
+				10,
+				0.2,
+				1
+			],
+			"to": [
+				11,
+				1.2,
+				3
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					0,
+					0.7,
+					0
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						11,
+						1,
+						10,
+						2
+					],
+					"texture": "#1"
+				},
+				"east": {
+					"uv": [
+						10,
+						1,
+						11,
+						3
+					],
+					"rotation": 90,
+					"texture": "#1"
+				},
+				"south": {
+					"uv": [
+						10,
+						2,
+						11,
+						3
+					],
+					"texture": "#1"
+				},
+				"west": {
+					"uv": [
+						10,
+						1,
+						11,
+						3
+					],
+					"rotation": 270,
+					"texture": "#1"
+				},
+				"up": {
+					"uv": [
+						10,
+						1,
+						11,
+						3
+					],
+					"texture": "#1"
+				},
+				"down": {
+					"uv": [
+						10,
+						3,
+						11,
+						1
+					],
+					"texture": "#1"
+				}
+			}
+		},
+		{
+			"name": "left_wing_bone",
+			"from": [
+				8.5,
+				2.01,
+				3
+			],
+			"to": [
+				11,
+				4.01,
+				5
+			],
+			"rotation": {
+				"angle": 22.5,
+				"axis": "z",
+				"origin": [
+					11.5,
+					4.01,
+					4.25
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						8.5,
+						0,
+						11,
+						2
+					],
+					"texture": "#bone"
+				},
+				"east": {
+					"uv": [
+						3,
+						0,
+						5,
+						2
+					],
+					"texture": "#bone"
+				},
+				"south": {
+					"uv": [
+						8.5,
+						0,
+						11,
+						2
+					],
+					"texture": "#bone"
+				},
+				"west": {
+					"uv": [
+						3,
+						0,
+						5,
+						2
+					],
+					"texture": "#bone"
+				},
+				"up": {
+					"uv": [
+						8.5,
+						3,
+						11,
+						5
+					],
+					"texture": "#bone"
+				},
+				"down": {
+					"uv": [
+						8.5,
+						3,
+						11,
+						5
+					],
+					"texture": "#bone"
+				}
+			}
+		}
+	]
+}

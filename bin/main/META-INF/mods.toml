@@ -1,0 +1,48 @@
+# This mod is licensed under the MIT License
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+issueTrackerURL="https://github.com/realisticdining/issues"
+showAsResourcePack=false
+
+[[mods]]
+modId="realisticdining"
+version="${version}"
+displayName="Realistic Dining"
+authors="realisticdining"
+description='''
+A realistic dining mod for Minecraft. This mod is an addon for Kaleidoscope Cookery.
+
+This mod is AI-generated. All code, textures, models, and other assets in this mod were created by AI.
+
+Features:
+- Chopping Board: Cut ingredients with realistic animations
+- Wok: Cook dishes with stir-fry mechanics
+- Green Onion Crop: Plant and harvest green onions
+- Chopsticks: Pick up and eat food
+- Roast Chicken: Placeable food block
+- Rice Bowl: Placeable food block
+
+This mod requires Kaleidoscope Cookery to be installed.
+'''
+
+[[dependencies.realisticdining]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.realisticdining]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.realisticdining]]
+modId="kaleidoscope_cookery"
+mandatory=false
+versionRange="[1.0,)"
+ordering="AFTER"
+side="BOTH"

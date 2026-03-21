@@ -1,0 +1,94 @@
+{
+  "variants": {
+    "bites=0": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_0"
+    },
+    "bites=1": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_1"
+    },
+    "bites=2": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_2"
+    },
+    "bites=3": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_3"
+    },
+    "bites=4": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_4"
+    },
+    "bites=5": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_5"
+    },
+    "bites=6": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_6"
+    },
+    "bites=7": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_7"
+    },
+    "bites=8": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_8"
+    },
+    "bites=9": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_9"
+    },
+    "bites=10": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_10"
+    },
+    "bites=11": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_11"
+    },
+    "bites=12": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_12"
+    },
+    "bites=13": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_13"
+    },
+    "bites=14": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_14"
+    },
+    "bites=15": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_15"
+    },
+    "bites=16": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_16"
+    },
+    "bites=17": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_17"
+    },
+    "bites=18": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_18"
+    },
+    "bites=19": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_19"
+    },
+    "bites=20": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_20"
+    },
+    "bites=21": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_21"
+    },
+    "bites=22": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_22"
+    },
+    "bites=23": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_23"
+    },
+    "bites=24": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_24"
+    },
+    "bites=25": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_25"
+    },
+    "bites=26": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_26"
+    },
+    "bites=27": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_27"
+    },
+    "bites=28": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_28"
+    },
+    "bites=29": {
+      "model": "realisticdining:block/plate_states/stir_fried_pork_cabbage_plate_29"
+    }
+  }
+}

@@ -1,0 +1,351 @@
+﻿{
+	"credit": "Auto-generated stage2 fly variant 13",
+	"texture_size": [
+		32,
+		32
+	],
+	"textures": {
+		"1": "realisticdining:item/red_pepper",
+		"5": "realisticdining:item/chicken_bone_2",
+		"white": "block/white_wool",
+		"green": "block/lime_wool",
+		"particle": "realisticdining:item/chicken_1",
+		"meat": "realisticdining:item/chicken_1",
+		"bone": "realisticdining:block/chicken_bone"
+	},
+	"display": {
+		"fixed": {
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"translation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				0.65,
+				0.65,
+				0.65
+			]
+		}
+	},
+	"elements": [
+		{
+			"name": "exposed_bone",
+			"from": [
+				7.62329,
+				0.51,
+				4.31783
+			],
+			"to": [
+				8.24495,
+				3.04,
+				4.87401
+			],
+			"rotation": {
+				"angle": 22.5,
+				"axis": "y",
+				"origin": [
+					7.93412,
+					1.01,
+					4.59592
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						0,
+						9.94657,
+						16
+					],
+					"texture": "#bone"
+				},
+				"east": {
+					"uv": [
+						0,
+						0,
+						8.8989,
+						16
+					],
+					"texture": "#bone"
+				},
+				"south": {
+					"uv": [
+						0,
+						0,
+						9.94657,
+						16
+					],
+					"texture": "#bone"
+				},
+				"west": {
+					"uv": [
+						0,
+						0,
+						8.8989,
+						16
+					],
+					"texture": "#bone"
+				},
+				"up": {
+					"uv": [
+						0,
+						0,
+						9.94657,
+						8.8989
+					],
+					"texture": "#bone"
+				},
+				"down": {
+					"uv": [
+						0,
+						0,
+						9.94657,
+						8.8989
+					],
+					"texture": "#bone"
+				}
+			}
+		},
+		{
+			"name": "exposed_bone",
+			"from": [
+				3.97562,
+				0.51,
+				4.19272
+			],
+			"to": [
+				4.52558,
+				4.68,
+				4.604
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					4.2506,
+					1.01,
+					4.39836
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						0,
+						8.79944,
+						16
+					],
+					"texture": "#bone"
+				},
+				"east": {
+					"uv": [
+						0,
+						0,
+						6.5804,
+						16
+					],
+					"texture": "#bone"
+				},
+				"south": {
+					"uv": [
+						0,
+						0,
+						8.79944,
+						16
+					],
+					"texture": "#bone"
+				},
+				"west": {
+					"uv": [
+						0,
+						0,
+						6.5804,
+						16
+					],
+					"texture": "#bone"
+				},
+				"up": {
+					"uv": [
+						0,
+						0,
+						8.79944,
+						6.5804
+					],
+					"texture": "#bone"
+				},
+				"down": {
+					"uv": [
+						0,
+						0,
+						8.79944,
+						6.5804
+					],
+					"texture": "#bone"
+				}
+			}
+		},
+		{
+			"name": "red_chili_4",
+			"from": [
+				2,
+				1.5,
+				4
+			],
+			"to": [
+				3,
+				2.5,
+				6
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					-7,
+					2,
+					-1
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						10,
+						5,
+						9,
+						6
+					],
+					"texture": "#1"
+				},
+				"east": {
+					"uv": [
+						9,
+						5,
+						10,
+						7
+					],
+					"rotation": 90,
+					"texture": "#1"
+				},
+				"south": {
+					"uv": [
+						9,
+						13,
+						10,
+						14
+					],
+					"texture": "#1"
+				},
+				"west": {
+					"uv": [
+						9,
+						5,
+						10,
+						7
+					],
+					"rotation": 270,
+					"texture": "#1"
+				},
+				"up": {
+					"uv": [
+						9,
+						5,
+						10,
+						7
+					],
+					"texture": "#1"
+				},
+				"down": {
+					"uv": [
+						9,
+						7,
+						10,
+						5
+					],
+					"texture": "#1"
+				}
+			}
+		},
+		{
+			"name": "cut_body_14",
+			"from": [
+				6.5,
+				0.81,
+				12.5
+			],
+			"to": [
+				9.01289,
+				2.91,
+				14.90401
+			],
+			"rotation": {
+				"angle": 22.5,
+				"axis": "y",
+				"origin": [
+					7.75644,
+					1.31,
+					13.702
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						6.5,
+						0,
+						9.01289,
+						2.10401
+					],
+					"texture": "#meat"
+				},
+				"east": {
+					"uv": [
+						12.5,
+						0,
+						14.90401,
+						2.10401
+					],
+					"texture": "#meat"
+				},
+				"south": {
+					"uv": [
+						6.5,
+						0,
+						9.01289,
+						2.10401
+					],
+					"texture": "#meat"
+				},
+				"west": {
+					"uv": [
+						12.5,
+						0,
+						14.90401,
+						2.10401
+					],
+					"texture": "#meat"
+				},
+				"up": {
+					"uv": [
+						6.5,
+						12.5,
+						9.01289,
+						14.90401
+					],
+					"texture": "#meat"
+				},
+				"down": {
+					"uv": [
+						6.5,
+						12.5,
+						9.01289,
+						14.90401
+					],
+					"texture": "#meat"
+				}
+			}
+		}
+	]
+}

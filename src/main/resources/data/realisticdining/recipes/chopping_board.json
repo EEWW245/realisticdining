@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    " S "
+  ],
+  "key": {
+    "P": {
+      "tag": "minecraft:wooden_pressure_plates"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "result": {
+    "item": "realisticdining:chopping_board",
+    "count": 1
+  }
+}

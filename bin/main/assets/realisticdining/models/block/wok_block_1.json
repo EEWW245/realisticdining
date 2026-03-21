@@ -1,0 +1,115 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Vegetable Oil Puddle - Perfectly matched to Wok bottom",
+	"textures": {
+		"metal": "realisticdining:block/wok_metal",
+		"handle": "realisticdining:block/wok_handle",
+		"particle": "realisticdining:item/vegetable_oil",
+		"oil": "realisticdining:item/vegetable_oil"
+	},
+	"elements": [
+		{
+			"name": "flat_bottom",
+			"from": [2, 0, 2],
+			"to": [14, 1, 14],
+			"faces": {
+				"north": {"uv": [2, 15, 14, 16], "texture": "#metal"},
+				"east": {"uv": [2, 15, 14, 16], "texture": "#metal"},
+				"south": {"uv": [2, 15, 14, 16], "texture": "#metal"},
+				"west": {"uv": [2, 15, 14, 16], "texture": "#metal"},
+				"up": {"uv": [2, 2, 14, 14], "texture": "#metal"},
+				"down": {"uv": [2, 2, 14, 14], "texture": "#metal"}
+			}
+		},
+		{
+			"name": "north_wall",
+			"from": [2, 1, 2],
+			"to": [14, 4, 3],
+			"faces": {
+				"north": {"uv": [2, 12, 14, 15], "texture": "#metal"},
+				"east": {"uv": [13, 12, 14, 15], "texture": "#metal"},
+				"south": {"uv": [2, 12, 14, 15], "texture": "#metal"},
+				"west": {"uv": [2, 12, 3, 15], "texture": "#metal"},
+				"up": {"uv": [2, 2, 14, 3], "texture": "#metal"},
+				"down": {"uv": [2, 15, 14, 16], "texture": "#metal"}
+			}
+		},
+		{
+			"name": "south_wall",
+			"from": [2, 1, 13],
+			"to": [14, 4, 14],
+			"faces": {
+				"north": {"uv": [2, 12, 14, 15], "texture": "#metal"},
+				"east": {"uv": [2, 12, 3, 15], "texture": "#metal"},
+				"south": {"uv": [2, 12, 14, 15], "texture": "#metal"},
+				"west": {"uv": [13, 12, 14, 15], "texture": "#metal"},
+				"up": {"uv": [2, 13, 14, 14], "texture": "#metal"},
+				"down": {"uv": [2, 15, 14, 16], "texture": "#metal"}
+			}
+		},
+		{
+			"name": "west_wall",
+			"from": [2, 1, 3],
+			"to": [3, 4, 13],
+			"faces": {
+				"north": {"uv": [13, 12, 14, 15], "texture": "#metal"},
+				"east": {"uv": [3, 12, 13, 15], "texture": "#metal"},
+				"south": {"uv": [2, 12, 3, 15], "texture": "#metal"},
+				"west": {"uv": [3, 12, 13, 15], "texture": "#metal"},
+				"up": {"uv": [2, 3, 3, 13], "texture": "#metal"},
+				"down": {"uv": [13, 15, 14, 16], "texture": "#metal"}
+			}
+		},
+		{
+			"name": "east_wall",
+			"from": [13, 1, 3],
+			"to": [14, 4, 13],
+			"faces": {
+				"north": {"uv": [2, 12, 3, 15], "texture": "#metal"},
+				"east": {"uv": [3, 12, 13, 15], "texture": "#metal"},
+				"south": {"uv": [13, 12, 14, 15], "texture": "#metal"},
+				"west": {"uv": [3, 12, 13, 15], "texture": "#metal"},
+				"up": {"uv": [13, 3, 14, 13], "texture": "#metal"},
+				"down": {"uv": [2, 15, 3, 16], "texture": "#metal"}
+			}
+		},
+		{
+			"name": "handle",
+			"from": [14, 1, 7],
+			"to": [23, 3, 9],
+			"faces": {
+				"north": {"uv": [0, 7, 9, 9], "texture": "#handle"},
+				"east": {"uv": [7, 7, 9, 9], "texture": "#handle"},
+				"south": {"uv": [0, 7, 9, 9], "texture": "#handle"},
+				"west": {"uv": [7, 7, 9, 9], "texture": "#handle"},
+				"up": {"uv": [0, 7, 9, 9], "texture": "#handle"},
+				"down": {"uv": [0, 7, 9, 9], "texture": "#handle"}
+			}
+		},
+		{
+			"name": "oil_plane",
+			"from": [2, 1.01, 3],
+			"to": [12, 1.01, 13],
+			"shade": false,
+			"rotation": {"angle": 0, "axis": "y", "origin": [-1, 0, 0]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#oil"}
+			}
+		}
+	],
+	"display": {},
+	"groups": [
+		0,
+		1,
+		2,
+		3,
+		4,
+		5,
+		{
+			"name": "vegetable_oil",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [6]
+		}
+	]
+}

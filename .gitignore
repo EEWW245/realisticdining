@@ -1,0 +1,37 @@
+# Compiled files
+*.class
+*.jar
+*.exe
+
+# Build directory
+build/
+.gradle/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Test data
+run/saves/
+run/logs/
+run/usercache.json
+run/usernamecache.json
+run/options.txt
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
