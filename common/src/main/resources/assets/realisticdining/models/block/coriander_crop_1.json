@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:block/cross",
+    "textures": {
+        "cross": "realisticdining:block/coriander_crop_1",
+        "particle": "realisticdining:block/coriander_crop_1"
+    }
+}

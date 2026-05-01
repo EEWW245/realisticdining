@@ -1,0 +1,354 @@
+﻿{
+	"credit": "Auto-generated fly variant 21",
+	"texture_size": [
+		32,
+		32
+	],
+	"textures": {
+		"1": "realisticdining:item/red_pepper",
+		"white": "block/white_wool",
+		"green": "block/lime_wool",
+		"particle": "realisticdining:block/chicken",
+		"meat": "realisticdining:block/chicken",
+		"bone": "realisticdining:block/chicken_bone"
+	},
+	"display": {
+		"fixed": {
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"translation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				0.65,
+				0.65,
+				0.65
+			]
+		}
+	},
+	"elements": [
+		{
+			"name": "red_chili_6",
+			"from": [
+				12,
+				0.0,
+				7
+			],
+			"to": [
+				13,
+				1.0,
+				8
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					-1,
+					0.5,
+					0
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						14,
+						5,
+						13,
+						6
+					],
+					"texture": "#1"
+				},
+				"east": {
+					"uv": [
+						13,
+						7,
+						14,
+						8
+					],
+					"rotation": 90,
+					"texture": "#1"
+				},
+				"south": {
+					"uv": [
+						13,
+						9,
+						14,
+						10
+					],
+					"texture": "#1"
+				},
+				"west": {
+					"uv": [
+						13,
+						7,
+						14,
+						8
+					],
+					"rotation": 270,
+					"texture": "#1"
+				},
+				"up": {
+					"uv": [
+						13,
+						7,
+						14,
+						8
+					],
+					"texture": "#1"
+				},
+				"down": {
+					"uv": [
+						13,
+						8,
+						14,
+						7
+					],
+					"texture": "#1"
+				}
+			}
+		},
+		{
+			"name": "exposed_bone",
+			"from": [
+				1.32354,
+				0.51,
+				6.38618
+			],
+			"to": [
+				1.87068,
+				3.9,
+				9.16503
+			],
+			"rotation": {
+				"angle": -22.5,
+				"axis": "y",
+				"origin": [
+					1.59711,
+					1.01,
+					7.77561
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						0,
+						8.75418,
+						16
+					],
+					"texture": "#bone"
+				},
+				"east": {
+					"uv": [
+						0,
+						0,
+						12.46163,
+						16
+					],
+					"texture": "#bone"
+				},
+				"south": {
+					"uv": [
+						0,
+						0,
+						8.75418,
+						16
+					],
+					"texture": "#bone"
+				},
+				"west": {
+					"uv": [
+						0,
+						0,
+						12.46163,
+						16
+					],
+					"texture": "#bone"
+				},
+				"up": {
+					"uv": [
+						0,
+						0,
+						8.75418,
+						12.46163
+					],
+					"texture": "#bone"
+				},
+				"down": {
+					"uv": [
+						0,
+						0,
+						8.75418,
+						12.46163
+					],
+					"texture": "#bone"
+				}
+			}
+		},
+		{
+			"name": "red_chili_5",
+			"from": [
+				2,
+				2.4,
+				6
+			],
+			"to": [
+				3,
+				3.4,
+				8
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					-7,
+					2.9,
+					-1
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						10,
+						5,
+						9,
+						6
+					],
+					"texture": "#1"
+				},
+				"east": {
+					"uv": [
+						9,
+						7,
+						10,
+						9
+					],
+					"rotation": 90,
+					"texture": "#1"
+				},
+				"south": {
+					"uv": [
+						9,
+						13,
+						10,
+						14
+					],
+					"texture": "#1"
+				},
+				"west": {
+					"uv": [
+						9,
+						7,
+						10,
+						9
+					],
+					"rotation": 270,
+					"texture": "#1"
+				},
+				"up": {
+					"uv": [
+						9,
+						7,
+						10,
+						9
+					],
+					"texture": "#1"
+				},
+				"down": {
+					"uv": [
+						9,
+						9,
+						10,
+						7
+					],
+					"texture": "#1"
+				}
+			}
+		},
+		{
+			"name": "red_chili_8",
+			"from": [
+				3,
+				-0.5,
+				1
+			],
+			"to": [
+				6,
+				0.5,
+				3
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					-2,
+					0,
+					-10
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						8,
+						11,
+						5,
+						12
+					],
+					"texture": "#1"
+				},
+				"east": {
+					"uv": [
+						7,
+						11,
+						8,
+						13
+					],
+					"rotation": 90,
+					"texture": "#1"
+				},
+				"south": {
+					"uv": [
+						5,
+						12,
+						8,
+						13
+					],
+					"texture": "#1"
+				},
+				"west": {
+					"uv": [
+						5,
+						11,
+						6,
+						13
+					],
+					"rotation": 270,
+					"texture": "#1"
+				},
+				"up": {
+					"uv": [
+						5,
+						11,
+						8,
+						13
+					],
+					"texture": "#1"
+				},
+				"down": {
+					"uv": [
+						5,
+						13,
+						8,
+						11
+					],
+					"texture": "#1"
+				}
+			}
+		}
+	]
+}

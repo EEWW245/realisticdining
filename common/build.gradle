@@ -1,0 +1,13 @@
+architectury {
+    common(rootProject.enabled_platforms.split(','))
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/realisticdining.accesswidener")
+}
+
+dependencies {
+    modImplementation "dev.architectury:architectury:${rootProject.architectury_api_version}"
+    
+    compileOnly "software.bernie.geckolib:geckolib-fabric-1.21.1:4.7.3"
+}

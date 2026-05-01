@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "picks=0,has_chopsticks=false": { "model": "realisticdining:block/tomato_poached_egg" },
+        "picks=1,has_chopsticks=false": { "model": "realisticdining:block/tomato_poached_egg_1" },
+        "picks=2,has_chopsticks=false": { "model": "realisticdining:block/tomato_poached_egg_2" },
+        "picks=3,has_chopsticks=false": { "model": "realisticdining:block/tomato_poached_egg_3" },
+        "picks=3,has_chopsticks=true": { "model": "realisticdining:block/plate_chopsticks" }
+    }
+}

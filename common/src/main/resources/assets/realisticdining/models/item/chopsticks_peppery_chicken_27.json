@@ -1,0 +1,508 @@
+﻿{
+  "credit": "Chopsticks with peppery chicken piece 27",
+  "texture_size": [
+    16,
+    16
+  ],
+  "textures": {
+    "chopstick": "realisticdining:item/chopsticks",
+    "0": "realisticdining:block/plate",
+    "1": "realisticdining:item/red_pepper",
+    "5": "realisticdining:item/chicken_bone_2",
+    "white": "block/white_wool",
+    "green": "block/lime_wool",
+    "particle": "realisticdining:item/chicken_2",
+    "meat": "realisticdining:item/chicken_2",
+    "bone": "realisticdining:block/chicken_bone"
+  },
+  "elements": [
+    {
+      "name": "chopstick_left",
+      "from": [
+        6.5,
+        1,
+        7.5
+      ],
+      "to": [
+        7.5,
+        15,
+        8.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            1,
+            1,
+            15
+          ],
+          "texture": "#chopstick"
+        },
+        "east": {
+          "uv": [
+            0,
+            1,
+            1,
+            15
+          ],
+          "texture": "#chopstick"
+        },
+        "south": {
+          "uv": [
+            0,
+            1,
+            1,
+            15
+          ],
+          "texture": "#chopstick"
+        },
+        "west": {
+          "uv": [
+            0,
+            1,
+            1,
+            15
+          ],
+          "texture": "#chopstick"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "texture": "#chopstick"
+        },
+        "down": {
+          "uv": [
+            0,
+            15,
+            1,
+            16
+          ],
+          "texture": "#chopstick"
+        }
+      }
+    },
+    {
+      "name": "chopstick_right",
+      "from": [
+        8.5,
+        1,
+        7.5
+      ],
+      "to": [
+        9.5,
+        15,
+        8.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            1,
+            3,
+            15
+          ],
+          "texture": "#chopstick"
+        },
+        "east": {
+          "uv": [
+            2,
+            1,
+            3,
+            15
+          ],
+          "texture": "#chopstick"
+        },
+        "south": {
+          "uv": [
+            2,
+            1,
+            3,
+            15
+          ],
+          "texture": "#chopstick"
+        },
+        "west": {
+          "uv": [
+            2,
+            1,
+            3,
+            15
+          ],
+          "texture": "#chopstick"
+        },
+        "up": {
+          "uv": [
+            2,
+            0,
+            3,
+            1
+          ],
+          "texture": "#chopstick"
+        },
+        "down": {
+          "uv": [
+            2,
+            15,
+            3,
+            16
+          ],
+          "texture": "#chopstick"
+        }
+      }
+    },
+    {
+      "name": "cut_body_0",
+      "from": [
+        6.63213,
+        11.67,
+        7.204135
+      ],
+      "to": [
+        9.36787,
+        13.33,
+        8.795865
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8.0,
+          12.17,
+          8.000005
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0.5,
+            0,
+            3.23574,
+            1.65978
+          ],
+          "texture": "#meat"
+        },
+        "east": {
+          "uv": [
+            0.5,
+            0,
+            2.09173,
+            1.65978
+          ],
+          "texture": "#meat"
+        },
+        "south": {
+          "uv": [
+            0.5,
+            0,
+            3.23574,
+            1.65978
+          ],
+          "texture": "#meat"
+        },
+        "west": {
+          "uv": [
+            0.5,
+            0,
+            2.09173,
+            1.65978
+          ],
+          "texture": "#meat"
+        },
+        "up": {
+          "uv": [
+            0.5,
+            0.5,
+            3.23574,
+            2.09173
+          ],
+          "texture": "#meat"
+        },
+        "down": {
+          "uv": [
+            0.5,
+            0.5,
+            3.23574,
+            2.09173
+          ],
+          "texture": "#meat"
+        }
+      }
+    },
+    {
+      "name": "exposed_bone",
+      "from": [
+        7.724655,
+        11.995000000000001,
+        6.76755
+      ],
+      "to": [
+        8.275345,
+        13.004999999999999,
+        9.23245
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8.000005,
+          12.495000000000001,
+          8.0
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            8.81101,
+            16
+          ],
+          "texture": "#bone"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            7.43838,
+            16
+          ],
+          "texture": "#bone"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            8.81101,
+            16
+          ],
+          "texture": "#bone"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            7.43838,
+            16
+          ],
+          "texture": "#bone"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            8.81101,
+            7.43838
+          ],
+          "texture": "#bone"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            8.81101,
+            7.43838
+          ],
+          "texture": "#bone"
+        }
+      }
+    },
+    {
+      "name": "cut_body_12",
+      "from": [
+        7.163445,
+        12.08,
+        7.18012
+      ],
+      "to": [
+        8.836555,
+        14.92,
+        8.819880000000001
+      ],
+      "rotation": {
+        "angle": -22.5,
+        "axis": "y",
+        "origin": [
+          8.000005000000002,
+          12.58,
+          8.0
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            6.5,
+            0,
+            8.17311,
+            2.8448
+          ],
+          "texture": "#meat"
+        },
+        "east": {
+          "uv": [
+            6.5,
+            0,
+            8.13976,
+            2.8448
+          ],
+          "texture": "#meat"
+        },
+        "south": {
+          "uv": [
+            6.5,
+            0,
+            8.17311,
+            2.8448
+          ],
+          "texture": "#meat"
+        },
+        "west": {
+          "uv": [
+            6.5,
+            0,
+            8.13976,
+            2.8448
+          ],
+          "texture": "#meat"
+        },
+        "up": {
+          "uv": [
+            6.5,
+            6.5,
+            8.17311,
+            8.13976
+          ],
+          "texture": "#meat"
+        },
+        "down": {
+          "uv": [
+            6.5,
+            6.5,
+            8.17311,
+            8.13976
+          ],
+          "texture": "#meat"
+        }
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        0,
+        -90,
+        55
+      ],
+      "translation": [
+        0,
+        4.0,
+        0.5
+      ],
+      "scale": [
+        0.85,
+        0.85,
+        0.85
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        0,
+        90,
+        -55
+      ],
+      "translation": [
+        0,
+        4.0,
+        0.5
+      ],
+      "scale": [
+        0.85,
+        0.85,
+        0.85
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        -90,
+        25
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        90,
+        -25
+      ],
+      "translation": [
+        1.13,
+        3.2,
+        1.13
+      ],
+      "scale": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "gui": {
+      "rotation": [
+        15,
+        -45,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

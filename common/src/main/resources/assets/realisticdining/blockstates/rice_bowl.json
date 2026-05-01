@@ -1,0 +1,21 @@
+{
+    "variants": {
+        "bites=0,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_0" },
+        "bites=1,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_1" },
+        "bites=2,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_2" },
+        "bites=3,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_3" },
+        "bites=4,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_4" },
+        "bites=5,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_5" },
+        "bites=6,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_6" },
+        "bites=7,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_7" },
+        "bites=8,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_8" },
+        "bites=9,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_9" },
+        "bites=10,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_10" },
+        "bites=11,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_11" },
+        "bites=12,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_12" },
+        "bites=13,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_13" },
+        "bites=14,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_14" },
+        "bites=15,has_chopsticks=false": { "model": "realisticdining:block/rice_bowl_bite_15" },
+        "bites=15,has_chopsticks=true": { "model": "realisticdining:block/rice_bowl_bite_chopsticks" }
+    }
+}

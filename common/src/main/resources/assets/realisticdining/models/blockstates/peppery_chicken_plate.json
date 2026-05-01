@@ -1,0 +1,112 @@
+{
+  "variants": {
+    "picks=0": {
+      "model": "realisticdining:block/peppery_chicken_plate"
+    },
+    "picks=1": {
+      "model": "realisticdining:block/peppery_chicken_plate_1"
+    },
+    "picks=2": {
+      "model": "realisticdining:block/peppery_chicken_plate_2"
+    },
+    "picks=3": {
+      "model": "realisticdining:block/peppery_chicken_plate_3"
+    },
+    "picks=4": {
+      "model": "realisticdining:block/peppery_chicken_plate_4"
+    },
+    "picks=5": {
+      "model": "realisticdining:block/peppery_chicken_plate_5"
+    },
+    "picks=6": {
+      "model": "realisticdining:block/peppery_chicken_plate_6"
+    },
+    "picks=7": {
+      "model": "realisticdining:block/peppery_chicken_plate_7"
+    },
+    "picks=8": {
+      "model": "realisticdining:block/peppery_chicken_plate_8"
+    },
+    "picks=9": {
+      "model": "realisticdining:block/peppery_chicken_plate_9"
+    },
+    "picks=10": {
+      "model": "realisticdining:block/peppery_chicken_plate_10"
+    },
+    "picks=11": {
+      "model": "realisticdining:block/peppery_chicken_plate_11"
+    },
+    "picks=12": {
+      "model": "realisticdining:block/peppery_chicken_plate_12"
+    },
+    "picks=13": {
+      "model": "realisticdining:block/peppery_chicken_plate_13"
+    },
+    "picks=14": {
+      "model": "realisticdining:block/peppery_chicken_plate_14"
+    },
+    "picks=15": {
+      "model": "realisticdining:block/peppery_chicken_plate_15"
+    },
+    "picks=16": {
+      "model": "realisticdining:block/peppery_chicken_plate_16"
+    },
+    "picks=17": {
+      "model": "realisticdining:block/peppery_chicken_plate_17"
+    },
+    "picks=18": {
+      "model": "realisticdining:block/peppery_chicken_plate_18"
+    },
+    "picks=19": {
+      "model": "realisticdining:block/peppery_chicken_plate_19"
+    },
+    "picks=20": {
+      "model": "realisticdining:block/peppery_chicken_plate_20"
+    },
+    "picks=21": {
+      "model": "realisticdining:block/peppery_chicken_plate_21"
+    },
+    "picks=22": {
+      "model": "realisticdining:block/peppery_chicken_plate_22"
+    },
+    "picks=23": {
+      "model": "realisticdining:block/peppery_chicken_plate_23"
+    },
+    "picks=24": {
+      "model": "realisticdining:block/peppery_chicken_plate_24"
+    },
+    "picks=25": {
+      "model": "realisticdining:block/peppery_chicken_plate_25"
+    },
+    "picks=26": {
+      "model": "realisticdining:block/peppery_chicken_plate_26"
+    },
+    "picks=27": {
+      "model": "realisticdining:block/peppery_chicken_plate_27"
+    },
+    "picks=28": {
+      "model": "realisticdining:block/peppery_chicken_plate_28"
+    },
+    "picks=29": {
+      "model": "realisticdining:block/peppery_chicken_plate_29"
+    },
+    "picks=30": {
+      "model": "realisticdining:block/peppery_chicken_plate_30"
+    },
+    "picks=31": {
+      "model": "realisticdining:block/peppery_chicken_plate_31"
+    },
+    "picks=32": {
+      "model": "realisticdining:block/peppery_chicken_plate_32"
+    },
+    "picks=33": {
+      "model": "realisticdining:block/peppery_chicken_plate_33"
+    },
+    "picks=34": {
+      "model": "realisticdining:block/peppery_chicken_plate_34"
+    },
+    "picks=35": {
+      "model": "realisticdining:block/peppery_chicken_plate_35"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Gradle Home (too large)
+gradle-home/
+gradle-8.12/
+gradle-8.12-all.zip
+
+# Crash reports and logs
+crash_report/
+错误报告*/
+*.log
+latest.log
+debug.log
+
+# Build output
+bin/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+
+# External mod sources (keep as reference if needed)
+KaleidoscopeCookery-*/

@@ -1,0 +1,151 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made by Assistant",
+	"textures": {
+		"1": "realisticdining:item/chopsticks_1",
+		"bowl": "block/oak_planks",
+		"particle": "realisticdining:item/chopsticks_1"
+	},
+	"elements": [
+		{
+			"name": "bowl_bottom",
+			"from": [5, 0, 5],
+			"to": [11, 1, 11],
+			"faces": {
+				"north": {"uv": [5, 15, 11, 16], "texture": "#bowl"},
+				"east": {"uv": [5, 15, 11, 16], "texture": "#bowl"},
+				"south": {"uv": [5, 15, 11, 16], "texture": "#bowl"},
+				"west": {"uv": [5, 15, 11, 16], "texture": "#bowl"},
+				"up": {"uv": [5, 5, 11, 11], "texture": "#bowl"},
+				"down": {"uv": [5, 5, 11, 11], "texture": "#bowl"}
+			}
+		},
+		{
+			"name": "bowl_wall_n",
+			"from": [4, 1, 4],
+			"to": [12, 4, 5],
+			"faces": {
+				"north": {"uv": [4, 12, 12, 15], "texture": "#bowl"},
+				"east": {"uv": [11, 12, 12, 15], "texture": "#bowl"},
+				"south": {"uv": [4, 12, 12, 15], "texture": "#bowl"},
+				"west": {"uv": [4, 12, 5, 15], "texture": "#bowl"},
+				"up": {"uv": [4, 4, 12, 5], "texture": "#bowl"},
+				"down": {"uv": [4, 15, 12, 16], "texture": "#bowl"}
+			}
+		},
+		{
+			"name": "bowl_wall_s",
+			"from": [4, 1, 11],
+			"to": [12, 4, 12],
+			"faces": {
+				"north": {"uv": [4, 12, 12, 15], "texture": "#bowl"},
+				"east": {"uv": [4, 12, 5, 15], "texture": "#bowl"},
+				"south": {"uv": [4, 12, 12, 15], "texture": "#bowl"},
+				"west": {"uv": [11, 12, 12, 15], "texture": "#bowl"},
+				"up": {"uv": [4, 11, 12, 12], "texture": "#bowl"},
+				"down": {"uv": [4, 15, 12, 16], "texture": "#bowl"}
+			}
+		},
+		{
+			"name": "bowl_wall_w",
+			"from": [4, 1, 5],
+			"to": [5, 4, 11],
+			"faces": {
+				"north": {"uv": [11, 12, 12, 15], "texture": "#bowl"},
+				"east": {"uv": [5, 12, 11, 15], "texture": "#bowl"},
+				"south": {"uv": [4, 12, 5, 15], "texture": "#bowl"},
+				"west": {"uv": [5, 12, 11, 15], "texture": "#bowl"},
+				"up": {"uv": [4, 5, 5, 11], "texture": "#bowl"},
+				"down": {"uv": [11, 15, 12, 16], "texture": "#bowl"}
+			}
+		},
+		{
+			"name": "bowl_wall_e",
+			"from": [11, 1, 5],
+			"to": [12, 4, 11],
+			"faces": {
+				"north": {"uv": [4, 12, 5, 15], "texture": "#bowl"},
+				"east": {"uv": [5, 12, 11, 15], "texture": "#bowl"},
+				"south": {"uv": [11, 12, 12, 15], "texture": "#bowl"},
+				"west": {"uv": [5, 12, 11, 15], "texture": "#bowl"},
+				"up": {"uv": [11, 5, 12, 11], "texture": "#bowl"},
+				"down": {"uv": [4, 15, 5, 16], "texture": "#bowl"}
+			}
+		},
+		{
+			"name": "chopstick_left",
+			"from": [6.5, 4, 1.8],
+			"to": [7.5, 5, 15.8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 3, -5.7]},
+			"faces": {
+				"north": {"uv": [2, 2, 2.5, 2.5], "texture": "#1"},
+				"east": {"uv": [0, 0, 7, 0.5], "texture": "#1"},
+				"south": {"uv": [2, 2.5, 2.5, 3], "texture": "#1"},
+				"west": {"uv": [0, 0.5, 7, 1], "texture": "#1"},
+				"up": {"uv": [0.5, 8, 0, 1], "texture": "#1"},
+				"down": {"uv": [1, 1, 0.5, 8], "texture": "#1"}
+			}
+		},
+		{
+			"name": "chopstick_right",
+			"from": [8.5, 4, 1.8],
+			"to": [9.5, 5, 15.8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 3, -5.7]},
+			"faces": {
+				"north": {"uv": [2.5, 2, 3, 2.5], "texture": "#1"},
+				"east": {"uv": [1, 1, 8, 1.5], "texture": "#1"},
+				"south": {"uv": [2.5, 2.5, 3, 3], "texture": "#1"},
+				"west": {"uv": [1, 1.5, 8, 2], "texture": "#1"},
+				"up": {"uv": [1.5, 9, 1, 2], "texture": "#1"},
+				"down": {"uv": [2, 2, 1.5, 9], "texture": "#1"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, -90, 55],
+			"translation": [0, 4, 0.5],
+			"scale": [0.85, 0.85, 0.85]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0, 90, -55],
+			"translation": [0, 4, 0.5],
+			"scale": [0.85, 0.85, 0.85]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -90, 25],
+			"translation": [1.13, 3.2, 1.13],
+			"scale": [0.68, 0.68, 0.68]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 90, -25],
+			"translation": [1.13, 3.2, 1.13],
+			"scale": [0.68, 0.68, 0.68]
+		},
+		"ground": {
+			"translation": [0, 2, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [15, -45, 0],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	},
+	"groups": [
+		0,
+		1,
+		2,
+		3,
+		4,
+		{
+			"name": "chopsticks",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [5, 6]
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.realisticdining.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "realisticdining-neoforge-refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,has_oil=false": { "model": "realisticdining:block/wok_yellow_steak" },
+    "facing=north,has_oil=true": { "model": "realisticdining:block/wok_yellow_steak" },
+    "facing=south,has_oil=false": { "model": "realisticdining:block/wok_yellow_steak", "y": 180 },
+    "facing=south,has_oil=true": { "model": "realisticdining:block/wok_yellow_steak", "y": 180 },
+    "facing=west,has_oil=false": { "model": "realisticdining:block/wok_yellow_steak", "y": 270 },
+    "facing=west,has_oil=true": { "model": "realisticdining:block/wok_yellow_steak", "y": 270 },
+    "facing=east,has_oil=false": { "model": "realisticdining:block/wok_yellow_steak", "y": 90 },
+    "facing=east,has_oil=true": { "model": "realisticdining:block/wok_yellow_steak", "y": 90 }
+  }
+}

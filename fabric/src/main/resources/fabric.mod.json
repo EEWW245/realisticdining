@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "realisticdining",
+  "version": "${version}",
+  "name": "Realistic Dining",
+  "description": "A realistic dining mod for Minecraft. This mod adds realistic cooking mechanics including chopping boards, woks, and chopsticks.",
+  "authors": [
+    "realisticdining"
+  ],
+  "contact": {
+    "homepage": "https://github.com/realisticdining",
+    "sources": "https://github.com/realisticdining"
+  },
+  "license": "MIT",
+  "icon": "assets/realisticdining/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.realisticdining.fabric.RealisticDiningFabric"
+    ],
+    "client": [
+      "com.realisticdining.fabric.RealisticDiningFabricClient"
+    ]
+  },
+  "mixins": [
+    "realisticdining-common.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "minecraft": "~${minecraft_version}",
+    "architectury": ">=${architectury_api_version}",
+    "geckolib": ">=4.0.0"
+  },
+  "suggests": {
+    "kaleidoscope_cookery": "*"
+  }
+}

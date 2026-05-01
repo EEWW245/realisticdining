@@ -1,0 +1,16 @@
+pluginManagement {
+    repositories {
+        maven { url "https://maven.architectury.dev/" }
+        maven { url "https://maven.neoforged.net/releases/" }
+        maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'realisticdining'
+
+include 'common'
+include 'fabric'
+include 'neoforge'

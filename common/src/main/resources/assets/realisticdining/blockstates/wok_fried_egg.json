@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,has_oil=false": {
+      "model": "realisticdining:block/wok_fried_egg"
+    },
+    "facing=north,has_oil=true": {
+      "model": "realisticdining:block/wok_fried_egg"
+    },
+    "facing=south,has_oil=false": {
+      "model": "realisticdining:block/wok_fried_egg",
+      "y": 180
+    },
+    "facing=south,has_oil=true": {
+      "model": "realisticdining:block/wok_fried_egg",
+      "y": 180
+    },
+    "facing=west,has_oil=false": {
+      "model": "realisticdining:block/wok_fried_egg",
+      "y": 270
+    },
+    "facing=west,has_oil=true": {
+      "model": "realisticdining:block/wok_fried_egg",
+      "y": 270
+    },
+    "facing=east,has_oil=false": {
+      "model": "realisticdining:block/wok_fried_egg",
+      "y": 90
+    },
+    "facing=east,has_oil=true": {
+      "model": "realisticdining:block/wok_fried_egg",
+      "y": 90
+    }
+  }
+}

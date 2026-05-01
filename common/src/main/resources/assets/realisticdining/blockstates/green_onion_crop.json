@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "age=0": { "model": "realisticdining:block/green_onion_crop_stage_0" },
+        "age=1": { "model": "realisticdining:block/green_onion_crop_stage_1" }
+    }
+}

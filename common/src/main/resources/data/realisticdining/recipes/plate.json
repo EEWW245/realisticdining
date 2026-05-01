@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " T ",
+    "T T",
+    " T "
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:white_terracotta"
+    }
+  },
+  "result": {
+    "item": "realisticdining:plate",
+    "count": 1
+  }
+}

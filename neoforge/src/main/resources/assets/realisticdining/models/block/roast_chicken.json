@@ -1,0 +1,15 @@
+{
+  "loader": "neoforge:obj",
+  "model": "realisticdining:models/obj/roast_chicken.obj",
+  "flip_v": false,
+  "mtl_override": "realisticdining:models/obj/roast_chicken.mtl",
+  "textures": {
+    "particle": "realisticdining:block/roast_chicken",
+    "#Material.001": "realisticdining:block/roast_chicken"
+  },
+  "transform": {
+    "translation": [0.5, 0, 0.5],
+    "rotation": [0, 0, 0],
+    "scale": [1, 1, 1]
+  }
+}

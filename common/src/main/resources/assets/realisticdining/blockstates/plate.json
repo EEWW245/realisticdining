@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "has_chopsticks=false": {
+      "model": "realisticdining:block/plate"
+    },
+    "has_chopsticks=true": {
+      "model": "realisticdining:block/plate_chopsticks"
+    }
+  }
+}

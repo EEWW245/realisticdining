@@ -1,0 +1,38 @@
+plugins {
+    id 'dev.architectury.loom' version '1.9.436' apply false
+    id 'architectury-plugin' version '3.4-SNAPSHOT' apply false
+}
+
+allprojects {
+    group = project.maven_group
+    version = project.mod_version
+
+    repositories {
+        mavenCentral()
+        maven { url "https://maven.neoforged.net/releases/" }
+        maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://maven.architectury.dev/" }
+        maven { url "https://maven.terraformersmc.com/" }
+        maven { url "https://cursemaven.com" }
+        maven { url "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+        options.release = 21
+    }
+}
+
+subprojects {
+    apply plugin: 'dev.architectury.loom'
+    apply plugin: 'architectury-plugin'
+
+    architectury {
+        minecraft = project.minecraft_version
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:${project.minecraft_version}"
+        mappings loom.officialMojangMappings()
+    }
+}
