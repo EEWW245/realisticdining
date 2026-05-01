@@ -1,0 +1,9 @@
+{
+    "conditions": [
+        {
+            "condition": "minecraft:block_state_property",
+            "block": "minecraft:short_grass"
+        }
+    ],
+    "modifier": "realisticdining:green_onion_seeds_from_grass"
+}

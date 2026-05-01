@@ -1,0 +1,21 @@
+accessWidener v2 common
+
+# Block entities
+accessible block_entity com.example.realisticdining.blockentities.WokBlockEntity
+accessible block_entity com.example.realisticdining.blockentities.ChoppingBoardBlockEntity
+accessible block_entity com.example.realisticdining.blockentities.RoastChickenBlockEntity
+
+# Blocks
+accessible block com.example.realisticdining.blocks.ChoppingBoardBlock
+accessible block com.example.realisticdining.blocks.WokBlock
+accessible block com.example.realisticdining.blocks.RoastChickenBlock
+accessible block com.example.realisticdining.blocks.PlateBlock
+accessible block com.example.realisticdining.blocks.RiceBowlBlock
+accessible block com.example.realisticdining.blocks.PepperyChickenPlateBlock
+accessible block com.example.realisticdining.blocks.StirFriedPorkCabbagePlateBlock
+accessible block com.example.realisticdining.blocks.GreenOnionCropBlock
+
+# Items
+accessible class com.example.realisticdining.items.PlaceableFoodItem
+accessible class com.example.realisticdining.items.EdibleChopsticksItem
+accessible class com.example.realisticdining.items.CookbookItem

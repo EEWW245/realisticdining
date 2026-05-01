@@ -1,0 +1,17 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.architectury.dev/' }
+        maven { url 'https://maven.fabricmc.net/' }
+        maven { url 'https://maven.minecraftforge.net/' }
+        maven { url 'https://bmclapi2.bangbang93.com/maven/' }
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        gradlePluginPortal()
+    }
+}
+
+include 'common'
+include 'forge'
+include 'fabric'
+
+rootProject.name = 'realisticdining'

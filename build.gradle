@@ -1,0 +1,29 @@
+plugins {
+    id 'architectury-plugin' version '3.4-SNAPSHOT' apply false
+    id 'dev.architectury.loom' version "${loom_version}" apply false
+}
+
+subprojects {
+    apply plugin: 'dev.architectury.loom'
+    apply plugin: 'java'
+
+    loom {
+        silentMojangMappingsLicense()
+    }
+
+    java {
+        withSourcesJar()
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+}
+
+allprojects {
+    version = rootProject.mod_version
+    group = rootProject.maven_group
+}

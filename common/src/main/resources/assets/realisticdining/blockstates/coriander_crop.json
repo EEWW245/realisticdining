@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "age=0": { "model": "realisticdining:block/coriander_crop" },
+        "age=1": { "model": "realisticdining:block/coriander_crop_1" }
+    }
+}

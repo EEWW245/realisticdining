@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "age=0": { "model": "cookingmod:block/green_onion_crop_stage_0" },
+        "age=1": { "model": "cookingmod:block/green_onion_crop_stage_1" }
+    }
+}

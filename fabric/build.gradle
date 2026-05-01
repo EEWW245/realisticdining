@@ -1,0 +1,47 @@
+archivesBaseName = "realisticdining-fabric"
+
+repositories {
+    mavenCentral()
+    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+
+    implementation project(path: ':common', configuration: 'namedElements')
+    
+    modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+}
+
+jar {
+    from project.zipTree(project.tasks.getByPath(':common:jar').archiveFile)
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", minecraft_version
+
+    from(project.file("../common/src/main/resources")) {
+        include "assets/**"
+        include "data/**"
+    }
+
+    from(project.file("../src/main/resources")) {
+        include "assets/**"
+        include "data/**"
+    }
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version, "mcversion": minecraft_version
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}

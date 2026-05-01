@@ -1,0 +1,583 @@
+{
+    "credit": "Tall Rice Bowl - Bite 14 (Removed 27 pieces)",
+    "textures": {
+        "bowl": "block/oak_planks",
+        "rice": "realisticdining:item/white_rice",
+        "chopsticks": "realisticdining:item/chopsticks"
+    },
+    "elements": [
+        {
+            "name": "bowl_bottom",
+            "from": [
+                5,
+                0,
+                5
+            ],
+            "to": [
+                11,
+                1,
+                11
+            ],
+            "faces": {
+                "north": {
+                    "uv": [
+                        5,
+                        15,
+                        11,
+                        16
+                    ],
+                    "texture": "#bowl"
+                },
+                "east": {
+                    "uv": [
+                        5,
+                        15,
+                        11,
+                        16
+                    ],
+                    "texture": "#bowl"
+                },
+                "south": {
+                    "uv": [
+                        5,
+                        15,
+                        11,
+                        16
+                    ],
+                    "texture": "#bowl"
+                },
+                "west": {
+                    "uv": [
+                        5,
+                        15,
+                        11,
+                        16
+                    ],
+                    "texture": "#bowl"
+                },
+                "up": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#bowl"
+                },
+                "down": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#bowl"
+                }
+            }
+        },
+        {
+            "name": "bowl_wall_n",
+            "from": [
+                4,
+                1,
+                4
+            ],
+            "to": [
+                12,
+                4,
+                5
+            ],
+            "faces": {
+                "north": {
+                    "uv": [
+                        4,
+                        12,
+                        12,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "east": {
+                    "uv": [
+                        11,
+                        12,
+                        12,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "south": {
+                    "uv": [
+                        4,
+                        12,
+                        12,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "west": {
+                    "uv": [
+                        4,
+                        12,
+                        5,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "up": {
+                    "uv": [
+                        4,
+                        4,
+                        12,
+                        5
+                    ],
+                    "texture": "#bowl"
+                },
+                "down": {
+                    "uv": [
+                        4,
+                        15,
+                        12,
+                        16
+                    ],
+                    "texture": "#bowl"
+                }
+            }
+        },
+        {
+            "name": "bowl_wall_s",
+            "from": [
+                4,
+                1,
+                11
+            ],
+            "to": [
+                12,
+                4,
+                12
+            ],
+            "faces": {
+                "north": {
+                    "uv": [
+                        4,
+                        12,
+                        12,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "east": {
+                    "uv": [
+                        4,
+                        12,
+                        5,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "south": {
+                    "uv": [
+                        4,
+                        12,
+                        12,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "west": {
+                    "uv": [
+                        11,
+                        12,
+                        12,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "up": {
+                    "uv": [
+                        4,
+                        11,
+                        12,
+                        12
+                    ],
+                    "texture": "#bowl"
+                },
+                "down": {
+                    "uv": [
+                        4,
+                        15,
+                        12,
+                        16
+                    ],
+                    "texture": "#bowl"
+                }
+            }
+        },
+        {
+            "name": "bowl_wall_w",
+            "from": [
+                4,
+                1,
+                5
+            ],
+            "to": [
+                5,
+                4,
+                11
+            ],
+            "faces": {
+                "north": {
+                    "uv": [
+                        11,
+                        12,
+                        12,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "east": {
+                    "uv": [
+                        5,
+                        12,
+                        11,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "south": {
+                    "uv": [
+                        4,
+                        12,
+                        5,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "west": {
+                    "uv": [
+                        5,
+                        12,
+                        11,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "up": {
+                    "uv": [
+                        4,
+                        5,
+                        5,
+                        11
+                    ],
+                    "texture": "#bowl"
+                },
+                "down": {
+                    "uv": [
+                        11,
+                        15,
+                        12,
+                        16
+                    ],
+                    "texture": "#bowl"
+                }
+            }
+        },
+        {
+            "name": "bowl_wall_e",
+            "from": [
+                11,
+                1,
+                5
+            ],
+            "to": [
+                12,
+                4,
+                11
+            ],
+            "faces": {
+                "north": {
+                    "uv": [
+                        4,
+                        12,
+                        5,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "east": {
+                    "uv": [
+                        5,
+                        12,
+                        11,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "south": {
+                    "uv": [
+                        11,
+                        12,
+                        12,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "west": {
+                    "uv": [
+                        5,
+                        12,
+                        11,
+                        15
+                    ],
+                    "texture": "#bowl"
+                },
+                "up": {
+                    "uv": [
+                        11,
+                        5,
+                        12,
+                        11
+                    ],
+                    "texture": "#bowl"
+                },
+                "down": {
+                    "uv": [
+                        4,
+                        15,
+                        5,
+                        16
+                    ],
+                    "texture": "#bowl"
+                }
+            }
+        },
+        {
+            "name": "rice_piece_27",
+            "from": [
+                9,
+                1,
+                5
+            ],
+            "to": [
+                11,
+                2.5,
+                7
+            ],
+            "faces": {
+                "north": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "east": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "south": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "west": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "up": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "down": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                }
+            }
+        },
+        {
+            "name": "rice_piece_28",
+            "from": [
+                9,
+                1,
+                7
+            ],
+            "to": [
+                11,
+                2.5,
+                9
+            ],
+            "faces": {
+                "north": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "east": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "south": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "west": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "up": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "down": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                }
+            }
+        },
+        {
+            "name": "rice_piece_29",
+            "from": [
+                9,
+                1,
+                9
+            ],
+            "to": [
+                11,
+                2.5,
+                11
+            ],
+            "faces": {
+                "north": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "east": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "south": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "west": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "up": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                },
+                "down": {
+                    "uv": [
+                        5,
+                        5,
+                        11,
+                        11
+                    ],
+                    "texture": "#rice"
+                }
+            }
+        }
+    ],
+    "display": {
+        "ground": {
+            "translation": [
+                0,
+                3,
+                0
+            ],
+            "scale": [
+                0.5,
+                0.5,
+                0.5
+            ]
+        },
+        "fixed": {
+            "scale": [
+                0.5,
+                0.5,
+                0.5
+            ]
+        }
+    }
+}

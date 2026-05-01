@@ -1,0 +1,12 @@
+{
+  "type": "realisticdining:wok_cooking",
+  "group": "cooking",
+  "input": {
+    "item": "minecraft:apple"
+  },
+  "output": {
+    "item": "minecraft:golden_apple",
+    "count": 1
+  },
+  "cookTime": 100
+}

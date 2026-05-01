@@ -1,0 +1,344 @@
+﻿{
+    "credit": "Masterpiece Layered Wok",
+    "texture_size": [
+        32,
+        32
+    ],
+    "textures": {
+        "0": "realisticdining:block/napa_cabbage",
+        "1": "realisticdining:block/pork"
+    },
+    "display": {
+        "fixed": {
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "translation": [
+                0,
+                0,
+                0
+            ],
+            "scale": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "elements": [
+        {
+            "name": "pork_2_2",
+            "from": [
+                6.6,
+                2.05,
+                6.6
+            ],
+            "to": [
+                8.6,
+                4.05,
+                8.6
+            ],
+            "faces": {
+                "up": {
+                    "uv": [
+                        7,
+                        7,
+                        9,
+                        9
+                    ],
+                    "texture": "#1"
+                },
+                "down": {
+                    "uv": [
+                        7,
+                        7,
+                        9,
+                        9
+                    ],
+                    "texture": "#1"
+                },
+                "north": {
+                    "uv": [
+                        7,
+                        1,
+                        9,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "south": {
+                    "uv": [
+                        7,
+                        1,
+                        9,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "east": {
+                    "uv": [
+                        7,
+                        1,
+                        9,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "west": {
+                    "uv": [
+                        7,
+                        1,
+                        9,
+                        3
+                    ],
+                    "texture": "#1"
+                }
+            },
+            "rotation": {
+                "angle": -22.5,
+                "axis": "z",
+                "origin": [
+                    7.6,
+                    3.05,
+                    7.6
+                ]
+            }
+        },
+        {
+            "name": "pork_1_1",
+            "from": [
+                4.2,
+                2.05,
+                4.2
+            ],
+            "to": [
+                6.2,
+                4.05,
+                6.2
+            ],
+            "faces": {
+                "up": {
+                    "uv": [
+                        5,
+                        5,
+                        7,
+                        7
+                    ],
+                    "texture": "#1"
+                },
+                "down": {
+                    "uv": [
+                        5,
+                        5,
+                        7,
+                        7
+                    ],
+                    "texture": "#1"
+                },
+                "north": {
+                    "uv": [
+                        5,
+                        1,
+                        7,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "south": {
+                    "uv": [
+                        5,
+                        1,
+                        7,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "east": {
+                    "uv": [
+                        5,
+                        1,
+                        7,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "west": {
+                    "uv": [
+                        5,
+                        1,
+                        7,
+                        3
+                    ],
+                    "texture": "#1"
+                }
+            },
+            "rotation": {
+                "angle": -22.5,
+                "axis": "x",
+                "origin": [
+                    5.2,
+                    3.05,
+                    5.2
+                ]
+            }
+        },
+        {
+            "name": "pork_2_0",
+            "from": [
+                6.6,
+                2.05,
+                3.0
+            ],
+            "to": [
+                8.6,
+                4.05,
+                5.0
+            ],
+            "faces": {
+                "up": {
+                    "uv": [
+                        7,
+                        3,
+                        9,
+                        5
+                    ],
+                    "texture": "#1"
+                },
+                "down": {
+                    "uv": [
+                        7,
+                        3,
+                        9,
+                        5
+                    ],
+                    "texture": "#1"
+                },
+                "north": {
+                    "uv": [
+                        7,
+                        1,
+                        9,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "south": {
+                    "uv": [
+                        7,
+                        1,
+                        9,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "east": {
+                    "uv": [
+                        3,
+                        1,
+                        5,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "west": {
+                    "uv": [
+                        3,
+                        1,
+                        5,
+                        3
+                    ],
+                    "texture": "#1"
+                }
+            },
+            "rotation": {
+                "angle": -22.5,
+                "axis": "z",
+                "origin": [
+                    7.6,
+                    3.05,
+                    4.0
+                ]
+            }
+        },
+        {
+            "name": "pork_3_0",
+            "from": [
+                9.8,
+                2.05,
+                3.0
+            ],
+            "to": [
+                11.8,
+                4.05,
+                5.0
+            ],
+            "faces": {
+                "up": {
+                    "uv": [
+                        9,
+                        3,
+                        11,
+                        5
+                    ],
+                    "texture": "#1"
+                },
+                "down": {
+                    "uv": [
+                        9,
+                        3,
+                        11,
+                        5
+                    ],
+                    "texture": "#1"
+                },
+                "north": {
+                    "uv": [
+                        9,
+                        1,
+                        11,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "south": {
+                    "uv": [
+                        9,
+                        1,
+                        11,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "east": {
+                    "uv": [
+                        3,
+                        1,
+                        5,
+                        3
+                    ],
+                    "texture": "#1"
+                },
+                "west": {
+                    "uv": [
+                        3,
+                        1,
+                        5,
+                        3
+                    ],
+                    "texture": "#1"
+                }
+            },
+            "rotation": {
+                "angle": 22.5,
+                "axis": "x",
+                "origin": [
+                    10.8,
+                    3.05,
+                    4.0
+                ]
+            }
+        }
+    ]
+}

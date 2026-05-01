@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " P ",
+        " B "
+    ],
+    "key": {
+        "P": {
+            "item": "minecraft:paper"
+        },
+        "B": {
+            "item": "minecraft:oak_planks"
+        }
+    },
+    "result": {
+        "item": "realisticdining:cookbook",
+        "count": 1
+    }
+}

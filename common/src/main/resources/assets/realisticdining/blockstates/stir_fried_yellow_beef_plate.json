@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "bites=0,has_chopsticks=false": { "model": "realisticdining:block/stir_fried_yellow_beef" },
+    "bites=1,has_chopsticks=false": { "model": "realisticdining:block/stir_fried_yellow_beef_1" },
+    "bites=2,has_chopsticks=false": { "model": "realisticdining:block/stir_fried_yellow_beef_2" },
+    "bites=3,has_chopsticks=false": { "model": "realisticdining:block/stir_fried_yellow_beef_3" },
+    "bites=4,has_chopsticks=false": { "model": "realisticdining:block/stir_fried_yellow_beef_4" },
+    "bites=5,has_chopsticks=false": { "model": "realisticdining:block/stir_fried_yellow_beef_5" },
+    "bites=5,has_chopsticks=true": { "model": "realisticdining:block/plate_chopsticks" }
+  }
+}

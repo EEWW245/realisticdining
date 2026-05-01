@@ -1,0 +1,63 @@
+{
+    "type": "minecraft:block",
+    "pools": [
+        {
+            "name": "green_onion_crop",
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:alternatives",
+                    "children": [
+                        {
+                            "type": "minecraft:item",
+                            "name": "realisticdining:green_onion",
+                            "conditions": [
+                                {
+                                    "condition": "minecraft:block_state_property",
+                                    "block": "realisticdining:green_onion_crop",
+                                    "properties": {
+                                        "age": "1"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "minecraft:item",
+                            "name": "realisticdining:green_onion_seeds"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "green_onion_seeds_bonus",
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "realisticdining:green_onion_seeds"
+                }
+            ],
+            "conditions": [
+                {
+                    "condition": "minecraft:block_state_property",
+                    "block": "realisticdining:green_onion_crop",
+                    "properties": {
+                        "age": "1"
+                    }
+                }
+            ],
+            "functions": [
+                {
+                    "function": "minecraft:apply_bonus",
+                    "enchantment": "minecraft:fortune",
+                    "formula": "minecraft:binomial_with_bonus_count",
+                    "parameters": {
+                        "extra": 3,
+                        "probability": 0.5714286
+                    }
+                }
+            ]
+        }
+    ]
+}
