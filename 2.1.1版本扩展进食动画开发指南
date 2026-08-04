@@ -133,7 +133,7 @@ DrinkSoundCue.loop(Supplier<SoundEvent> sound, double timeSeconds);
 
 **时间单位**：秒，动画起点为 0。例如 `DrinkSoundCue.once(SODA_FIZZ, 1.5)` 表示动画开始后 1.5 秒播放一次嘶嘶声。
 
-### 4.4 多贴图支持（可选，v2.0.5+）
+### 4.4 多贴图支持（可选，v2.1.1+）
 
 如果你的食物模型需要多张贴图（例如辣子鸡的鸡肉、辣椒、盘子分别画在各自贴图上），可以使用 `register` 的重载方法，传入一个 `boneTextures` 骨骼名→贴图路径映射：
 
@@ -973,7 +973,7 @@ public class MyAddonClientSetup {
 
 ---
 
-## 十一、双模型 API（v2.0.7+）
+## 十一、双模型 API（v2.1.1+）
 
 ### 11.1 什么是双模型 API
 
@@ -1147,7 +1147,7 @@ assets/myaddon/
 
 ---
 
-## 十二、U 键双手检查（v2.0.7+）
+## 十二、U 键双手检查（v2.1.1+）
 
 ### 12.1 行为说明
 
