@@ -1,10 +1,10 @@
-# Realistic Dining 附属开发指南
+# 开发指南
 
 > **版本**：API v2（对应模组 v2.1.1+）
 > **适用平台**：Fabric 1.20.1 / Forge 1.20.1 / Fabric 1.21.1 / NeoForge 1.21.1
 > **作者**：Realistic Dining 模组作者
 
-本指南面向希望为 Realistic Dining 开发附属（Addon）的模组作者。通过本模组提供的公共 API，为模组添加自定义的饮用/食用动画。{具有双模型，单模型API}
+本指南面向开发自定义进食动画模组作者。通过本模组提供的公共 API，为模组添加自定义的饮用/食用动画。{具有双模型，单模型API}
 
 
 
@@ -201,7 +201,7 @@ DrinkAnimRegistry.register(
 
 ## 五、完整开发流程
 
-下面以"辣子鸡"为例，演示从零开发一个附属食物动画。
+下面以"辣子鸡"为例，演示从零开发一个食物动画。
 
 ### Step 1：BlockBench 建模
 
@@ -426,9 +426,9 @@ public class MyAddon {
 > - 把 `init()` 放在 `EnqueueIMC` 等过晚阶段 → 物品注册表可能还没就绪
 > - 在 Architectury 多平台项目里直接调用 `MyAddonClientSetup.init()` 而不走平台入口 → 服务端启动会崩
 
-### Step 7：构建附属 jar
+### Step 7：构建 jar
 
-正常 `./gradlew build` 即可。附属 jar 不需要包含任何渲染代码、Mixin、按键绑定。
+正常 `./gradlew build` 即可。jar 不需要包含任何渲染代码、Mixin、按键绑定。
 
 ---
 
@@ -551,7 +551,7 @@ myaddon/
 ### 你可以做的
 
 - ✅ 自由开发并发布 Realistic Dining 的附属模组
-- ✅ 附属可以开源或闭源，可选择任意 License
+- ✅ 可以开源或闭源，可选择任意 License
 - ✅ 在附属描述中提及"基于 Realistic Dining 开发"（建议但非强制）
 - ✅ 商业化（如 Patreon/CurseForge 积分下载）
 
@@ -575,7 +575,7 @@ myaddon/
 
 ## 十、附录：Forge 1.20.1 完整端到端示例
 
-> 本章以 1.20.1 Forge 为例，从空项目到可发布的附属 jar，列出**所有需要写的代码和配置**。其他平台结构类似，只是入口点和注册 API 不同。
+> 本章以 1.20.1 Forge 为例，从空项目到可发布的 jar，列出**所有需要写的代码和配置**。其他平台结构类似，只是入口点和注册 API 不同。
 
 ### 10.1 build.gradle：声明 Realistic Dining 依赖
 
