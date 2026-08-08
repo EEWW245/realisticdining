@@ -2,6 +2,7 @@
 *.class
 *.jar
 *.exe
+!gradle/wrapper/gradle-wrapper.jar
 
 # Build directory
 build/
