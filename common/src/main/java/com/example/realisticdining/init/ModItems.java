@@ -5,6 +5,12 @@ import com.example.realisticdining.items.PlaceableFoodItem;
 import com.example.realisticdining.items.EdibleChopsticksItem;
 import com.example.realisticdining.platform.PlatformRegistry;
 import com.example.realisticdining.platform.ServiceHelper;
+import com.example.realisticdining.blocks.FriedRiceEggBlock;
+import com.example.realisticdining.blocks.PepperyChickenPlateBlock;
+import com.example.realisticdining.blocks.RiceBowlBlock;
+import com.example.realisticdining.blocks.StirFriedPorkCabbagePlateBlock;
+import com.example.realisticdining.blocks.StirFriedYellowBeefPlateBlock;
+import com.example.realisticdining.blocks.TomatoPoachedEggBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -17,6 +23,55 @@ public class ModItems {
 
     public static final Supplier<Item> VEGETABLE_OIL = register("vegetable_oil",
             () -> new Item(new Item.Properties()));
+
+    // ==================== 饮用动画物品 ====================
+    public static final Supplier<Item> MINERAL_WATER = register("mineral_water",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> MILK_BEER = register("milk_beer",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> CRISP = register("crisp",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> ENERGY_BAR = register("energy_bar",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    // ==================== 新增饮用动画物品（v2.0.6+） ====================
+    // 瓶装组（套用矿泉水瓶形动画）
+    public static final Supplier<Item> PEACH_GRAPEFRUIT_TEA = register("peach_grapefruit_tea",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> SPORTS_DRINK = register("sports_drink",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> ICED_TEA = register("iced_tea",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> COCONUT_JUICE = register("coconut_juice",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> ORANGE_JUICE = register("orange_juice",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    // 罐装组（套用罐装饮料动画）
+    public static final Supplier<Item> SOYMILK = register("soymilk",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> COLA = register("cola",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> BEER = register("beer",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    // 薯片变体组（套用 crisp_1 薯片袋动画）
+    public static final Supplier<Item> POTATO_CHIPS = register("potato_chips",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> POTATO_CHIPS_BBQ = register("potato_chips_bbq",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> POTATO_CHIPS_CUCUMBER = register("potato_chips_cucumber",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> POTATO_CHIPS_TOMATO = register("potato_chips_tomato",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> CRISPY_FISH_CHIPS = register("crispy_fish_chips",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    // 饼干组（套用 biscuit 饼干动画，能量棒变体）
+    public static final Supplier<Item> COOKIE_BAG = register("cookie_bag",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> COOKIE_BAG_COCONUT_LATTE = register("cookie_bag_coconut_latte",
+            () -> new Item(new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> NAPA_CABBAGE = register("napa_cabbage",
             () -> new Item(new Item.Properties()));
     public static final Supplier<Item> GREEN_ONION = register("green_onion",
@@ -51,6 +106,8 @@ public class ModItems {
 
     public static final Supplier<Item> STIR_FRIED_PORK_CABBAGE = register("stir_fried_pork_cabbage", () -> new PlaceableFoodItem(
             ModBlocks.STIR_FRIED_PORK_CABBAGE_PLATE.get(),
+            StirFriedPorkCabbagePlateBlock.BITES,
+            "StirFriedPorkCabbageBites",
             new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(8)
@@ -61,6 +118,8 @@ public class ModItems {
 
     public static final Supplier<Item> PEPPERY_CHICKEN = register("peppery_chicken", () -> new PlaceableFoodItem(
             ModBlocks.PEPPERY_CHICKEN_PLATE.get(),
+            PepperyChickenPlateBlock.PICKS,
+            "PepperyChickenPicks",
             new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(10)
@@ -71,11 +130,23 @@ public class ModItems {
 
     public static final Supplier<Item> STIR_FRIED_YELLOW_BEEF = register("stir_fried_yellow_beef", () -> new PlaceableFoodItem(
             ModBlocks.STIR_FRIED_YELLOW_BEEF_PLATE.get(),
+            StirFriedYellowBeefPlateBlock.BITES,
+            "StirFriedYellowBeefBites",
             new Item.Properties()
                     .food(new FoodProperties.Builder()
                             .nutrition(10)
                             .saturationMod(1.5f)
                             .meat()
+                            .build())
+    ));
+
+    public static final Supplier<Item> RICE_BOWL = register("rice_bowl", () -> new com.example.realisticdining.items.RiceBowlItem(
+            ModBlocks.RICE_BOWL.get(),
+            RiceBowlBlock.BITES,
+            new Item.Properties()
+                    .food(new FoodProperties.Builder()
+                            .nutrition(8)
+                            .saturationMod(1.2f)
                             .build())
     ));
 
@@ -105,6 +176,10 @@ public class ModItems {
     ));
 
     public static final Supplier<Item> COOKBOOK = register("cookbook", () -> new com.example.realisticdining.items.CookbookItem(new Item.Properties()
+            .stacksTo(1)
+    ));
+
+    public static final Supplier<Item> EAT_RICE_GUIDE = register("eat_rice_guide", () -> new com.example.realisticdining.items.EatRiceGuideItem(new Item.Properties()
             .stacksTo(1)
     ));
 
@@ -521,6 +596,11 @@ public class ModItems {
             new Item.Properties()
     ));
 
+    public static final Supplier<Item> VENDING_MACHINE = register("vending_machine", () -> new BlockItem(
+            ModBlocks.VENDING_MACHINE.get(),
+            new Item.Properties()
+    ));
+
     public static final Supplier<Item> CORIANDER = register("coriander", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> YELLOW_STEAK = register("yellow_steak", () -> new Item(new Item.Properties()));
 
@@ -554,6 +634,8 @@ public class ModItems {
 
     public static final Supplier<Item> TOMATO_POACHED_EGG = register("tomato_poached_egg",
             () -> new PlaceableFoodItem(ModBlocks.TOMATO_POACHED_EGG_BLOCK.get(),
+                    TomatoPoachedEggBlock.PICKS,
+                    "TomatoPoachedEggPicks",
                     new Item.Properties().food(new FoodProperties.Builder()
                             .nutrition(8)
                             .saturationMod(1.2f)
@@ -569,6 +651,8 @@ public class ModItems {
 
     public static final Supplier<Item> FRIED_RICE_EGG = register("fried_rice_egg",
             () -> new PlaceableFoodItem(ModBlocks.FRIED_RICE_EGG_BLOCK.get(),
+                    FriedRiceEggBlock.BITES,
+                    "FriedRiceEggBites",
                     new Item.Properties().food(new FoodProperties.Builder()
                             .nutrition(2)
                             .saturationMod(0.3f)

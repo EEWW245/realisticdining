@@ -1,5 +1,11 @@
 archivesBaseName = "realisticdining-fabric"
 
+loom {
+    mixin {
+        defaultRefmapName.set("realisticdining.fabric.refmap.json")
+    }
+}
+
 repositories {
     mavenCentral()
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }

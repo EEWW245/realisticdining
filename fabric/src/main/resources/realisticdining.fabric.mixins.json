@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "com.example.realisticdining.fabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "refmap": "realisticdining.fabric.refmap.json",
+  "client": [
+    "ItemInHandRendererMixin",
+    "FirstPersonModelLogicHandlerMixin",
+    "ItemInHandLayerMixin"
+  ],
+  "mixins": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

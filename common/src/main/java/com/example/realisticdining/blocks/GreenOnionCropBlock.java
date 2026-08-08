@@ -92,6 +92,7 @@ public class GreenOnionCropBlock extends CropBlock {
             if (!level.isClientSide) {
                 int count = 1 + level.random.nextInt(2);
                 popResource(level, pos, new ItemStack(ModItems.GREEN_ONION.get(), count));
+                popResource(level, pos, new ItemStack(ModItems.GREEN_ONION_SEEDS.get()));
                 
                 level.setBlock(pos, state.setValue(AGE, 0), 2);
             }

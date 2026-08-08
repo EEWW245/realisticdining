@@ -1,5 +1,11 @@
 archivesBaseName = "realisticdining-forge"
 
+loom {
+    mixin {
+        defaultRefmapName.set("realisticdining.forge.refmap.json")
+    }
+}
+
 repositories {
     mavenCentral()
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
@@ -18,6 +24,10 @@ dependencies {
 jar {
     from project.zipTree(project.tasks.getByPath(':common:jar').archiveFile)
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    manifest {
+        attributes 'MixinConfigs': 'realisticdining.forge.mixins.json'
+    }
 }
 
 processResources {

@@ -22,8 +22,31 @@ public class ModSounds {
     public static final Supplier<SoundEvent> GREEN_VEGETABLES_IN_THE_POT = register("green_vegetables_in_the_pot",
             () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(RealisticDining.MOD_ID, "green_vegetables_in_the_pot")));
 
+    // === 饮用动画音效 ===
+    // 薯片
+    public static final Supplier<SoundEvent> DRINK_CRISP_BAG_PICKUP = registerDrink("drink.crisp.bag_pickup");
+    public static final Supplier<SoundEvent> DRINK_CRISP_BAG_OPEN = registerDrink("drink.crisp.bag_open");
+    public static final Supplier<SoundEvent> DRINK_CRISP_CRUNCH = registerDrink("drink.crisp.crisp_crunch");
+    // 矿泉水
+    public static final Supplier<SoundEvent> DRINK_WATER_CAP_OFF = registerDrink("drink.water.cap_off");
+    public static final Supplier<SoundEvent> DRINK_WATER_GULP = registerDrink("drink.water.water_gulp");
+    public static final Supplier<SoundEvent> DRINK_WATER_AHH = registerDrink("drink.water.water_ahh");
+    // 能量棒
+    public static final Supplier<SoundEvent> DRINK_ENERGYBAR_WRAPPER_PICKUP = registerDrink("drink.energybar.wrapper_pickup");
+    public static final Supplier<SoundEvent> DRINK_ENERGYBAR_WRAPPER_OPEN = registerDrink("drink.energybar.wrapper_open");
+    public static final Supplier<SoundEvent> DRINK_ENERGYBAR_BAR_CHEW = registerDrink("drink.energybar.bar_chew");
+    // 罐装
+    public static final Supplier<SoundEvent> DRINK_CAN_PULL_TAB = registerDrink("drink.can.pull_tab");
+    public static final Supplier<SoundEvent> DRINK_CAN_GULP = registerDrink("drink.can.can_gulp");
+    public static final Supplier<SoundEvent> DRINK_CAN_AHH = registerDrink("drink.can.can_ahh");
+
     private static <T extends SoundEvent> Supplier<T> register(String name, Supplier<T> sound) {
         return SOUND_EVENTS.register(new ResourceLocation(RealisticDining.MOD_ID, name), sound);
+    }
+
+    private static Supplier<SoundEvent> registerDrink(String path) {
+        return SOUND_EVENTS.register(new ResourceLocation(RealisticDining.MOD_ID, path),
+                () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(RealisticDining.MOD_ID, path)));
     }
 
     public static void init() {

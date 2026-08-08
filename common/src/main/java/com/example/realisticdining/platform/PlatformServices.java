@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -21,6 +22,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.level.ServerPlayer;
 import java.util.function.Supplier;
 import java.util.function.Consumer;
 
@@ -74,4 +76,20 @@ public interface PlatformServices {
     void registerBlockBreakHandler(BlockBreakHandler handler);
     
     void registerCommand(Consumer<CommandDispatcher<CommandSourceStack>> commandRegister);
+
+    void openEatRiceGuideMenu(ServerPlayer player);
+
+    void openCookbookMenu(ServerPlayer player);
+
+    /**
+     * 客户端 → 服务器：发送自动售货机购买请求。
+     * 由各平台网络包实现，服务端扣金粒+给物品。
+     */
+    void sendVendingPurchase(ResourceLocation itemId);
+
+    /**
+     * 客户端 → 服务器：饮料/零食动画播完后请求消耗物品。
+     * @param drinkId 与 {@link com.example.realisticdining.common.DrinkItemMapping} 中登记的 drinkId 一致
+     */
+    void sendDrinkConsume(String drinkId);
 }

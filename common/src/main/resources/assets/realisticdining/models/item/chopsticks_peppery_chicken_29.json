@@ -1,11 +1,11 @@
-﻿{
+{
   "credit": "Chopsticks with peppery chicken piece 29",
   "texture_size": [
     16,
     16
   ],
   "textures": {
-    "chopstick": "realisticdining:item/chopsticks",
+    "chopstick": "realisticdining:item/chopsticks_3",
     "0": "realisticdining:block/plate",
     "1": "realisticdining:item/red_pepper",
     "5": "realisticdining:item/chicken_bone_2",

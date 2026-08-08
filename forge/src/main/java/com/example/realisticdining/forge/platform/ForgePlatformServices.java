@@ -1,11 +1,16 @@
 package com.example.realisticdining.forge.platform;
 
+import com.example.realisticdining.menu.CookbookMenu;
+import com.example.realisticdining.menu.EatRiceGuideMenu;
 import com.example.realisticdining.platform.PlatformRegistry;
 import com.example.realisticdining.platform.PlatformServices;
+import com.example.realisticdining.forge.network.VendingMachinePurchasePacket;
+import com.example.realisticdining.forge.network.ConsumeDrinkPacket;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +24,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraft.server.level.ServerLevel;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -129,5 +138,47 @@ public class ForgePlatformServices implements PlatformServices {
                 register.accept(event.getDispatcher());
             }
         });
+    }
+    
+    @Override
+    public void openEatRiceGuideMenu(ServerPlayer player) {
+        MenuProvider provider = new MenuProvider() {
+            @Override
+            public Component getDisplayName() {
+                return Component.literal("进食动画说明书");
+            }
+
+            @Override
+            public AbstractContainerMenu createMenu(int containerId, net.minecraft.world.entity.player.Inventory inventory, net.minecraft.world.entity.player.Player player) {
+                return new EatRiceGuideMenu(containerId, inventory, null);
+            }
+        };
+        player.openMenu(provider);
+    }
+
+    @Override
+    public void openCookbookMenu(ServerPlayer player) {
+        MenuProvider provider = new MenuProvider() {
+            @Override
+            public Component getDisplayName() {
+                return Component.literal("食谱书");
+            }
+
+            @Override
+            public AbstractContainerMenu createMenu(int containerId, net.minecraft.world.entity.player.Inventory inventory, net.minecraft.world.entity.player.Player player) {
+                return new CookbookMenu(containerId, inventory, null);
+            }
+        };
+        player.openMenu(provider);
+    }
+
+    @Override
+    public void sendVendingPurchase(ResourceLocation itemId) {
+        VendingMachinePurchasePacket.sendToServer(itemId);
+    }
+
+    @Override
+    public void sendDrinkConsume(String drinkId) {
+        ConsumeDrinkPacket.sendToServer(drinkId);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.realisticdining.blockentities;
 
+import com.example.realisticdining.client.WokModeConfig;
 import com.example.realisticdining.compat.KaleidoscopeCompat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -191,18 +192,23 @@ public class WokBlockEntity extends BaseContainerBlockEntity implements Containe
 
     public boolean canServe(long currentGameTime) {
         if (!isReadyToStir()) return false;
-        if (stirCount < REQUIRED_STIRS) return false;
+        int requiredStirs = WokModeConfig.isSimplifiedMode() ? WokModeConfig.SIMPLIFIED_REQUIRED_STIRS : REQUIRED_STIRS;
+        if (stirCount < requiredStirs) return false;
         if (cookingStartTime == 0) return false;
         
         long elapsed = currentGameTime - cookingStartTime;
-        return elapsed >= COOK_DURATION;
+        return elapsed >= WokModeConfig.COOK_DURATION;
     }
 
     public boolean isBurned(long currentGameTime) {
         if (cookingStartTime == 0) return false;
         
         long elapsed = currentGameTime - cookingStartTime;
-        return elapsed >= (COOK_DURATION + BURN_DURATION);
+        return elapsed >= (WokModeConfig.COOK_DURATION + WokModeConfig.BURN_DURATION);
+    }
+
+    public int getTimeBasedStage(long currentGameTime) {
+        return WokModeConfig.getTimeBasedStage(cookingStartTime, currentGameTime);
     }
 
     public int getRemainingCookSeconds(long currentGameTime) {

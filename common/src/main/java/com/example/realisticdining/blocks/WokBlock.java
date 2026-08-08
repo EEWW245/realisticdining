@@ -3,6 +3,7 @@ package com.example.realisticdining.blocks;
 import com.example.realisticdining.blockentities.WokBlockEntity;
 import com.example.realisticdining.blockentities.WokFriedEggBlockEntity;
 import com.example.realisticdining.blockentities.WokYellowSteakBlockEntity;
+import com.example.realisticdining.client.WokModeConfig;
 import com.example.realisticdining.compat.KaleidoscopeCompat;
 import com.example.realisticdining.init.ModBlockEntities;
 import com.example.realisticdining.init.ModBlocks;
@@ -134,6 +135,11 @@ public class WokBlock extends BaseEntityBlock {
                 if (!player.isCreative()) heldItem.shrink(1);
                 addedOil = true;
             }
+            // 主模组油脂（Oil）：功能和油壶一样，每次消耗 1 个
+            else if (KaleidoscopeCompat.isOil(heldItem)) {
+                if (!player.isCreative()) heldItem.shrink(1);
+                addedOil = true;
+            }
             // 主模组油壶（需要有油）
             else if (KaleidoscopeCompat.isOilPot(heldItem) && KaleidoscopeCompat.hasOil(heldItem)) {
                 if (!player.isCreative()) {
@@ -262,8 +268,8 @@ public class WokBlock extends BaseEntityBlock {
             level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, randomPitch);
 
             int currentStir = wokEntity.getStirCount();
-            if (currentStir == 30) {
-                player.displayClientMessage(Component.literal("已翻炒30次"), true);
+            if (!WokModeConfig.isSimplifiedMode() && currentStir == WokModeConfig.NORMAL_REQUIRED_STIRS) {
+                player.displayClientMessage(Component.literal("已翻炒" + WokModeConfig.NORMAL_REQUIRED_STIRS + "次"), true);
             }
             return InteractionResult.CONSUME;
         }

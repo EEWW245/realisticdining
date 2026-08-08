@@ -1,6 +1,6 @@
 {
 	"credit": "Tall Rice Bowl - Bite 4 (Removed 8 pieces)",
-	"textures": {
+	"textures": { "particle": "item/bowl",
 		"bowl": "realisticdining:block/fried_rice_egg_empty"
 	},
 	"elements": [

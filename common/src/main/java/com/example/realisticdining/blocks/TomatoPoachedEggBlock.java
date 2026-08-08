@@ -24,6 +24,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import com.example.realisticdining.init.ModItems;
+import com.example.realisticdining.items.PlaceableFoodItem;
 
 public class TomatoPoachedEggBlock extends Block {
     public static final IntegerProperty PICKS = IntegerProperty.create("picks", 0, 3);
@@ -149,13 +150,17 @@ public class TomatoPoachedEggBlock extends Block {
         boolean hasChopsticks = state.getValue(HAS_CHOPSTICKS);
         
         if (!level.isClientSide) {
-            if (picks == 0) {
-                popResource(level, pos, new ItemStack(ModItems.TOMATO_POACHED_EGG.get()));
-            } else if (picks == 3 || hasChopsticks) {
+            if (picks == 3 || hasChopsticks) {
                 popResource(level, pos, new ItemStack(Items.BOWL));
                 if (hasChopsticks) {
                     popResource(level, pos, new ItemStack(ModItems.CHOPSTICKS.get()));
                 }
+            } else {
+                ItemStack tomatoPoachedEggItem = new ItemStack(ModItems.TOMATO_POACHED_EGG.get());
+                if (picks > 0) {
+                    PlaceableFoodItem.setBitesToStack(tomatoPoachedEggItem, "TomatoPoachedEggPicks", picks);
+                }
+                popResource(level, pos, tomatoPoachedEggItem);
             }
         }
     }

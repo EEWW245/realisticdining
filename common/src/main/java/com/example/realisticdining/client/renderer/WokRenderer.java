@@ -57,9 +57,10 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
                     int variant = blockEntity.getCurrentStirVariant();
 
                     // a. 渲染乖乖待在平底锅底的食材 (Base)
+                    int stage = blockEntity.getTimeBasedStage(blockEntity.getLevel().getGameTime());
                     ItemStack baseItem = isSpicyChicken ? 
-                        getSpicyChickenBaseItem(variant, blockEntity.getStirCount()) : 
-                        getWokBaseItem(variant, blockEntity.getStirCount());
+                        getSpicyChickenBaseItem(variant, stage) : 
+                        getWokBaseItem(variant, stage);
                     itemRenderer.renderStatic(baseItem, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, bufferSource, blockEntity.getLevel(), 0);
 
                     // b. 渲染被铲子扬起飞天的食材 (Fly)
@@ -93,29 +94,29 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
                     poseStack.translate(0, 0.34f, 0);
 
                     ItemStack flyItem = isSpicyChicken ? 
-                        getSpicyChickenFlyItem(variant, blockEntity.getStirCount()) : 
-                        getWokFlyItem(variant, blockEntity.getStirCount());
+                        getSpicyChickenFlyItem(variant, stage) : 
+                        getWokFlyItem(variant, stage);
                     itemRenderer.renderStatic(flyItem, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, bufferSource, blockEntity.getLevel(), 0);
                     poseStack.popPose();
 
                 } else {
                     // == 安静状态：所有食材平躺在锅底 ==
-                    int stirCount = blockEntity.getStirCount();
+                    int stage = blockEntity.getTimeBasedStage(blockEntity.getLevel().getGameTime());
                     ItemStack idleItem;
                     if (isSpicyChicken) {
                         // 辣子鸡的安静状态
-                        if (stirCount >= 25) {
+                        if (stage >= 2) {
                             idleItem = new ItemStack(ModItems.WOK_CHICKEN_3_IDLE_STAGE3.get());
-                        } else if (stirCount >= 19 && stirCount <= 24) {
+                        } else if (stage == 1) {
                             idleItem = new ItemStack(ModItems.WOK_CHICKEN_3_IDLE_STAGE2.get());
                         } else {
                             idleItem = new ItemStack(ModItems.WOK_CHICKEN_3_IDLE.get());
                         }
                     } else {
                         // 猪肉炒白菜的安静状态
-                        if (stirCount >= 25) {
+                        if (stage >= 2) {
                             idleItem = new ItemStack(ModItems.WOK_IDLE_STAGE3.get());
-                        } else if (stirCount >= 19 && stirCount <= 24) {
+                        } else if (stage == 1) {
                             idleItem = new ItemStack(ModItems.WOK_IDLE_STAGE2.get());
                         } else {
                             idleItem = new ItemStack(ModItems.WOK_IDLE.get());
@@ -153,8 +154,8 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
     }
 
     // --- 获取 1~8 种锅底状态的方法 ---
-    private ItemStack getWokBaseItem(int variant, int stirCount) {
-        if (stirCount >= 25) {
+    private ItemStack getWokBaseItem(int variant, int stage) {
+        if (stage >= 2) {
             return switch (variant) {
                 case 1 -> new ItemStack(ModItems.WOK_BASE_STAGE3_1.get());
                 case 2 -> new ItemStack(ModItems.WOK_BASE_STAGE3_2.get());
@@ -166,7 +167,7 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
                 case 8 -> new ItemStack(ModItems.WOK_BASE_STAGE3_8.get());
                 default -> new ItemStack(ModItems.WOK_BASE_STAGE3_1.get());
             };
-        } else if (stirCount >= 19 && stirCount <= 24) {
+        } else if (stage == 1) {
             return switch (variant) {
                 case 1 -> new ItemStack(ModItems.WOK_BASE_STAGE2_1.get());
                 case 2 -> new ItemStack(ModItems.WOK_BASE_STAGE2_2.get());
@@ -194,8 +195,8 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
     }
 
     // --- 获取 1~8 种飞天状态的方法 ---
-    private ItemStack getWokFlyItem(int variant, int stirCount) {
-        if (stirCount >= 25) {
+    private ItemStack getWokFlyItem(int variant, int stage) {
+        if (stage >= 2) {
             return switch (variant) {
                 case 1 -> new ItemStack(ModItems.WOK_FLY_STAGE3_1.get());
                 case 2 -> new ItemStack(ModItems.WOK_FLY_STAGE3_2.get());
@@ -207,7 +208,7 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
                 case 8 -> new ItemStack(ModItems.WOK_FLY_STAGE3_8.get());
                 default -> new ItemStack(ModItems.WOK_FLY_STAGE3_1.get());
             };
-        } else if (stirCount >= 19 && stirCount <= 24) {
+        } else if (stage == 1) {
             return switch (variant) {
                 case 1 -> new ItemStack(ModItems.WOK_FLY_STAGE2_1.get());
                 case 2 -> new ItemStack(ModItems.WOK_FLY_STAGE2_2.get());
@@ -235,13 +236,13 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
     }
 
     // --- 辣子鸡：获取 1~30 种锅底状态的方法 ---
-    private ItemStack getSpicyChickenBaseItem(int variant, int stirCount) {
+    private ItemStack getSpicyChickenBaseItem(int variant, int stage) {
         // 辣子鸡使用30个变体，每个变体随机2-4个元素被炒起
         int v = ((variant - 1) % 30) + 1;
         
-        // 根据翻炒次数选择阶段
-        if (stirCount >= 25) {
-            // STAGE3 (25-30次)
+        // 根据时间阶段选择材质
+        if (stage >= 2) {
+            // STAGE3
             return switch (v) {
                 case 1 -> new ItemStack(ModItems.WOK_CHICKEN_3_BASE_STAGE3_1.get());
                 case 2 -> new ItemStack(ModItems.WOK_CHICKEN_3_BASE_STAGE3_2.get());
@@ -275,8 +276,8 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
                 case 30 -> new ItemStack(ModItems.WOK_CHICKEN_3_BASE_STAGE3_30.get());
                 default -> new ItemStack(ModItems.WOK_CHICKEN_3_BASE_STAGE3_1.get());
             };
-        } else if (stirCount >= 19 && stirCount <= 24) {
-            // STAGE2 (19-24次)
+        } else if (stage == 1) {
+            // STAGE2
             return switch (v) {
                 case 1 -> new ItemStack(ModItems.WOK_CHICKEN_3_BASE_STAGE2_1.get());
                 case 2 -> new ItemStack(ModItems.WOK_CHICKEN_3_BASE_STAGE2_2.get());
@@ -312,7 +313,7 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
             };
         }
         
-        // STAGE1 (0-18次)
+        // STAGE1
         return switch (v) {
             case 1 -> new ItemStack(ModItems.WOK_CHICKEN_3_BASE_1.get());
             case 2 -> new ItemStack(ModItems.WOK_CHICKEN_3_BASE_2.get());
@@ -349,13 +350,13 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
     }
 
     // --- 辣子鸡：获取 1~30 种飞天状态的方法 ---
-    private ItemStack getSpicyChickenFlyItem(int variant, int stirCount) {
+    private ItemStack getSpicyChickenFlyItem(int variant, int stage) {
         // 辣子鸡使用30个变体，每个变体随机2-4个元素被炒起
         int v = ((variant - 1) % 30) + 1;
         
-        // 根据翻炒次数选择阶段
-        if (stirCount >= 25) {
-            // STAGE3 (25-30次)
+        // 根据时间阶段选择材质
+        if (stage >= 2) {
+            // STAGE3
             return switch (v) {
                 case 1 -> new ItemStack(ModItems.WOK_CHICKEN_3_FLY_STAGE3_1.get());
                 case 2 -> new ItemStack(ModItems.WOK_CHICKEN_3_FLY_STAGE3_2.get());
@@ -391,7 +392,7 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
             };
         }
         
-        // STAGE1 (0-18次)
+        // STAGE1
         return switch (v) {
             case 1 -> new ItemStack(ModItems.WOK_CHICKEN_3_FLY_1.get());
             case 2 -> new ItemStack(ModItems.WOK_CHICKEN_3_FLY_2.get());

@@ -25,6 +25,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 
 import com.example.realisticdining.init.ModItems;
 import com.example.realisticdining.compat.KaleidoscopeCompat;
+import com.example.realisticdining.items.PlaceableFoodItem;
 
 public class RiceBowlBlock extends Block {
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 15);
@@ -144,16 +145,22 @@ public class RiceBowlBlock extends Block {
         boolean hasChopsticks = state.getValue(HAS_CHOPSTICKS);
         
         if (!level.isClientSide) {
-            if (bites == 0) {
-                ItemStack riceItem = KaleidoscopeCompat.getRiceItem();
-                if (!riceItem.isEmpty()) {
-                    popResource(level, pos, riceItem);
-                }
-            } else if (bites == 15 || hasChopsticks) {
+            if (bites == 15 || hasChopsticks) {
                 popResource(level, pos, new ItemStack(Items.BOWL));
                 if (hasChopsticks) {
                     popResource(level, pos, new ItemStack(ModItems.CHOPSTICKS.get()));
                 }
+            } else if (bites == 0) {
+                ItemStack compatRice = KaleidoscopeCompat.getRiceItem();
+                if (!compatRice.isEmpty()) {
+                    popResource(level, pos, compatRice);
+                } else {
+                    popResource(level, pos, new ItemStack(ModItems.RICE_BOWL.get()));
+                }
+            } else {
+                ItemStack riceItem = new ItemStack(ModItems.RICE_BOWL.get());
+                PlaceableFoodItem.setBitesToStack(riceItem, "RiceBowlBites", bites);
+                popResource(level, pos, riceItem);
             }
         }
     }

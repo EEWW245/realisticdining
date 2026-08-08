@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "realisticdining:item/peach_grapefruit_tea_64x64"
+	}
+}

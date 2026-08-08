@@ -68,19 +68,19 @@ public class ModBlocks {
     ));
     
     public static final Supplier<Block> STIR_FRIED_PORK_CABBAGE_PLATE = register("stir_fried_pork_cabbage_plate", () -> new StirFriedPorkCabbagePlateBlock(
-            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).strength(0.5f).noOcclusion().noCollission()
+            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).instabreak().noOcclusion().noCollission()
     ));
     
     public static final Supplier<Block> PEPPERY_CHICKEN_PLATE = register("peppery_chicken_plate", () -> new PepperyChickenPlateBlock(
-            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).strength(0.5f).noOcclusion().noCollission()
+            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).instabreak().noOcclusion().noCollission()
     ));
     
     public static final Supplier<Block> STIR_FRIED_YELLOW_BEEF_PLATE = register("stir_fried_yellow_beef_plate", () -> new StirFriedYellowBeefPlateBlock(
-            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).strength(0.5f).noOcclusion().noCollission()
+            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).instabreak().noOcclusion().noCollission()
     ));
     
     public static final Supplier<Block> RICE_BOWL = register("rice_bowl", () -> new RiceBowlBlock(
-            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).strength(0.5f).noOcclusion().noCollission()
+            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).instabreak().noOcclusion().noCollission()
     ));
     
     public static final Supplier<Block> GREEN_ONION_CROP = register("green_onion_crop", () -> new GreenOnionCropBlock(
@@ -88,15 +88,19 @@ public class ModBlocks {
     ));
 
     public static final Supplier<Block> TOMATO_POACHED_EGG_BLOCK = register("tomato_poached_egg_block", () -> new TomatoPoachedEggBlock(
-            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).strength(0.5f).noOcclusion().noCollission()
+            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).instabreak().noOcclusion().noCollission()
     ));
 
     public static final Supplier<Block> FRIED_RICE_EGG_BLOCK = register("fried_rice_egg_block", () -> new FriedRiceEggBlock(
-            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).strength(0.5f).noOcclusion().noCollission()
+            BlockBehaviour.Properties.of().mapColor(MapColor.CLAY).sound(SoundType.STONE).instabreak().noOcclusion().noCollission()
     ));
 
     public static final Supplier<Block> CORIANDER_CROP = register("coriander_crop", () -> new CorianderCropBlock(
             BlockBehaviour.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.CROP)
+    ));
+
+    public static final Supplier<Block> VENDING_MACHINE = register("vending_machine", () -> new VendingMachineBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(3.0f).noOcclusion()
     ));
     
     private static <T extends Block> Supplier<T> register(String name, Supplier<T> block) {

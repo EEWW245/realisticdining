@@ -1,6 +1,7 @@
 package com.example.realisticdining.blocks;
 
 import com.example.realisticdining.init.ModItems;
+import com.example.realisticdining.items.PlaceableFoodItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -146,14 +147,17 @@ public class StirFriedYellowBeefPlateBlock extends Block {
         boolean hasChopsticks = state.getValue(HAS_CHOPSTICKS);
         
         if (!level.isClientSide) {
-            if (bites == 0) {
-                ItemStack dish = new ItemStack(ModItems.STIR_FRIED_YELLOW_BEEF.get());
-                popResource(level, pos, dish);
-            } else if (bites == 5 || hasChopsticks) {
+            if (bites == 5 || hasChopsticks) {
                 popResource(level, pos, new ItemStack(Items.BOWL));
                 if (hasChopsticks) {
                     popResource(level, pos, new ItemStack(ModItems.CHOPSTICKS.get()));
                 }
+            } else {
+                ItemStack stirFriedYellowBeefItem = new ItemStack(ModItems.STIR_FRIED_YELLOW_BEEF.get());
+                if (bites > 0) {
+                    PlaceableFoodItem.setBitesToStack(stirFriedYellowBeefItem, "StirFriedYellowBeefBites", bites);
+                }
+                popResource(level, pos, stirFriedYellowBeefItem);
             }
         }
     }

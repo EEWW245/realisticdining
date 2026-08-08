@@ -24,6 +24,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import com.example.realisticdining.init.ModItems;
+import com.example.realisticdining.items.PlaceableFoodItem;
 
 public class PepperyChickenPlateBlock extends Block {
 
@@ -152,13 +153,17 @@ public class PepperyChickenPlateBlock extends Block {
         boolean hasChopsticks = state.getValue(HAS_CHOPSTICKS);
         
         if (!level.isClientSide) {
-            if (picks == 0) {
-                popResource(level, pos, new ItemStack(ModItems.PEPPERY_CHICKEN.get()));
-            } else if (picks == 35 || hasChopsticks) {
+            if (picks == 35 || hasChopsticks) {
                 popResource(level, pos, new ItemStack(Items.BOWL));
                 if (hasChopsticks) {
                     popResource(level, pos, new ItemStack(ModItems.CHOPSTICKS.get()));
                 }
+            } else {
+                ItemStack pepperyChickenItem = new ItemStack(ModItems.PEPPERY_CHICKEN.get());
+                if (picks > 0) {
+                    PlaceableFoodItem.setBitesToStack(pepperyChickenItem, "PepperyChickenPicks", picks);
+                }
+                popResource(level, pos, pepperyChickenItem);
             }
         }
     }

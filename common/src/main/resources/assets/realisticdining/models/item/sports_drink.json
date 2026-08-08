@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "realisticdining:item/sports_drink_64x64"
+	}
+}

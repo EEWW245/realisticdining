@@ -1,5 +1,6 @@
 package com.example.realisticdining.events;
 
+import com.example.realisticdining.ServerEatingState;
 import com.example.realisticdining.compat.KaleidoscopeCompat;
 import com.example.realisticdining.init.ModBlocks;
 import com.example.realisticdining.platform.ServiceHelper;
@@ -13,10 +14,18 @@ public class RicePlaceHandler {
     
     public static void init() {
         ServiceHelper.getPlatformServices().registerRightClickBlockHandler((player, hand, pos, hitPos) -> {
+            if (hand != InteractionHand.OFF_HAND) {
+                return InteractionResult.PASS;
+            }
+            
             Level world = player.level();
             ItemStack heldItem = player.getItemInHand(hand);
             
             if (KaleidoscopeCompat.isRice(heldItem)) {
+                if (ServerEatingState.isEating(player.getUUID())) {
+                    return InteractionResult.FAIL;
+                }
+                
                 if (world.getBlockState(pos.above()).getBlock() == Blocks.AIR) {
                     world.setBlock(pos.above(), ModBlocks.RICE_BOWL.get().defaultBlockState(), 3);
                     if (!player.isCreative()) {

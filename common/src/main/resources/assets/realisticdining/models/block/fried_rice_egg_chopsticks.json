@@ -1,7 +1,7 @@
 {
 	"format_version": "1.21.11",
 	"credit": "Made by Assistant",
-	"textures": {
+	"textures": { "particle": "item/bowl",
 		"1": "realisticdining:item/chopsticks_1",
 		"bowl": "realisticdining:block/fried_rice_egg_empty",
 		"particle": "realisticdining:item/chopsticks_1"

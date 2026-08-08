@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "com.example.realisticdining.forge.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "refmap": "realisticdining.forge.refmap.json",
+  "client": [
+    "ItemInHandRendererMixin",
+    "FirstPersonModelLogicHandlerMixin",
+    "EpicFightRenderEngineMixin"
+  ],
+  "mixins": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

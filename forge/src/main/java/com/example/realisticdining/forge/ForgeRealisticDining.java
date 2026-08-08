@@ -6,9 +6,17 @@ import com.example.realisticdining.client.renderer.RoastChickenRenderer;
 import com.example.realisticdining.client.renderer.WokFriedEggRenderer;
 import com.example.realisticdining.client.renderer.WokRenderer;
 import com.example.realisticdining.client.renderer.WokYellowSteakRenderer;
+import com.example.realisticdining.client.screen.CookbookScreen;
+import com.example.realisticdining.client.screen.EatRiceGuideScreen;
+import com.example.realisticdining.client.screen.VendingMachineScreen;
+import com.example.realisticdining.forge.network.ApplyHungerPacket;
+import com.example.realisticdining.forge.network.ConsumeRicePacket;
+import com.example.realisticdining.forge.network.ConsumeDrinkPacket;
+import com.example.realisticdining.forge.network.VendingMachinePurchasePacket;
 import com.example.realisticdining.forge.platform.ForgePlatformServices;
 import com.example.realisticdining.init.ModBlockEntities;
 import com.example.realisticdining.init.ModBlocks;
+import com.example.realisticdining.init.ModMenus;
 import com.example.realisticdining.platform.ServiceHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -17,6 +25,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(RealisticDining.MOD_ID)
@@ -29,10 +38,19 @@ public class ForgeRealisticDining {
         ForgePlatformServices forgeServices = (ForgePlatformServices) ServiceHelper.getPlatformServices();
         forgeServices.registerAll(modEventBus);
 
+        modEventBus.addListener(ForgeRealisticDining::onCommonSetup);
+
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             modEventBus.addListener(ForgeRealisticDining::onClientSetup);
             modEventBus.addListener(ForgeRealisticDining::registerEntityRenderers);
         });
+    }
+
+    private static void onCommonSetup(final FMLCommonSetupEvent event) {
+        ConsumeRicePacket.register();
+        ConsumeDrinkPacket.register();
+        ApplyHungerPacket.register();
+        VendingMachinePurchasePacket.register();
     }
 
     private static void onClientSetup(final FMLClientSetupEvent event) {
@@ -42,6 +60,10 @@ public class ForgeRealisticDining {
 
         event.enqueueWork(() -> {
             net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.CORIANDER_CROP.get(), net.minecraft.client.renderer.RenderType.cutout());
+            net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.GREEN_ONION_CROP.get(), net.minecraft.client.renderer.RenderType.cutout());
+            net.minecraft.client.gui.screens.MenuScreens.register(ModMenus.EAT_RICE_GUIDE_MENU.get(), EatRiceGuideScreen::new);
+            net.minecraft.client.gui.screens.MenuScreens.register(ModMenus.COOKBOOK_MENU.get(), CookbookScreen::new);
+            net.minecraft.client.gui.screens.MenuScreens.register(ModMenus.VENDING_MACHINE_MENU.get(), VendingMachineScreen::new);
         });
     }
 

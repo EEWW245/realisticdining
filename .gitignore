@@ -5,7 +5,11 @@
 
 # Build directory
 build/
+bin/
 .gradle/
+
+# Build logs
+build_log.txt
 
 # IDE
 .idea/

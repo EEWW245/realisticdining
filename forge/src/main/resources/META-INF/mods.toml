@@ -21,6 +21,9 @@ Features:
 This mod requires Kaleidoscope Cookery to be installed.
 '''
 
+[[mixins]]
+config="realisticdining.forge.mixins.json"
+
 [[dependencies.realisticdining]]
 modId="forge"
 mandatory=true

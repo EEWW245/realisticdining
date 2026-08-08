@@ -2,6 +2,7 @@ package com.example.realisticdining.blocks;
 
 import com.example.realisticdining.compat.KaleidoscopeCompat;
 import com.example.realisticdining.init.ModItems;
+import com.example.realisticdining.items.PlaceableFoodItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -143,18 +144,22 @@ public class FriedRiceEggBlock extends Block {
         boolean hasChopsticks = state.getValue(HAS_CHOPSTICKS);
         
         if (!level.isClientSide) {
-            if (bites == 0) {
-                Item eggFriedRice = KaleidoscopeCompat.getEggFriedRice();
-                if (eggFriedRice != null) {
-                    popResource(level, pos, new ItemStack(eggFriedRice));
-                } else {
-                    popResource(level, pos, new ItemStack(ModItems.FRIED_RICE_EGG.get()));
-                }
-            } else if (bites == 10 || hasChopsticks) {
+            if (bites == 10 || hasChopsticks) {
                 popResource(level, pos, new ItemStack(Items.BOWL));
                 if (hasChopsticks) {
                     popResource(level, pos, new ItemStack(ModItems.CHOPSTICKS.get()));
                 }
+            } else if (bites == 0) {
+                Item compatEggFriedRice = KaleidoscopeCompat.getEggFriedRice();
+                if (compatEggFriedRice != null) {
+                    popResource(level, pos, new ItemStack(compatEggFriedRice));
+                } else {
+                    popResource(level, pos, new ItemStack(ModItems.FRIED_RICE_EGG.get()));
+                }
+            } else {
+                ItemStack friedRiceEggItem = new ItemStack(ModItems.FRIED_RICE_EGG.get());
+                PlaceableFoodItem.setBitesToStack(friedRiceEggItem, "FriedRiceEggBites", bites);
+                popResource(level, pos, friedRiceEggItem);
             }
         }
     }

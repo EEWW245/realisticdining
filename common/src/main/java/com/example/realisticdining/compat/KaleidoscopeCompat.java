@@ -16,6 +16,7 @@ public class KaleidoscopeCompat {
     private static Boolean loaded = null;
     private static Item lettuceItem = null;
     private static Item oilPotItem = null;
+    private static Item oilItem = null;
     private static Block stoveBlock = null;
     private static Item redPepperItem = null;
     private static Item greenChiliItem = null;
@@ -24,6 +25,7 @@ public class KaleidoscopeCompat {
     public static boolean isLoaded() {
         if (loaded == null) {
             loaded = ServiceHelper.getPlatformServices().isModLoaded(MOD_ID);
+            System.out.println("[RD-DEBUG] KaleidoscopeCompat.isLoaded() called, kaleidoscope_cookery=" + loaded);
         }
         return loaded;
     }
@@ -40,6 +42,29 @@ public class KaleidoscopeCompat {
             oilPotItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(new ResourceLocation(MOD_ID, "oil_pot"));
         }
         return oilPotItem;
+    }
+
+    /**
+     * 获取森罗物语的油脂（Oil）物品。
+     * 油脂物品的功能和油壶一样：可作为炒锅的油源使用，每次消耗 1 个。
+     */
+    public static Item getOil() {
+        if (oilItem == null && isLoaded()) {
+            oilItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(new ResourceLocation(MOD_ID, "oil"));
+        }
+        return oilItem;
+    }
+
+    /**
+     * 检查物品是否是森罗物语的油脂（Oil）。
+     * 油脂物品的功能和油壶一样，可作为炒锅的油源使用。
+     */
+    public static boolean isOil(ItemStack stack) {
+        if (!isLoaded() || stack.isEmpty()) {
+            return false;
+        }
+        Item oil = getOil();
+        return oil != null && stack.getItem() == oil;
     }
 
     public static Block getStove() {
@@ -82,11 +107,18 @@ public class KaleidoscopeCompat {
     }
 
     public static boolean isLettuce(ItemStack stack) {
-        if (!isLoaded() || stack.isEmpty()) {
+        if (stack.isEmpty()) {
             return false;
         }
-        Item lettuce = getLettuce();
-        return lettuce != null && stack.getItem() == lettuce;
+        // 森罗物语生菜
+        if (isLoaded()) {
+            Item lettuce = getLettuce();
+            if (lettuce != null && stack.getItem() == lettuce) {
+                return true;
+            }
+        }
+        // 农夫乐事卷心菜(cabbage)与生菜功能等价
+        return FarmersDelightCompat.isCabbage(stack);
     }
 
     public static boolean isStove(Block block) {
@@ -124,11 +156,22 @@ public class KaleidoscopeCompat {
     }
 
     public static boolean isRice(ItemStack stack) {
-        if (!isLoaded() || stack.isEmpty()) {
+        if (stack.isEmpty()) {
             return false;
         }
-        Item rice = getRice();
-        return rice != null && stack.getItem() == rice;
+        // 森罗物语米饭
+        if (isLoaded()) {
+            Item rice = getRice();
+            if (rice != null && stack.getItem() == rice) {
+                return true;
+            }
+        }
+        // 农夫乐事熟米饭(cooked_rice)与森罗米饭功能等价
+        return FarmersDelightCompat.isCookedRice(stack);
+    }
+
+    public static boolean isCookedRice(ItemStack stack) {
+        return isRice(stack);
     }
 
     private static Item getRice() {
@@ -142,7 +185,11 @@ public class KaleidoscopeCompat {
         if (riceItem == null && isLoaded()) {
             riceItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(new ResourceLocation(MOD_ID, "cooked_rice"));
         }
-        return riceItem != null ? new ItemStack(riceItem) : ItemStack.EMPTY;
+        if (riceItem != null) {
+            return new ItemStack(riceItem);
+        }
+        // 森罗未加载时回退到农夫乐事米饭
+        return FarmersDelightCompat.getCookedRiceItem();
     }
 
     private static Item getRedPepper() {
@@ -169,11 +216,18 @@ public class KaleidoscopeCompat {
     }
 
     public static boolean isTomato(ItemStack stack) {
-        if (!isLoaded() || stack.isEmpty()) {
+        if (stack.isEmpty()) {
             return false;
         }
-        Item tomato = getTomato();
-        return tomato != null && stack.getItem() == tomato;
+        // 森罗物语番茄
+        if (isLoaded()) {
+            Item tomato = getTomato();
+            if (tomato != null && stack.getItem() == tomato) {
+                return true;
+            }
+        }
+        // 农夫乐事番茄与森罗番茄功能等价
+        return FarmersDelightCompat.isTomato(stack);
     }
 
     private static Item eggFriedRiceItem = null;
