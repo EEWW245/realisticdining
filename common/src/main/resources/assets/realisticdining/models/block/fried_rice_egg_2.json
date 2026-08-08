@@ -1,7 +1,6 @@
 {
-	"format_version": "1.21.11",
-	"credit": "Tall Rice Bowl - Bite 2 (Removed 5 pieces)",
-	"textures": {
+	"credit": "Tall Rice Bowl - Bite 2 (Removed 4 pieces)",
+	"textures": { "particle": "item/bowl",
 		"bowl": "realisticdining:block/fried_rice_egg_empty",
 		"rice": "realisticdining:block/fried_rice_egg"
 	},

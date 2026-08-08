@@ -23,7 +23,8 @@
     ]
   },
   "mixins": [
-    "realisticdining-common.mixins.json"
+    "realisticdining-common.mixins.json",
+    "realisticdining.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${fabric_loader_version}",

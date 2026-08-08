@@ -1,6 +1,8 @@
 package com.realisticdining.neoforge.registry;
 
 import com.realisticdining.menu.CookbookMenu;
+import com.realisticdining.menu.EatRiceGuideMenu;
+import com.realisticdining.menu.VendingMachineMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
@@ -11,16 +13,26 @@ import java.util.function.Supplier;
 import static com.realisticdining.RealisticDining.MOD_ID;
 
 public class ModMenuTypes {
-    
+
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(
             net.minecraft.core.registries.Registries.MENU, MOD_ID
     );
-    
+
     public static final Supplier<MenuType<CookbookMenu>> COOKBOOK_MENU = MENU_TYPES.register(
             "cookbook_menu",
             () -> IMenuTypeExtension.create((containerId, inventory, buf) -> new CookbookMenu(containerId, inventory, buf))
     );
-    
+
+    public static final Supplier<MenuType<EatRiceGuideMenu>> EAT_RICE_GUIDE_MENU = MENU_TYPES.register(
+            "eat_rice_guide_menu",
+            () -> IMenuTypeExtension.create((containerId, inventory, buf) -> new EatRiceGuideMenu(containerId, inventory, buf))
+    );
+
+    public static final Supplier<MenuType<VendingMachineMenu>> VENDING_MACHINE_MENU = MENU_TYPES.register(
+            "vending_machine_menu",
+            () -> IMenuTypeExtension.create((containerId, inventory, buf) -> new VendingMachineMenu(containerId, inventory, buf))
+    );
+
     public static void register(IEventBus eventBus) {
         MENU_TYPES.register(eventBus);
     }

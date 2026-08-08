@@ -1,12 +1,15 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.realisticdining.mixin",
+  "package": "com.realisticdining.neoforge.mixin",
   "compatibilityLevel": "JAVA_21",
   "refmap": "realisticdining-neoforge-refmap.json",
   "mixins": [
   ],
   "client": [
+    "ItemInHandRendererMixin",
+    "EpicFightRenderEngineMixin",
+    "FirstPersonModelLogicHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

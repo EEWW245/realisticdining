@@ -17,6 +17,25 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("itemGroup.realisticdining"))
                     .icon(() -> new ItemStack(ModItems.WOK.get()))
                     .displayItems((params, output) -> {
+                        output.accept(ModItems.MINERAL_WATER.get());
+                        output.accept(ModItems.MILK_BEER.get());
+                        output.accept(ModItems.CRISP.get());
+                        output.accept(ModItems.ENERGY_BAR.get());
+                        output.accept(ModItems.PEACH_GRAPEFRUIT_TEA.get());
+                        output.accept(ModItems.SPORTS_DRINK.get());
+                        output.accept(ModItems.ICED_TEA.get());
+                        output.accept(ModItems.COCONUT_JUICE.get());
+                        output.accept(ModItems.ORANGE_JUICE.get());
+                        output.accept(ModItems.SOYMILK.get());
+                        output.accept(ModItems.COLA.get());
+                        output.accept(ModItems.BEER.get());
+                        output.accept(ModItems.POTATO_CHIPS.get());
+                        output.accept(ModItems.POTATO_CHIPS_BBQ.get());
+                        output.accept(ModItems.POTATO_CHIPS_CUCUMBER.get());
+                        output.accept(ModItems.POTATO_CHIPS_TOMATO.get());
+                        output.accept(ModItems.CRISPY_FISH_CHIPS.get());
+                        output.accept(ModItems.COOKIE_BAG.get());
+                        output.accept(ModItems.COOKIE_BAG_COCONUT_LATTE.get());
                         output.accept(ModItems.GREEN_ONION.get());
                         output.accept(ModItems.GREEN_ONION_SEEDS.get());
                         output.accept(ModItems.CORIANDER.get());
@@ -34,8 +53,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.ROAST_CHICKEN.get());
                         output.accept(ModItems.WOK.get());
                         output.accept(ModItems.CHOPPING_BOARD.get());
+                        output.accept(ModItems.VENDING_MACHINE.get());
                         output.accept(ModItems.SPATULA.get());
                         output.accept(ModItems.COOKBOOK.get());
+                        output.accept(ModItems.EAT_RICE_GUIDE.get());
                         output.accept(ModItems.CHOPSTICKS.get());
                         output.accept(ModItems.PLATE.get());
                         output.accept(ModItems.RESULT_CHILI.get());

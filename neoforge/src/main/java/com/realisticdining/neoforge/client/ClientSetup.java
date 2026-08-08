@@ -1,6 +1,8 @@
 package com.realisticdining.neoforge.client;
 
 import com.realisticdining.menu.CookbookScreen;
+import com.realisticdining.menu.EatRiceGuideScreen;
+import com.realisticdining.menu.VendingMachineScreen;
 import com.realisticdining.neoforge.client.renderer.ChoppingBoardRenderer;
 import com.realisticdining.neoforge.client.renderer.WokRenderer;
 import com.realisticdining.neoforge.registry.ModMenuTypes;
@@ -27,6 +29,8 @@ public class ClientSetup {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(ModMenuTypes.COOKBOOK_MENU.get(), CookbookScreen::new);
+        event.register(ModMenuTypes.EAT_RICE_GUIDE_MENU.get(), EatRiceGuideScreen::new);
+        event.register(ModMenuTypes.VENDING_MACHINE_MENU.get(), VendingMachineScreen::new);
     }
     
     @SubscribeEvent
@@ -38,6 +42,7 @@ public class ClientSetup {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.WOK_FRIED_EGG.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.RICE_BOWL.get(), RenderType.cutout());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.CORIANDER_CROP.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.GREEN_ONION_CROP.get(), RenderType.cutout());
         });
     }
 }

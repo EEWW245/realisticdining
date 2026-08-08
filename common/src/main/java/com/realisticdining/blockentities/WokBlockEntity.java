@@ -1,5 +1,6 @@
 package com.realisticdining.blockentities;
 
+import com.realisticdining.client.WokModeConfig;
 import com.realisticdining.compat.KaleidoscopeCookeryCompat;
 import com.realisticdining.registry.ModBlockEntities;
 import com.realisticdining.registry.ModItems;
@@ -182,18 +183,23 @@ public class WokBlockEntity extends BlockEntity implements Container {
 
     public boolean canServe(long currentGameTime) {
         if (!isReadyToStir()) return false;
-        if (stirCount < REQUIRED_STIRS) return false;
+        int requiredStirs = WokModeConfig.isSimplifiedMode() ? WokModeConfig.SIMPLIFIED_REQUIRED_STIRS : REQUIRED_STIRS;
+        if (stirCount < requiredStirs) return false;
         if (cookingStartTime == 0) return false;
         
         long elapsed = currentGameTime - cookingStartTime;
-        return elapsed >= COOK_DURATION;
+        return elapsed >= WokModeConfig.COOK_DURATION;
     }
 
     public boolean isBurned(long currentGameTime) {
         if (cookingStartTime == 0) return false;
         
         long elapsed = currentGameTime - cookingStartTime;
-        return elapsed >= (COOK_DURATION + BURN_DURATION);
+        return elapsed >= (WokModeConfig.COOK_DURATION + WokModeConfig.BURN_DURATION);
+    }
+
+    public int getTimeBasedStage(long currentGameTime) {
+        return WokModeConfig.getTimeBasedStage(cookingStartTime, currentGameTime);
     }
 
     public int getRemainingCookSeconds(long currentGameTime) {

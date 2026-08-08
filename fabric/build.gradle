@@ -7,6 +7,12 @@ architectury {
     fabric()
 }
 
+loom {
+    mixin {
+        defaultRefmapName.set("realisticdining-fabric-refmap.json")
+    }
+}
+
 configurations {
     common {
         canBeResolved = true
@@ -29,6 +35,8 @@ dependencies {
     modImplementation "dev.architectury:architectury-fabric:${rootProject.architectury_api_version}"
     
     modImplementation "software.bernie.geckolib:geckolib-fabric-1.21.1:4.7.3"
+
+    modCompileOnly "maven.modrinth:first-person-model:2.7.1-fabric"
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowBundle(project(path: ':common', configuration: 'transformProductionFabric')) { transitive false }

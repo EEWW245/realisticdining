@@ -2,8 +2,8 @@
 	"format_version": "1.21.11",
 	"credit": "Made by Assistant",
 	"textures": {
-		"0": "realisticdining:item/chopsticks",
-		"particle": "realisticdining:item/chopsticks"
+		"0": "realisticdining:item/chopsticks_2",
+		"particle": "realisticdining:item/chopsticks_2"
 	},
 	"elements": [
 		{

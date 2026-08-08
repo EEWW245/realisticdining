@@ -58,3 +58,10 @@ local.properties
 
 # External mod sources (keep as reference if needed)
 KaleidoscopeCookery-*/
+
+# Build logs
+build_log.txt
+build_log2.txt
+
+# Decompiled reference sources (not part of project)
+software/

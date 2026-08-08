@@ -40,7 +40,10 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                         "为你带来真实的烹饪体验。",
                         "",
                         "本模组新增多种食材、",
-                        "烹饪工具和完整的烹饪流程。"
+                        "烹饪工具和完整的烹饪流程。",
+                        "",
+                        "与iterationT 3光影不兼容",
+                        "出现菜品黑影问题。"
                 )
         ));
 
@@ -51,6 +54,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                         "需要使用的物品：",
                         "",
                         "• 油壶：倒油",
+                        "• 油脂：倒油（新增）",
                         "• 红辣椒：切好的辣椒",
                         "• 生菜：切好的青菜",
                         "• 米饭物品：生成米饭模型",
@@ -61,7 +65,36 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 3 页：种植系统
+        // 第 3 页：2.1版本兼容农夫乐事的物品
+        pages.add(new PageContent(
+                "=== 2.1版本兼容农夫乐事的物品 ===",
+                List.of(
+                        "• 米饭（功能相当于森罗的米饭）",
+                        "• 番茄",
+                        "• 卷心菜（功能相当于森罗的生菜）"
+                )
+        ));
+
+        // 第 4 页：翻炒模式切换
+        pages.add(new PageContent(
+                "=== 翻炒模式切换 ===",
+                List.of(
+                        "炒菜的翻炒次数可以按按键配置的",
+                        "P键（默认）可简化为翻炒次数为至少4次，",
+                        "主要是为了可以让女仆仓管的女仆",
+                        "用高级合成表，帮你炒菜。",
+                        "",
+                        "按 O键（默认）可以恢复原来的",
+                        "多次（例如30次翻炒）翻炒。",
+                        "",
+                        "此功能适用于：",
+                        "• 猪肉炒白菜",
+                        "• 辣子鸡",
+                        "• 小炒黄牛肉"
+                )
+        ));
+
+        // 第 4 页：种植系统
         pages.add(new PageContent(
                 "=== 种植系统 ===",
                 List.of(
@@ -81,7 +114,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 4 页：刀具切割（基础食材）
+        // 第 5 页：刀具切割（基础食材）
         pages.add(new PageContent(
                 "=== 刀具切割（基础食材）===",
                 List.of(
@@ -100,7 +133,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 5 页：刀具切割（进阶食材）
+        // 第 6 页：刀具切割（进阶食材）
         pages.add(new PageContent(
                 "=== 刀具切割（进阶食材）===",
                 List.of(
@@ -118,7 +151,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 6 页：炒锅使用
+        // 第 7 页：炒锅使用
         pages.add(new PageContent(
                 "=== 炒锅使用 ===",
                 List.of(
@@ -137,7 +170,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 7 页：辣子鸡配方
+        // 第 8 页：辣子鸡配方
         pages.add(new PageContent(
                 "=== 辣子鸡配方 ===",
                 List.of(
@@ -154,7 +187,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 8 页：小炒黄牛肉配方
+        // 第 9 页：小炒黄牛肉配方
         pages.add(new PageContent(
                 "=== 小炒黄牛肉配方 ===",
                 List.of(
@@ -173,7 +206,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 9 页：猪肉炒菜配方
+        // 第 10 页：猪肉炒菜配方
         pages.add(new PageContent(
                 "=== 猪肉炒菜配方 ===",
                 List.of(
@@ -189,7 +222,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 10 页：番茄荷包蛋配方
+        // 第 11 页：番茄荷包蛋配方
         pages.add(new PageContent(
                 "=== 番茄荷包蛋配方 ===",
                 List.of(
@@ -205,7 +238,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 11 页：蛋炒饭制作
+        // 第 12 页：蛋炒饭制作
         pages.add(new PageContent(
                 "=== 蛋炒饭制作 ===",
                 List.of(
@@ -225,7 +258,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 12 页：米饭放置
+        // 第 13 页：米饭放置
         pages.add(new PageContent(
                 "=== 米饭放置 ===",
                 List.of(
@@ -245,7 +278,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 13 页：筷子使用
+        // 第 14 页：筷子使用
         pages.add(new PageContent(
                 "=== 筷子使用 ===",
                 List.of(
@@ -264,7 +297,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 14 页：铲子使用
+        // 第 15 页：铲子使用
         pages.add(new PageContent(
                 "=== 铲子使用 ===",
                 List.of(
@@ -285,7 +318,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 15 页：烤鸡
+        // 第 16 页：烤鸡
         pages.add(new PageContent(
                 "=== 烤鸡 ===",
                 List.of(
@@ -372,7 +405,8 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 pageText,
                 x + imageWidth / 2 - this.font.width(pageText) / 2,
                 y + imageHeight - 45,
-                0xFF8B4513
+                0xFF8B4513,
+                false
         );
     }
 
@@ -386,7 +420,8 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 title,
                 x + imageWidth / 2 - this.font.width(title) / 2,
                 y + 20,
-                0xFF8B0000
+                0xFF8B0000,
+                false
         );
 
         // 绘制分隔线
@@ -406,7 +441,8 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                     line,
                     x + imageWidth / 2 - this.font.width(line) / 2,
                     lineY,
-                    0xFF000000
+                    0xFF000000,
+                    false
             );
             lineY += 11;
         }

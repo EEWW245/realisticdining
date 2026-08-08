@@ -46,10 +46,11 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
             if (timeSinceStir < animDuration && blockEntity.getStirCount() > 0) {
                 float progress = (timeSinceStir + partialTick) / animDuration;
                 int variant = blockEntity.getCurrentStirVariant();
+                int stage = blockEntity.getTimeBasedStage(blockEntity.getLevel().getGameTime());
 
                 ItemStack baseItem = isSpicyChicken ? 
-                    getSpicyChickenBaseItem(variant, blockEntity.getStirCount()) : 
-                    getWokBaseItem(variant, blockEntity.getStirCount());
+                    getSpicyChickenBaseItem(variant, stage) : 
+                    getWokBaseItem(variant, stage);
                 itemRenderer.renderStatic(baseItem, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, bufferSource, blockEntity.getLevel(), 0);
 
                 poseStack.pushPose();
@@ -72,26 +73,26 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
                 poseStack.translate(0, 0.34f, 0);
 
                 ItemStack flyItem = isSpicyChicken ? 
-                    getSpicyChickenFlyItem(variant, blockEntity.getStirCount()) : 
-                    getWokFlyItem(variant, blockEntity.getStirCount());
+                    getSpicyChickenFlyItem(variant, stage) : 
+                    getWokFlyItem(variant, stage);
                 itemRenderer.renderStatic(flyItem, ItemDisplayContext.FIXED, packedLight, OverlayTexture.NO_OVERLAY, poseStack, bufferSource, blockEntity.getLevel(), 0);
                 poseStack.popPose();
 
             } else {
-                int stirCount = blockEntity.getStirCount();
+                int stage = blockEntity.getTimeBasedStage(blockEntity.getLevel().getGameTime());
                 ItemStack idleItem;
                 if (isSpicyChicken) {
-                    if (stirCount >= 25) {
+                    if (stage >= 2) {
                         idleItem = new ItemStack(ModItems.WOK_CHICKEN_3_IDLE_STAGE3.get());
-                    } else if (stirCount >= 19) {
+                    } else if (stage == 1) {
                         idleItem = new ItemStack(ModItems.WOK_CHICKEN_3_IDLE_STAGE2.get());
                     } else {
                         idleItem = new ItemStack(ModItems.WOK_CHICKEN_3_IDLE.get());
                     }
                 } else {
-                    if (stirCount >= 25) {
+                    if (stage >= 2) {
                         idleItem = new ItemStack(ModItems.WOK_IDLE_STAGE3.get());
-                    } else if (stirCount >= 19) {
+                    } else if (stage == 1) {
                         idleItem = new ItemStack(ModItems.WOK_IDLE_STAGE2.get());
                     } else {
                         idleItem = new ItemStack(ModItems.WOK_IDLE.get());
@@ -117,8 +118,8 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
         poseStack.popPose();
     }
 
-    private ItemStack getWokBaseItem(int variant, int stirCount) {
-        if (stirCount >= 25) {
+    private ItemStack getWokBaseItem(int variant, int stage) {
+        if (stage >= 2) {
             return switch (variant) {
                 case 1 -> new ItemStack(ModItems.WOK_BASE_STAGE3_1.get());
                 case 2 -> new ItemStack(ModItems.WOK_BASE_STAGE3_2.get());
@@ -130,7 +131,7 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
                 case 8 -> new ItemStack(ModItems.WOK_BASE_STAGE3_8.get());
                 default -> new ItemStack(ModItems.WOK_BASE_STAGE3_1.get());
             };
-        } else if (stirCount >= 19) {
+        } else if (stage == 1) {
             return switch (variant) {
                 case 1 -> new ItemStack(ModItems.WOK_BASE_STAGE2_1.get());
                 case 2 -> new ItemStack(ModItems.WOK_BASE_STAGE2_2.get());
@@ -157,8 +158,8 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
         };
     }
 
-    private ItemStack getWokFlyItem(int variant, int stirCount) {
-        if (stirCount >= 25) {
+    private ItemStack getWokFlyItem(int variant, int stage) {
+        if (stage >= 2) {
             return switch (variant) {
                 case 1 -> new ItemStack(ModItems.WOK_FLY_STAGE3_1.get());
                 case 2 -> new ItemStack(ModItems.WOK_FLY_STAGE3_2.get());
@@ -170,7 +171,7 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
                 case 8 -> new ItemStack(ModItems.WOK_FLY_STAGE3_8.get());
                 default -> new ItemStack(ModItems.WOK_FLY_STAGE3_1.get());
             };
-        } else if (stirCount >= 19) {
+        } else if (stage == 1) {
             return switch (variant) {
                 case 1 -> new ItemStack(ModItems.WOK_FLY_STAGE2_1.get());
                 case 2 -> new ItemStack(ModItems.WOK_FLY_STAGE2_2.get());
@@ -197,21 +198,21 @@ public class WokRenderer implements BlockEntityRenderer<WokBlockEntity> {
         };
     }
 
-    private ItemStack getSpicyChickenBaseItem(int variant, int stirCount) {
+    private ItemStack getSpicyChickenBaseItem(int variant, int stage) {
         int v = ((variant - 1) % 30) + 1;
         
-        if (stirCount >= 25) {
+        if (stage >= 2) {
             return getSpicyChickenBaseStage3(v);
-        } else if (stirCount >= 19) {
+        } else if (stage == 1) {
             return getSpicyChickenBaseStage2(v);
         }
         return getSpicyChickenBaseStage1(v);
     }
 
-    private ItemStack getSpicyChickenFlyItem(int variant, int stirCount) {
+    private ItemStack getSpicyChickenFlyItem(int variant, int stage) {
         int v = ((variant - 1) % 30) + 1;
         
-        if (stirCount >= 25) {
+        if (stage >= 2) {
             return getSpicyChickenFlyStage3(v);
         }
         return getSpicyChickenFlyStage1(v);

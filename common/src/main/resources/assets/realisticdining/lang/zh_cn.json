@@ -60,6 +60,7 @@
   "item.realisticdining.chicken_stage_20": "鸡肉 (切20刀)",
   "item.realisticdining.peppery_chicken": "辣子鸡",
   "item.realisticdining.cookbook": "食谱书",
+  "item.realisticdining.eat_rice_guide": "进食动画说明书",
   
   "item.realisticdining.coriander": "香菜",
   "item.realisticdining.result_coriander": "香菜段",
@@ -142,5 +143,45 @@
   "block.realisticdining.green_onion_crop": "葱作物",
   "block.realisticdining.coriander_crop": "香菜作物",
   
-  "item.realisticdining.coriander_seeds": "香菜种子"
+  "item.realisticdining.coriander_seeds": "香菜种子",
+  
+  "item.realisticdining.rice_bowl": "米饭",
+  "item.realisticdining.fried_rice_egg": "蛋炒饭",
+
+  "key.realisticdining.enable_simplified_mode": "开启至少翻炒次数为4次",
+  "key.realisticdining.restore_normal_mode": "恢复多翻炒次数",
+
+  "key.realisticdining.trigger_anim": "触发手臂动画",
+  "key.realisticdining.trigger_eat_rice": "触发吃米饭动画",
+  "key.realisticdining.toggle_arm_render": "关闭吃米饭动画",
+  "key.realisticdining.arm_render_enabled": "吃米饭动画已启用",
+  "key.realisticdining.arm_render_disabled": "吃米饭动画已关闭",
+  "key.realisticdining.trigger_drink": "触发饮用动画（主手物品）",
+  "key.categories.realisticdining": "更真实的用餐",
+
+  "item.realisticdining.mineral_water": "矿泉水",
+  "item.realisticdining.milk_beer": "奶啤",
+  "item.realisticdining.crisp": "薯片",
+  "item.realisticdining.energy_bar": "能量棒",
+  "item.realisticdining.peach_grapefruit_tea": "蜜桃柚子茶",
+  "item.realisticdining.sports_drink": "加得乐",
+  "item.realisticdining.iced_tea": "冰虹茶",
+  "item.realisticdining.coconut_juice": "椰汁",
+  "item.realisticdining.orange_juice": "橙汁",
+  "item.realisticdining.soymilk": "豆浆",
+  "item.realisticdining.cola": "可乐",
+  "item.realisticdining.beer": "啤酒",
+  "item.realisticdining.potato_chips": "原味薯片",
+  "item.realisticdining.potato_chips_bbq": "烧烤味薯片",
+  "item.realisticdining.potato_chips_cucumber": "黄瓜味薯片",
+  "item.realisticdining.potato_chips_tomato": "番茄味薯片",
+  "item.realisticdining.crispy_fish_chips": "香酥烤鱼味",
+  "item.realisticdining.cookie_bag": "曲奇饼干",
+  "item.realisticdining.cookie_bag_coconut_latte": "生椰拿铁饼干",
+
+  "block.realisticdining.vending_machine": "自动售货机",
+  "gui.realisticdining.vending_machine.close": "关闭",
+  "gui.realisticdining.vending_machine.insufficient_funds": "金粒不足！",
+  "gui.realisticdining.vending_machine.out_of_stock": "货物数量不足",
+  "gui.realisticdining.vending_machine.subtitle": "（每一种物品可购买次数为六次，到了第二天才补货）"
 }

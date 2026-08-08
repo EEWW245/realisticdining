@@ -1,5 +1,6 @@
 package com.realisticdining.neoforge.event;
 
+import com.realisticdining.common.ServerEatingState;
 import com.realisticdining.compat.KaleidoscopeCookeryCompat;
 import com.realisticdining.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -28,6 +29,12 @@ public class RicePlaceHandler {
         ItemStack heldItem = player.getItemInHand(event.getHand());
         
         if (KaleidoscopeCookeryCompat.isCookedRice(heldItem)) {
+            if (ServerEatingState.isEating(player.getUUID())) {
+                event.setCancellationResult(InteractionResult.FAIL);
+                event.setCanceled(true);
+                return;
+            }
+            
             if (level.getBlockState(pos.above()).getBlock() == Blocks.AIR) {
                 level.setBlock(pos.above(), ModBlocks.RICE_BOWL.get().defaultBlockState(), 3);
                 if (!player.isCreative()) {

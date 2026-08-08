@@ -82,6 +82,7 @@ public class GreenOnionCropBlock extends CropBlock {
         if (this.isMaxAge(state)) {
             if (!level.isClientSide) {
                 popResource(level, pos, new ItemStack(ModItems.GREEN_ONION.get()));
+                popResource(level, pos, new ItemStack(ModItems.GREEN_ONION_SEEDS.get()));
                 level.setBlock(pos, this.getStateForAge(0), 2);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);

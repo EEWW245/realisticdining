@@ -1,6 +1,12 @@
 package com.realisticdining.registry;
 
 import com.realisticdining.RealisticDining;
+import com.realisticdining.blocks.FriedRiceEggBlock;
+import com.realisticdining.blocks.PepperyChickenPlateBlock;
+import com.realisticdining.blocks.RiceBowlBlock;
+import com.realisticdining.blocks.StirFriedPorkCabbagePlateBlock;
+import com.realisticdining.blocks.StirFriedYellowBeefPlateBlock;
+import com.realisticdining.blocks.TomatoPoachedEggBlock;
 import com.realisticdining.items.*;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -14,6 +20,55 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(RealisticDining.MOD_ID, Registries.ITEM);
 
     public static final RegistrySupplier<Item> VEGETABLE_OIL = ITEMS.register("vegetable_oil",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    // ==================== 饮用动画物品 ====================
+    public static final RegistrySupplier<Item> MINERAL_WATER = ITEMS.register("mineral_water",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> MILK_BEER = ITEMS.register("milk_beer",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> CRISP = ITEMS.register("crisp",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> ENERGY_BAR = ITEMS.register("energy_bar",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    // ==================== 新增饮用动画物品（v2.0.6+） ====================
+    // 瓶装组（套用矿泉水瓶形动画）
+    public static final RegistrySupplier<Item> PEACH_GRAPEFRUIT_TEA = ITEMS.register("peach_grapefruit_tea",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> SPORTS_DRINK = ITEMS.register("sports_drink",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> ICED_TEA = ITEMS.register("iced_tea",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> COCONUT_JUICE = ITEMS.register("coconut_juice",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> ORANGE_JUICE = ITEMS.register("orange_juice",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    // 罐装组（套用罐装饮料动画）
+    public static final RegistrySupplier<Item> SOYMILK = ITEMS.register("soymilk",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> COLA = ITEMS.register("cola",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> BEER = ITEMS.register("beer",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    // 薯片变体组（套用 crisp_1 薯片袋动画）
+    public static final RegistrySupplier<Item> POTATO_CHIPS = ITEMS.register("potato_chips",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> POTATO_CHIPS_BBQ = ITEMS.register("potato_chips_bbq",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> POTATO_CHIPS_CUCUMBER = ITEMS.register("potato_chips_cucumber",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> POTATO_CHIPS_TOMATO = ITEMS.register("potato_chips_tomato",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> CRISPY_FISH_CHIPS = ITEMS.register("crispy_fish_chips",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    // 饼干组（套用 biscuit 饼干动画，能量棒变体）
+    public static final RegistrySupplier<Item> COOKIE_BAG = ITEMS.register("cookie_bag",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistrySupplier<Item> COOKIE_BAG_COCONUT_LATTE = ITEMS.register("cookie_bag_coconut_latte",
             () -> new Item(new Item.Properties().stacksTo(16)));
     
     public static final RegistrySupplier<Item> BEEF_SLICE = ITEMS.register("beef_slice",
@@ -102,18 +157,32 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> STIR_FRIED_PORK_CABBAGE = ITEMS.register("stir_fried_pork_cabbage", 
             () -> new PlaceableFoodItem(ModBlocks.STIR_FRIED_PORK_CABBAGE_PLATE.get(),
+                    StirFriedPorkCabbagePlateBlock.BITES,
+                    "StirFriedPorkCabbageBites",
                     new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationModifier(1.2f).build())));
 
     public static final RegistrySupplier<Item> PEPPERY_CHICKEN = ITEMS.register("peppery_chicken", 
             () -> new PlaceableFoodItem(ModBlocks.PEPPERY_CHICKEN_PLATE.get(),
+                    PepperyChickenPlateBlock.PICKS,
+                    "PepperyChickenPicks",
                     new Item.Properties().food(new FoodProperties.Builder().nutrition(10).saturationModifier(1.5f).build())));
 
     public static final RegistrySupplier<Item> STIR_FRIED_YELLOW_BEEF = ITEMS.register("stir_fried_yellow_beef", 
             () -> new PlaceableFoodItem(ModBlocks.STIR_FRIED_YELLOW_BEEF_PLATE.get(),
+                    StirFriedYellowBeefPlateBlock.BITES,
+                    "StirFriedYellowBeefBites",
                     new Item.Properties().food(new FoodProperties.Builder().nutrition(10).saturationModifier(1.5f).build())));
 
-    public static final RegistrySupplier<Item> WOK = ITEMS.register("wok", 
+    public static final RegistrySupplier<Item> RICE_BOWL = ITEMS.register("rice_bowl", 
+            () -> new RiceBowlItem(ModBlocks.RICE_BOWL.get(),
+                    RiceBowlBlock.BITES,
+                    new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationModifier(1.2f).build())));
+
+    public static final RegistrySupplier<Item> WOK = ITEMS.register("wok",
             () -> new BlockItem(ModBlocks.WOK_BLOCK.get(), new Item.Properties().stacksTo(1)));
+
+    public static final RegistrySupplier<Item> VENDING_MACHINE = ITEMS.register("vending_machine",
+            () -> new BlockItem(ModBlocks.VENDING_MACHINE.get(), new Item.Properties()));
 
     public static final RegistrySupplier<Item> PORK_PIECES = ITEMS.register("pork_pieces", 
             () -> new Item(new Item.Properties()));
@@ -129,6 +198,9 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> COOKBOOK = ITEMS.register("cookbook", 
             () -> new CookbookItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistrySupplier<Item> EAT_RICE_GUIDE = ITEMS.register("eat_rice_guide", 
+            () -> new EatRiceGuideItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistrySupplier<Item> CHOPSTICKS = ITEMS.register("chopsticks", 
             () -> new Item(new Item.Properties().stacksTo(1)));
@@ -230,6 +302,8 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> TOMATO_POACHED_EGG = ITEMS.register("tomato_poached_egg",
             () -> new PlaceableFoodItem(ModBlocks.TOMATO_POACHED_EGG_BLOCK.get(),
+                    TomatoPoachedEggBlock.PICKS,
+                    "TomatoPoachedEggPicks",
                     new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationModifier(1.2f).build())));
 
     public static final RegistrySupplier<Item> CHOPSTICKS_EGG = ITEMS.register("chopsticks_egg",
@@ -712,6 +786,8 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> FRIED_RICE_EGG = ITEMS.register("fried_rice_egg",
             () -> new PlaceableFoodItem(ModBlocks.FRIED_RICE_EGG_BLOCK.get(),
+                    FriedRiceEggBlock.BITES,
+                    "FriedRiceEggBites",
                     new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationModifier(1.2f).build())));
 
     public static final RegistrySupplier<Item> FRIED_RICE_EGG_MODEL_0 = ITEMS.register("fried_rice_egg_0", () -> new Item(new Item.Properties()));

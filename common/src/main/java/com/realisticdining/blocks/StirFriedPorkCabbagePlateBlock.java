@@ -1,5 +1,6 @@
 package com.realisticdining.blocks;
 
+import com.realisticdining.items.PlaceableFoodItem;
 import com.realisticdining.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -151,14 +152,17 @@ public class StirFriedPorkCabbagePlateBlock extends Block {
         boolean hasChopsticks = state.getValue(HAS_CHOPSTICKS);
 
         if (!level.isClientSide) {
-            if (bites == 29) {
-                ItemStack dish = new ItemStack(ModItems.STIR_FRIED_PORK_CABBAGE.get());
-                popResource(level, pos, dish);
-            } else if (bites == 0 || hasChopsticks) {
+            if (bites == 0 || hasChopsticks) {
                 popResource(level, pos, new ItemStack(Items.BOWL));
                 if (hasChopsticks) {
                     popResource(level, pos, new ItemStack(ModItems.CHOPSTICKS.get()));
                 }
+            } else {
+                ItemStack stirFriedPorkCabbageItem = new ItemStack(ModItems.STIR_FRIED_PORK_CABBAGE.get());
+                if (bites < 29) {
+                    PlaceableFoodItem.setBitesToStack(stirFriedPorkCabbageItem, "StirFriedPorkCabbageBites", bites);
+                }
+                popResource(level, pos, stirFriedPorkCabbageItem);
             }
         }
     }

@@ -44,19 +44,19 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> STIR_FRIED_PORK_CABBAGE_PLATE = BLOCKS.register("stir_fried_pork_cabbage_plate",
             () -> new StirFriedPorkCabbagePlateBlock(BlockBehaviour.Properties.of()
-                    .strength(0.5f, 0.5f)
+                    .instabreak()
                     .noOcclusion()
                     .noCollission()));
 
     public static final RegistrySupplier<Block> PEPPERY_CHICKEN_PLATE = BLOCKS.register("peppery_chicken_plate",
             () -> new PepperyChickenPlateBlock(BlockBehaviour.Properties.of()
-                    .strength(0.5f, 0.5f)
+                    .instabreak()
                     .noOcclusion()
                     .noCollission()));
 
     public static final RegistrySupplier<Block> RICE_BOWL = BLOCKS.register("rice_bowl",
             () -> new RiceBowlBlock(BlockBehaviour.Properties.of()
-                    .strength(0.5f, 0.5f)
+                    .instabreak()
                     .noOcclusion()
                     .noCollission()));
 
@@ -80,19 +80,19 @@ public class ModBlocks {
 
     public static final RegistrySupplier<Block> STIR_FRIED_YELLOW_BEEF_PLATE = BLOCKS.register("stir_fried_yellow_beef_plate",
             () -> new StirFriedYellowBeefPlateBlock(BlockBehaviour.Properties.of()
-                    .strength(0.5f, 0.5f)
+                    .instabreak()
                     .noOcclusion()
                     .noCollission()));
 
     public static final RegistrySupplier<Block> TOMATO_POACHED_EGG_BLOCK = BLOCKS.register("tomato_poached_egg_block",
             () -> new TomatoPoachedEggBlock(BlockBehaviour.Properties.of()
-                    .strength(0.5f, 0.5f)
+                    .instabreak()
                     .noOcclusion()
                     .noCollission()));
 
     public static final RegistrySupplier<Block> FRIED_RICE_EGG_BLOCK = BLOCKS.register("fried_rice_egg_block",
             () -> new FriedRiceEggBlock(BlockBehaviour.Properties.of()
-                    .strength(0.5f, 0.5f)
+                    .instabreak()
                     .noOcclusion()
                     .noCollission()));
 
@@ -102,6 +102,11 @@ public class ModBlocks {
                     .randomTicks()
                     .instabreak()
                     .sound(SoundType.CROP)));
+
+    public static final RegistrySupplier<Block> VENDING_MACHINE = BLOCKS.register("vending_machine",
+            () -> new VendingMachineBlock(BlockBehaviour.Properties.of()
+                    .strength(3.0f, 4.0f)
+                    .noOcclusion()));
 
     public static void init() {
         BLOCKS.register();

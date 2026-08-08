@@ -1,5 +1,6 @@
 package com.realisticdining.fabric.event;
 
+import com.realisticdining.common.ServerEatingState;
 import com.realisticdining.compat.KaleidoscopeCookeryCompat;
 import com.realisticdining.registry.ModBlocks;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -25,6 +26,10 @@ public class RicePlaceHandler {
             
             if (!KaleidoscopeCookeryCompat.isCookedRice(heldItem)) {
                 return InteractionResult.PASS;
+            }
+            
+            if (ServerEatingState.isEating(player.getUUID())) {
+                return InteractionResult.FAIL;
             }
             
             BlockPos pos = hitResult.getBlockPos();

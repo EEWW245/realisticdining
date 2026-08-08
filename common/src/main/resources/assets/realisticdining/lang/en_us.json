@@ -60,6 +60,7 @@
   "item.realisticdining.chicken_stage_20": "Chicken (20 cuts)",
   "item.realisticdining.peppery_chicken": "Peppery Chicken",
   "item.realisticdining.cookbook": "Cookbook",
+  "item.realisticdining.eat_rice_guide": "Eating Animation Guide",
   
   "item.realisticdining.chopsticks_peppery_chicken_1": "Peppery Chicken",
   "item.realisticdining.chopsticks_peppery_chicken_2": "Peppery Chicken",
@@ -108,5 +109,45 @@
   "block.realisticdining.green_onion_crop": "Green Onion Crop",
   "block.realisticdining.coriander_crop": "Coriander Crop",
   
-  "item.realisticdining.coriander_seeds": "Coriander Seeds"
+  "item.realisticdining.coriander_seeds": "Coriander Seeds",
+  
+  "item.realisticdining.rice_bowl": "Rice",
+  "item.realisticdining.fried_rice_egg": "Egg Fried Rice",
+
+  "key.realisticdining.enable_simplified_mode": "Enable Simplified Mode (4 Stirs)",
+  "key.realisticdining.restore_normal_mode": "Restore Normal Mode (30 Stirs)",
+
+  "key.realisticdining.trigger_anim": "Trigger Arm Animation",
+  "key.realisticdining.trigger_eat_rice": "Trigger Eat Rice Animation",
+  "key.realisticdining.toggle_arm_render": "Toggle Arm Render",
+  "key.realisticdining.arm_render_enabled": "Arm Render Enabled",
+  "key.realisticdining.arm_render_disabled": "Arm Render Disabled",
+  "key.realisticdining.trigger_drink": "Trigger Drink Animation (Main Hand)",
+  "key.categories.realisticdining": "Realistic Dining",
+
+  "item.realisticdining.mineral_water": "Mineral Water",
+  "item.realisticdining.milk_beer": "Milk Beer",
+  "item.realisticdining.crisp": "Crisps",
+  "item.realisticdining.energy_bar": "Energy Bar",
+  "item.realisticdining.peach_grapefruit_tea": "Peach Grapefruit Tea",
+  "item.realisticdining.sports_drink": "Sports Drink",
+  "item.realisticdining.iced_tea": "Iced Tea",
+  "item.realisticdining.coconut_juice": "Coconut Juice",
+  "item.realisticdining.orange_juice": "Orange Juice",
+  "item.realisticdining.soymilk": "Soymilk",
+  "item.realisticdining.cola": "Cola",
+  "item.realisticdining.beer": "Beer",
+  "item.realisticdining.potato_chips": "Potato Chips",
+  "item.realisticdining.potato_chips_bbq": "Potato Chips (BBQ)",
+  "item.realisticdining.potato_chips_cucumber": "Potato Chips (Cucumber)",
+  "item.realisticdining.potato_chips_tomato": "Potato Chips (Tomato)",
+  "item.realisticdining.crispy_fish_chips": "Crispy Fish Chips",
+  "item.realisticdining.cookie_bag": "Cookie Bag",
+  "item.realisticdining.cookie_bag_coconut_latte": "Cookie Bag (Coconut Latte)",
+
+  "block.realisticdining.vending_machine": "Vending Machine",
+  "gui.realisticdining.vending_machine.close": "Close",
+  "gui.realisticdining.vending_machine.insufficient_funds": "Not enough gold nuggets!",
+  "gui.realisticdining.vending_machine.out_of_stock": "Out of stock",
+  "gui.realisticdining.vending_machine.subtitle": "(Each item can be purchased up to 6 times, restocked the next day)"
 }

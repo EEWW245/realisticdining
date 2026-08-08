@@ -87,17 +87,30 @@ public class KaleidoscopeCookeryCompat {
     }
 
     /**
-     * 检查物品是否是主模组的生菜
+     * 检查物品是否是主模组的生菜(或农夫乐事卷心菜)
      */
     public static boolean isLettuce(ItemStack stack) {
-        return isItem(stack, LETTUCE);
+        return isItem(stack, LETTUCE) || FarmersDelightCompat.isCabbage(stack);
     }
 
     /**
-     * 检查物品是否是主模组的米饭
+     * 检查物品是否是主模组的米饭(或农夫乐事熟米饭)
      */
     public static boolean isCookedRice(ItemStack stack) {
-        return isItem(stack, COOKED_RICE);
+        return isItem(stack, COOKED_RICE) || FarmersDelightCompat.isCookedRice(stack);
+    }
+
+    /**
+     * 获取用于米饭碗破坏回收的米饭物品。
+     * 优先返回森罗米饭；森罗未加载时回退农夫乐事熟米饭；
+     * 两者都未加载时返回 {@link net.minecraft.world.item.Items#AIR}。
+     */
+    public static Item getCookedRiceForDrop() {
+        Item rice = getItem(COOKED_RICE);
+        if (rice != net.minecraft.world.item.Items.AIR) {
+            return rice;
+        }
+        return FarmersDelightCompat.getCookedRiceItem();
     }
 
     /**
@@ -108,10 +121,10 @@ public class KaleidoscopeCookeryCompat {
     }
 
     /**
-     * 检查物品是否是主模组的番茄
+     * 检查物品是否是主模组的番茄(或农夫乐事番茄)
      */
     public static boolean isTomato(ItemStack stack) {
-        return isItem(stack, TOMATO);
+        return isItem(stack, TOMATO) || FarmersDelightCompat.isTomato(stack);
     }
 
     /**

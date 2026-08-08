@@ -1,10 +1,10 @@
-﻿{
+{
     "format_version": "1.21.11",
     "credit": "Micro-sculpted Chopsticks with rice",
     "textures": {
         "bowl": "block/oak_planks",
         "rice": "realisticdining:item/white_rice",
-        "chopsticks": "realisticdining:item/chopsticks",
+        "chopsticks": "realisticdining:item/chopsticks_3",
         "particle": "realisticdining:item/white_rice"
     },
     "elements": [

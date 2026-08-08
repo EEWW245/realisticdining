@@ -1,6 +1,7 @@
 package com.realisticdining.blocks;
 
 import com.realisticdining.compat.KaleidoscopeCookeryCompat;
+import com.realisticdining.items.PlaceableFoodItem;
 import com.realisticdining.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -11,6 +12,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
@@ -139,18 +141,22 @@ public class RiceBowlBlock extends Block {
         boolean hasChopsticks = state.getValue(HAS_CHOPSTICKS);
 
         if (!level.isClientSide) {
-            if (bites == 0) {
-                if (KaleidoscopeCookeryCompat.isModLoaded()) {
-                    ItemStack rice = new ItemStack(KaleidoscopeCookeryCompat.getItem(KaleidoscopeCookeryCompat.COOKED_RICE));
-                    if (!rice.isEmpty()) {
-                        popResource(level, pos, rice);
-                    }
-                }
-            } else if (bites == 15 || hasChopsticks) {
+            if (bites == 15 || hasChopsticks) {
                 popResource(level, pos, new ItemStack(Items.BOWL));
                 if (hasChopsticks) {
                     popResource(level, pos, new ItemStack(ModItems.CHOPSTICKS.get()));
                 }
+            } else if (bites == 0) {
+                Item compatRice = KaleidoscopeCookeryCompat.getCookedRiceForDrop();
+                if (compatRice != Items.AIR) {
+                    popResource(level, pos, new ItemStack(compatRice));
+                } else {
+                    popResource(level, pos, new ItemStack(ModItems.RICE_BOWL.get()));
+                }
+            } else {
+                ItemStack riceItem = new ItemStack(ModItems.RICE_BOWL.get());
+                PlaceableFoodItem.setBitesToStack(riceItem, "RiceBowlBites", bites);
+                popResource(level, pos, riceItem);
             }
         }
     }
