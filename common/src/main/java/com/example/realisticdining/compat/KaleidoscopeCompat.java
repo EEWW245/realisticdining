@@ -1,5 +1,6 @@
 package com.example.realisticdining.compat;
 
+import com.example.realisticdining.init.ModTags;
 import com.example.realisticdining.platform.ServiceHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -110,14 +111,17 @@ public class KaleidoscopeCompat {
         if (stack.isEmpty()) {
             return false;
         }
-        // 森罗物语生菜
+        // Tag 优先：覆盖森罗/农夫乐事/整合包统一物品
+        if (stack.is(ModTags.Items.LETTUCE)) {
+            return true;
+        }
+        // 旧版硬编码 fallback（森罗未注册到 Tag 时兜底）
         if (isLoaded()) {
             Item lettuce = getLettuce();
             if (lettuce != null && stack.getItem() == lettuce) {
                 return true;
             }
         }
-        // 农夫乐事卷心菜(cabbage)与生菜功能等价
         return FarmersDelightCompat.isCabbage(stack);
     }
 
@@ -140,26 +144,50 @@ public class KaleidoscopeCompat {
     }
 
     public static boolean isRedChili(ItemStack stack) {
-        if (!isLoaded() || stack.isEmpty()) {
+        if (stack.isEmpty()) {
             return false;
         }
-        Item redPepper = getRedPepper();
-        return redPepper != null && stack.getItem() == redPepper;
+        // Tag 优先：覆盖森罗/农夫乐事/整合包统一物品
+        if (stack.is(ModTags.Items.RED_CHILI)) {
+            return true;
+        }
+        // 森罗硬编码 fallback
+        if (isLoaded()) {
+            Item redPepper = getRedPepper();
+            if (redPepper != null && stack.getItem() == redPepper) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean isGreenChili(ItemStack stack) {
-        if (!isLoaded() || stack.isEmpty()) {
+        if (stack.isEmpty()) {
             return false;
         }
-        Item greenChili = getGreenChili();
-        return greenChili != null && stack.getItem() == greenChili;
+        // Tag 优先：覆盖森罗/整合包统一物品
+        if (stack.is(ModTags.Items.GREEN_CHILI)) {
+            return true;
+        }
+        // 森罗硬编码 fallback
+        if (isLoaded()) {
+            Item greenChili = getGreenChili();
+            if (greenChili != null && stack.getItem() == greenChili) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean isRice(ItemStack stack) {
         if (stack.isEmpty()) {
             return false;
         }
-        // 森罗物语米饭
+        // Tag 优先：覆盖森罗/农夫乐事/整合包统一物品
+        if (stack.is(ModTags.Items.RICE)) {
+            return true;
+        }
+        // 森罗硬编码 fallback
         if (isLoaded()) {
             Item rice = getRice();
             if (rice != null && stack.getItem() == rice) {
@@ -219,7 +247,11 @@ public class KaleidoscopeCompat {
         if (stack.isEmpty()) {
             return false;
         }
-        // 森罗物语番茄
+        // Tag 优先：覆盖森罗/农夫乐事/整合包统一物品
+        if (stack.is(ModTags.Items.TOMATO)) {
+            return true;
+        }
+        // 森罗硬编码 fallback
         if (isLoaded()) {
             Item tomato = getTomato();
             if (tomato != null && stack.getItem() == tomato) {
@@ -240,10 +272,20 @@ public class KaleidoscopeCompat {
     }
 
     public static boolean isEggFriedRice(ItemStack stack) {
-        if (!isLoaded() || stack.isEmpty()) {
+        if (stack.isEmpty()) {
             return false;
         }
-        Item eggFriedRice = getEggFriedRice();
-        return eggFriedRice != null && stack.getItem() == eggFriedRice;
+        // Tag 优先：覆盖森罗/整合包统一物品
+        if (stack.is(ModTags.Items.EGG_FRIED_RICE)) {
+            return true;
+        }
+        // 森罗硬编码 fallback
+        if (isLoaded()) {
+            Item eggFriedRice = getEggFriedRice();
+            if (eggFriedRice != null && stack.getItem() == eggFriedRice) {
+                return true;
+            }
+        }
+        return false;
     }
 }

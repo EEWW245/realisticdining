@@ -2,6 +2,7 @@ package com.example.realisticdining.blocks;
 
 import com.example.realisticdining.blockentities.ChoppingBoardBlockEntity;
 import com.example.realisticdining.compat.KaleidoscopeCompat;
+import com.example.realisticdining.compat.LatiaoCraft2Compat;
 import com.example.realisticdining.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -460,11 +461,11 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
     }
 
     private boolean isRedPepperItem(ItemStack stack) {
-        return KaleidoscopeCompat.isRedChili(stack);
+        return KaleidoscopeCompat.isRedChili(stack) || LatiaoCraft2Compat.isRedPepper(stack);
     }
 
     private boolean isGreenChiliItem(ItemStack stack) {
-        return KaleidoscopeCompat.isGreenChili(stack);
+        return KaleidoscopeCompat.isGreenChili(stack) || LatiaoCraft2Compat.isGreenPepper(stack);
     }
 
     private boolean isCorianderItem(ItemStack stack) {

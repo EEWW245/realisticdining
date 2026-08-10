@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "kaleidoscope_cookery:egg_fried_rice",
+    "#forge:egg_fried_rice",
+    "#forge:foods/egg_fried_rice"
+  ]
+}

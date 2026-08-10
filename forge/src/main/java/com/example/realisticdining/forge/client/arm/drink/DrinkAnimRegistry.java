@@ -126,7 +126,7 @@ public class DrinkAnimRegistry {
     public static final DrinkAnimHandler ENERGY_BAR = register(
             "realisticdining", "energy_bar", 5.0,
             ENERGY_BAR_GEO, ENERGY_BAR_ANIM, ENERGY_BAR_RAW_ANIM,
-            "textures/block/energy_bar_texture.png",
+            "textures/block/energy_bar.png",
             "energy_bar_controller", "drink",
             ENERGY_BAR_SOUNDS);
 
@@ -228,14 +228,14 @@ public class DrinkAnimRegistry {
     public static final DrinkAnimHandler COOKIE_BAG = register(
             "realisticdining", "cookie_bag", 5.0,
             BISCUIT_GEO, BISCUIT_ANIM, BISCUIT_RAW_ANIM,
-            "textures/item/cookie_bag.png",
+            "textures/block/cookie_bag.png",
             "cookie_bag_controller", "drink",
             ENERGY_BAR_SOUNDS);
 
     public static final DrinkAnimHandler COOKIE_BAG_COCONUT_LATTE = register(
             "realisticdining", "cookie_bag_coconut_latte", 5.0,
             BISCUIT_GEO, BISCUIT_ANIM, BISCUIT_RAW_ANIM,
-            "textures/item/cookie_bag_coconut_latte.png",
+            "textures/block/cookie_bag_coconut_latte.png",
             "cookie_bag_coconut_latte_controller", "drink",
             ENERGY_BAR_SOUNDS);
 

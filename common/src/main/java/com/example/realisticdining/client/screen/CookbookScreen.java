@@ -76,7 +76,16 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 4 页：翻炒模式切换
+        // 第 4 页：2.1.3菜板兼容辣条工艺2
+        pages.add(new PageContent(
+                "=== 2.1.3菜板兼容辣条工艺2[Latiao craft 2]的物品 ===",
+                List.of(
+                        "红辣椒",
+                        "青椒"
+                )
+        ));
+
+        // 第 5 页：翻炒模式切换
         pages.add(new PageContent(
                 "=== 翻炒模式切换 ===",
                 List.of(
@@ -95,7 +104,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 5 页：种植系统
+        // 第 6 页：种植系统
         pages.add(new PageContent(
                 "=== 种植系统 ===",
                 List.of(
@@ -115,7 +124,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 6 页：刀具切割（基础食材）
+        // 第 7 页：刀具切割（基础食材）
         pages.add(new PageContent(
                 "=== 刀具切割（基础食材）===",
                 List.of(
@@ -134,7 +143,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 7 页：刀具切割（进阶食材）
+        // 第 8 页：刀具切割（进阶食材）
         pages.add(new PageContent(
                 "=== 刀具切割（进阶食材）===",
                 List.of(
@@ -152,7 +161,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 8 页：炒锅使用
+        // 第 9 页：炒锅使用
         pages.add(new PageContent(
                 "=== 炒锅使用 ===",
                 List.of(
@@ -171,7 +180,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 9 页：辣子鸡配方
+        // 第 10 页：辣子鸡配方
         pages.add(new PageContent(
                 "=== 辣子鸡配方 ===",
                 List.of(
@@ -188,7 +197,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 10 页：小炒黄牛肉配方
+        // 第 11 页：小炒黄牛肉配方
         pages.add(new PageContent(
                 "=== 小炒黄牛肉配方 ===",
                 List.of(
@@ -207,7 +216,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 11 页：猪肉炒菜配方
+        // 第 12 页：猪肉炒菜配方
         pages.add(new PageContent(
                 "=== 猪肉炒菜配方 ===",
                 List.of(
@@ -223,7 +232,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 12 页：番茄荷包蛋配方
+        // 第 13 页：番茄荷包蛋配方
         pages.add(new PageContent(
                 "=== 番茄荷包蛋配方 ===",
                 List.of(
@@ -239,7 +248,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 13 页：蛋炒饭制作
+        // 第 14 页：蛋炒饭制作
         pages.add(new PageContent(
                 "=== 蛋炒饭制作 ===",
                 List.of(
@@ -259,7 +268,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 14 页：米饭放置
+        // 第 15 页：米饭放置
         pages.add(new PageContent(
                 "=== 米饭放置 ===",
                 List.of(
@@ -279,7 +288,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 15 页：筷子使用（基础用法）
+        // 第 16 页：筷子使用（基础用法）
         pages.add(new PageContent(
                 "=== 筷子使用（基础）===",
                 List.of(
@@ -295,7 +304,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 16 页：筷子使用（特殊用法）
+        // 第 17 页：筷子使用（特殊用法）
         pages.add(new PageContent(
                 "=== 筷子使用（特殊）===",
                 List.of(
@@ -311,7 +320,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 17 页：铲子使用
+        // 第 18 页：铲子使用
         pages.add(new PageContent(
                 "=== 铲子使用 ===",
                 List.of(
@@ -332,7 +341,7 @@ public class CookbookScreen extends AbstractContainerScreen<CookbookMenu> {
                 )
         ));
 
-        // 第 18 页：烤鸡
+        // 第 19 页：烤鸡
         pages.add(new PageContent(
                 "=== 烤鸡 ===",
                 List.of(

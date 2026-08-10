@@ -166,7 +166,9 @@ public class FpArmRenderSystem {
                     DrinkAnimState.Phase oldPhase = oldHandler.phase();
                     if (oldPhase == DrinkAnimState.Phase.HOLD) {
                         oldHandler.triggerPutdown(gameTime);
-                    } else if (oldPhase != DrinkAnimState.Phase.IDLE) {
+                    } else if (oldPhase == DrinkAnimState.Phase.PICKUP
+                            || oldPhase == DrinkAnimState.Phase.PUTDOWN) {
+                        // 仅 PICKUP/PUTDOWN 态强制中断；DRINK 态让其自然播完
                         oldHandler.reset();
                     }
                 }
