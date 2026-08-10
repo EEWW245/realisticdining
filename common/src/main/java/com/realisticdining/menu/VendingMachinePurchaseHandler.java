@@ -1,6 +1,5 @@
 package com.realisticdining.menu;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -10,12 +9,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+import java.util.UUID;
+
 /**
  * 服务端购买处理：扣除玩家金粒并给对应物品。
  * 在主线程上由各平台网络包 handler 调用。
  *
- * <p>每日库存：每个自动售货机方块对每种物品每日最多 6 次购买，新一天自动补货。
- * 当库存用尽时给玩家发送"货物数量不足"提示。
+ * <p>每日库存：每个玩家对每种物品每日最多 6 次购买，不论从哪台售货机购买都共用同一额度，
+ * 新一天自动补货。当库存用尽时给玩家发送"货物数量不足"提示。
  */
 public final class VendingMachinePurchaseHandler {
 
@@ -25,16 +26,16 @@ public final class VendingMachinePurchaseHandler {
         Item item = BuiltInRegistries.ITEM.get(itemId);
         if (item == Items.AIR) return;
 
-        // 1. 从玩家当前打开的菜单中取出方块坐标
-        BlockPos pos = null;
-        if (player.containerMenu instanceof VendingMachineMenu vmMenu) {
-            pos = vmMenu.getPos();
+        // 1. 必须打开了售货机菜单才能购买（防止伪造网络包）
+        if (!(player.containerMenu instanceof VendingMachineMenu)) {
+            return;
         }
 
         // 2. 预检库存：仅查询不递增，剩余 0 则提示"货物数量不足"
         ServerLevel level = player.serverLevel();
-        VendingMachineStockData stockData = pos != null ? VendingMachineStockData.get(level) : null;
-        if (stockData != null && stockData.getRemaining(level, pos, itemId) <= 0) {
+        UUID playerUUID = player.getUUID();
+        VendingMachineStockData stockData = VendingMachineStockData.get(level);
+        if (stockData.getRemaining(level, playerUUID, itemId) <= 0) {
             player.sendSystemMessage(Component.translatable("gui.realisticdining.vending_machine.out_of_stock"));
             return;
         }
@@ -56,7 +57,7 @@ public final class VendingMachinePurchaseHandler {
         }
 
         // 4. 全部预检通过 → 记录库存（应当成功；若失败则中止交易）
-        if (stockData != null && !stockData.tryPurchase(level, pos, itemId)) {
+        if (!stockData.tryPurchase(level, playerUUID, itemId)) {
             player.sendSystemMessage(Component.translatable("gui.realisticdining.vending_machine.out_of_stock"));
             return;
         }

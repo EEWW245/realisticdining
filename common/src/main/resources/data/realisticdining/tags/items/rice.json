@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "kaleidoscope_cookery:cooked_rice",
+    "farmersdelight:cooked_rice",
+    "#forge:cooked_rice",
+    "#forge:foods/cooked_rice"
+  ]
+}

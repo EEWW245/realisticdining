@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "kaleidoscope_cookery:red_chili",
+    "farmersdelight:dry_red_pepper",
+    "ltc2:pepper_red",
+    "#forge:crops/red_chili",
+    "#forge:crops/red_pepper",
+    "#forge:vegetables/red_pepper",
+    "#forge:vegetables/red_chili"
+  ]
+}

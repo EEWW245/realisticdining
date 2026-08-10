@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "kaleidoscope_cookery:tomato",
+    "farmersdelight:tomato",
+    "#forge:crops/tomato",
+    "#forge:vegetables/tomato"
+  ]
+}

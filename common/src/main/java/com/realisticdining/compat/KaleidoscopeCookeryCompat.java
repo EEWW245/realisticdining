@@ -1,5 +1,6 @@
 package com.realisticdining.compat;
 
+import com.realisticdining.init.ModTags;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -76,6 +77,10 @@ public class KaleidoscopeCookeryCompat {
      * 检查物品是否是主模组的红辣椒
      */
     public static boolean isRedChili(ItemStack stack) {
+        // Tag 优先：覆盖森罗/农夫乐事/整合包统一物品
+        if (!stack.isEmpty() && stack.is(ModTags.Items.RED_CHILI)) {
+            return true;
+        }
         return isItem(stack, RED_CHILI);
     }
 
@@ -83,6 +88,10 @@ public class KaleidoscopeCookeryCompat {
      * 检查物品是否是主模组的青辣椒
      */
     public static boolean isGreenChili(ItemStack stack) {
+        // Tag 优先：覆盖森罗/整合包统一物品
+        if (!stack.isEmpty() && stack.is(ModTags.Items.GREEN_CHILI)) {
+            return true;
+        }
         return isItem(stack, GREEN_CHILI);
     }
 
@@ -90,6 +99,10 @@ public class KaleidoscopeCookeryCompat {
      * 检查物品是否是主模组的生菜(或农夫乐事卷心菜)
      */
     public static boolean isLettuce(ItemStack stack) {
+        // Tag 优先：覆盖森罗/农夫乐事/整合包统一物品
+        if (!stack.isEmpty() && stack.is(ModTags.Items.LETTUCE)) {
+            return true;
+        }
         return isItem(stack, LETTUCE) || FarmersDelightCompat.isCabbage(stack);
     }
 
@@ -97,6 +110,10 @@ public class KaleidoscopeCookeryCompat {
      * 检查物品是否是主模组的米饭(或农夫乐事熟米饭)
      */
     public static boolean isCookedRice(ItemStack stack) {
+        // Tag 优先：覆盖森罗/农夫乐事/整合包统一物品
+        if (!stack.isEmpty() && stack.is(ModTags.Items.RICE)) {
+            return true;
+        }
         return isItem(stack, COOKED_RICE) || FarmersDelightCompat.isCookedRice(stack);
     }
 
@@ -124,6 +141,10 @@ public class KaleidoscopeCookeryCompat {
      * 检查物品是否是主模组的番茄(或农夫乐事番茄)
      */
     public static boolean isTomato(ItemStack stack) {
+        // Tag 优先：覆盖森罗/农夫乐事/整合包统一物品
+        if (!stack.isEmpty() && stack.is(ModTags.Items.TOMATO)) {
+            return true;
+        }
         return isItem(stack, TOMATO) || FarmersDelightCompat.isTomato(stack);
     }
 
@@ -195,6 +216,10 @@ public class KaleidoscopeCookeryCompat {
     public static final String EGG_FRIED_RICE = "egg_fried_rice";
 
     public static boolean isEggFriedRice(ItemStack stack) {
+        // Tag 优先：覆盖森罗/整合包统一物品
+        if (!stack.isEmpty() && stack.is(ModTags.Items.EGG_FRIED_RICE)) {
+            return true;
+        }
         return isItem(stack, EGG_FRIED_RICE);
     }
 

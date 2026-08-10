@@ -1,6 +1,5 @@
 package com.realisticdining.menu;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -11,22 +10,24 @@ import net.minecraft.world.level.saveddata.SavedData;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 自动售货机每日库存数据（1.21.1 SavedData）。
  *
- * <p>每个自动售货机方块（按 BlockPos 区分）记录当天每种物品已被购买的次数。
+ * <p>按玩家 UUID 记录当天每种物品已被购买的次数。
  * 到了新的一天（level.getDayTime() / 24000L 改变）自动清空所有计数。
  *
- * <p>每种物品每天最多购买 {@link #MAX_PURCHASES_PER_ITEM} 次。
+ * <p>每种物品每个玩家每天最多购买 {@link #MAX_PURCHASES_PER_ITEM} 次，
+ * 不论从哪台售货机购买、换多少台售货机都不会重置额度。
  */
 public class VendingMachineStockData extends SavedData {
 
     private static final String DATA_NAME = "realisticdining_vending_machine_stock";
     public static final int MAX_PURCHASES_PER_ITEM = 6;
 
-    /** key: blockPos.asLong(), value: (itemId -> purchases today) */
-    private final Map<Long, Map<ResourceLocation, Integer>> stock = new HashMap<>();
+    /** key: 玩家 UUID, value: (itemId -> purchases today) */
+    private final Map<UUID, Map<ResourceLocation, Integer>> stock = new HashMap<>();
     private long lastDay = -1L;
 
     public VendingMachineStockData() {}
@@ -36,14 +37,14 @@ public class VendingMachineStockData extends SavedData {
         ListTag entries = tag.getList("entries", Tag.TAG_COMPOUND);
         for (int i = 0; i < entries.size(); i++) {
             CompoundTag entry = entries.getCompound(i);
-            long posLong = entry.getLong("pos");
+            UUID playerUUID = entry.getUUID("uuid");
             ListTag items = entry.getList("items", Tag.TAG_COMPOUND);
             Map<ResourceLocation, Integer> itemMap = new HashMap<>();
             for (int j = 0; j < items.size(); j++) {
                 CompoundTag itemEntry = items.getCompound(j);
                 itemMap.put(ResourceLocation.parse(itemEntry.getString("id")), itemEntry.getInt("count"));
             }
-            this.stock.put(posLong, itemMap);
+            this.stock.put(playerUUID, itemMap);
         }
     }
 
@@ -51,9 +52,9 @@ public class VendingMachineStockData extends SavedData {
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider provider) {
         tag.putLong("lastDay", this.lastDay);
         ListTag entries = new ListTag();
-        for (Map.Entry<Long, Map<ResourceLocation, Integer>> e : this.stock.entrySet()) {
+        for (Map.Entry<UUID, Map<ResourceLocation, Integer>> e : this.stock.entrySet()) {
             CompoundTag entry = new CompoundTag();
-            entry.putLong("pos", e.getKey());
+            entry.putUUID("uuid", e.getKey());
             ListTag items = new ListTag();
             for (Map.Entry<ResourceLocation, Integer> ie : e.getValue().entrySet()) {
                 CompoundTag itemEntry = new CompoundTag();
@@ -87,10 +88,10 @@ public class VendingMachineStockData extends SavedData {
         }
     }
 
-    /** 返回该方块该物品今日剩余可购买次数。 */
-    public int getRemaining(ServerLevel level, BlockPos pos, ResourceLocation itemId) {
+    /** 返回该玩家该物品今日剩余可购买次数。 */
+    public int getRemaining(ServerLevel level, UUID playerUUID, ResourceLocation itemId) {
         checkDay(level);
-        Map<ResourceLocation, Integer> itemMap = this.stock.get(pos.asLong());
+        Map<ResourceLocation, Integer> itemMap = this.stock.get(playerUUID);
         if (itemMap == null) return MAX_PURCHASES_PER_ITEM;
         Integer count = itemMap.get(itemId);
         if (count == null) return MAX_PURCHASES_PER_ITEM;
@@ -101,9 +102,9 @@ public class VendingMachineStockData extends SavedData {
      * 尝试购买一次：若仍有库存返回 true 并 +1 计数；否则返回 false。
      * 调用方应在返回 false 时给玩家发送"货物数量不足"提示。
      */
-    public boolean tryPurchase(ServerLevel level, BlockPos pos, ResourceLocation itemId) {
+    public boolean tryPurchase(ServerLevel level, UUID playerUUID, ResourceLocation itemId) {
         checkDay(level);
-        Map<ResourceLocation, Integer> itemMap = this.stock.computeIfAbsent(pos.asLong(), k -> new HashMap<>());
+        Map<ResourceLocation, Integer> itemMap = this.stock.computeIfAbsent(playerUUID, k -> new HashMap<>());
         Integer count = itemMap.get(itemId);
         int current = count == null ? 0 : count;
         if (current >= MAX_PURCHASES_PER_ITEM) return false;

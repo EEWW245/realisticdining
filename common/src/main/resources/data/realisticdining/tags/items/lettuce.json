@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "kaleidoscope_cookery:lettuce",
+    "farmersdelight:cabbage",
+    "#forge:crops/lettuce",
+    "#forge:vegetables/cabbage",
+    "#forge:vegetables/lettuce"
+  ]
+}
