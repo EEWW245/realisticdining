@@ -9,7 +9,10 @@
   "client": [
     "ItemInHandRendererMixin",
     "FirstPersonModelLogicHandlerMixin",
-    "ItemInHandLayerMixin"
+    "ItemInHandLayerMixin",
+    "PunchyCompatMixin",
+    "PackItemRendererMixin",
+    "ClientPackSourceMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -54,12 +54,20 @@ public class DrinkAnimHandler {
     private final List<DrinkLoopSound> activeLoops = new ArrayList<>();
     /** 标记 DRINK 动画刚自然结束，供 FpArmRenderSystem 轮询并触发消耗包。 */
     private boolean justFinished = false;
+    /** 提前消耗：DRINK 阶段提前量到达后标记已发消耗包，避免动画结束重复发。 */
+    private boolean consumeSent = false;
+    /** 提前消耗信号：供 FpArmRenderSystem 轮询提前发消耗包。 */
+    private boolean consumeReady = false;
     /** 是否配置了 putdown 动画（false 时切物品直接 reset，不播放下动画）。 */
     private boolean hasPutdownAnim = false;
 
     public DrinkAnimHandler(DrinkAnimConfig config) {
         this.config = config;
         this.state = new DrinkAnimState(config.duration());
+        // v2.1.6+ 配置持物前缀模式
+        if (config.holdDuration() > 0) {
+            this.state.configureHoldPrefix(config.holdDuration());
+        }
         this.animatable = new DrinkAnimAnimatable(config);
         this.model = new DrinkAnimModel(config);
         if (config.isDualModel()) {
@@ -119,6 +127,8 @@ public class DrinkAnimHandler {
 
     /**
      * 触发 pickup 动画。仅在 IDLE 态且无其他动画在播时有效。
+     * <p>v2.1.6+ 持物前缀模式下，触发 drink 动画（update 会在到达 holdDuration 时冻结定格）；
+     * 旧 pickup 模式下触发独立的 pickup 动画。
      * @return true 表示已开始；false 表示被全局锁拒绝（FpArmRenderSystem 会排队 pendingPickup）
      */
     public boolean triggerPickup(double gameTime) {
@@ -126,9 +136,17 @@ public class DrinkAnimHandler {
         if (state.phase() != DrinkAnimState.Phase.IDLE) return false;
         if (DrinkAnimRegistry.anyPlaying()) return false;
         state.startPickup(gameTime);
-        animatable.triggerPickupAnimation();
-        if (animatable2 != null) {
-            animatable2.triggerPickupAnimation();
+        if (state.isHoldPrefixConfigured()) {
+            // v2.1.6+ 持物前缀模式：触发 drink 动画，update 会在到达 holdDuration 时 freezeAtHold 定格
+            animatable.triggerDrinkAnimation();
+            if (animatable2 != null) {
+                animatable2.triggerDrinkAnimation();
+            }
+        } else {
+            animatable.triggerPickupAnimation();
+            if (animatable2 != null) {
+                animatable2.triggerPickupAnimation();
+            }
         }
         return true;
     }
@@ -166,10 +184,21 @@ public class DrinkAnimHandler {
     private void startDrinkInternal(double gameTime) {
         resetSoundState();
         justFinished = false;
+        consumeSent = false;
+        consumeReady = false;
         if (state.startDrink(gameTime)) {
-            animatable.triggerDrinkAnimation();
-            if (animatable2 != null) {
-                animatable2.triggerDrinkAnimation();
+            if (state.drinkStartOffset() > 0) {
+                // v2.1.6+ 持物前缀模式 HOLD 续播：解冻，动画从冻结帧无缝继续播到结尾
+                animatable.unfreezeAnimation();
+                if (animatable2 != null) {
+                    animatable2.unfreezeAnimation();
+                }
+            } else {
+                // IDLE 新播（含喝完再按 U）：完整重置链从头播放，杜绝 controller STOPPED 残留
+                animatable.triggerDrinkAnimation();
+                if (animatable2 != null) {
+                    animatable2.triggerDrinkAnimation();
+                }
             }
         }
     }
@@ -201,6 +230,13 @@ public class DrinkAnimHandler {
 
         // PICKUP → HOLD 转换：检查排队的 DRINK
         if (phaseBefore == DrinkAnimState.Phase.PICKUP && phaseAfter == DrinkAnimState.Phase.HOLD) {
+            // v2.1.6+ 持物前缀模式：精准冻结在 holdDuration 帧（HOLD 态持物定格）
+            if (state.isHoldPrefixConfigured()) {
+                animatable.freezeAtHold(state.holdDuration());
+                if (animatable2 != null) {
+                    animatable2.freezeAtHold(state.holdDuration());
+                }
+            }
             if (state.consumePendingDrink()) {
                 startDrinkInternal(gameTime);
                 phaseAfter = state.phase();
@@ -218,8 +254,18 @@ public class DrinkAnimHandler {
 
         // 仅 DRINK 阶段推进音效和饥饿 cue
         if (phaseAfter == DrinkAnimState.Phase.DRINK) {
-            double elapsed = state.elapsed(gameTime, partialTick);
-            double elapsedReal = state.elapsedRealSeconds();
+            // v2.x 提前消耗：动画时间轴到达 duration - CONSUME_LEAD_SECONDS 时提前发消耗包，
+            // 抵消网络 RTT + 服务端处理延迟，动画播完物品已消耗，消除"物品还在手"过渡期
+            if (!consumeSent) {
+                double leadElapsed = state.elapsedInAnimation(gameTime, partialTick);
+                if (leadElapsed >= config.duration() - CONSUME_LEAD_SECONDS) {
+                    consumeSent = true;
+                    consumeReady = true;
+                }
+            }
+            // v2.1.6+ 音效/饥饿 cue 基于动画时间轴（含 drinkStartOffset），HOLD 续播与 IDLE 新播都对齐
+            double elapsed = state.elapsedInAnimation(gameTime, partialTick);
+            double elapsedReal = state.elapsedRealSeconds() + state.drinkStartOffset();
             updateSounds(elapsedReal);
             updateHunger(elapsed);
         }
@@ -227,6 +273,8 @@ public class DrinkAnimHandler {
         if (renderer == null) {
             renderer = new DrinkAnimRenderer(model, config);
         }
+        // v2.1.6+ 传递当前 phase 给 renderer，用于持物阶段隐藏左臂
+        renderer.setCurrentPhase(phaseAfter);
         poseStack.pushPose();
         renderer.renderDrink(poseStack, (GeoAnimatable) animatable, bufferSource, packedLight, partialTick);
         poseStack.popPose();
@@ -235,6 +283,7 @@ public class DrinkAnimHandler {
             if (renderer2 == null) {
                 renderer2 = new DrinkAnimRenderer(model2, config, 2);
             }
+            renderer2.setCurrentPhase(phaseAfter);
             poseStack.pushPose();
             renderer2.renderDrink(poseStack, (GeoAnimatable) animatable2, bufferSource, packedLight, partialTick);
             poseStack.popPose();
@@ -247,6 +296,9 @@ public class DrinkAnimHandler {
      * <p>400 模组整合包主线程卡顿时，SoundManager.play() 从调用到 OpenAL 实际开播
      * 有 100~300ms 入队延迟。提前 50ms 触发可抵消大部分入队延迟，让音效听感上准点。
      */
+    /** 消耗提前量（秒）：DRINK 动画结束前提前发消耗包，抵消网络 RTT + 服务端处理延迟。 */
+    private static final double CONSUME_LEAD_SECONDS = 1.0;
+
     private static final double SOUND_PRE_TRIGGER_SECONDS = 0.05;
 
     private void updateSounds(double elapsedReal) {
@@ -313,6 +365,13 @@ public class DrinkAnimHandler {
     public void reset() {
         resetSoundState();
         justFinished = false;
+        consumeSent = false;
+        consumeReady = false;
+        // v2.1.6+ 完整重置动画状态（清冻结 + forceAnimationReset + stop），杜绝下次播放异常
+        animatable.resetAnimationState();
+        if (animatable2 != null) {
+            animatable2.resetAnimationState();
+        }
         state.reset();
     }
 
@@ -320,6 +379,21 @@ public class DrinkAnimHandler {
      * 轮询动画是否刚自然结束。返回 true 表示刚结束（仅一次），同时清除标记。
      * FpArmRenderSystem 检测到 true 后发送消耗 C2S 包。
      */
+    /**
+     * v2.x 轮询是否应提前发消耗包（DRINK 阶段提前量到达）。
+     * 返回 true 表示应发（仅一次），同时清除标记。
+     */
+    public boolean pollConsume() {
+        if (!consumeReady) return false;
+        consumeReady = false;
+        return true;
+    }
+
+    /** v2.x 本次 DRINK 是否已提前发出消耗包（供 FpArmRenderSystem 判断重新拿起时机）。 */
+    public boolean isConsumeSent() {
+        return consumeSent;
+    }
+
     public boolean pollFinished() {
         if (!justFinished) return false;
         justFinished = false;

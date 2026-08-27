@@ -64,7 +64,7 @@ public class PlatformHelperImpl {
         VendingMachinePurchasePacket.sendPurchaseToServer(itemId);
     }
 
-    public static void sendDrinkConsume(String drinkId) {
-        com.realisticdining.fabric.network.ConsumeDrinkPacket.sendConsumeToServer(drinkId);
+    public static void sendDrinkConsume(String drinkId, boolean startEating) {
+        com.realisticdining.fabric.network.ConsumeDrinkPacket.sendConsumeToServer(drinkId, startEating);
     }
 }

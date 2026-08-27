@@ -27,8 +27,6 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistrySupplier<Item> MILK_BEER = ITEMS.register("milk_beer",
             () -> new Item(new Item.Properties().stacksTo(16)));
-    public static final RegistrySupplier<Item> CRISP = ITEMS.register("crisp",
-            () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistrySupplier<Item> ENERGY_BAR = ITEMS.register("energy_bar",
             () -> new Item(new Item.Properties().stacksTo(16)));
 
@@ -69,6 +67,10 @@ public class ModItems {
     public static final RegistrySupplier<Item> COOKIE_BAG = ITEMS.register("cookie_bag",
             () -> new Item(new Item.Properties().stacksTo(16)));
     public static final RegistrySupplier<Item> COOKIE_BAG_COCONUT_LATTE = ITEMS.register("cookie_bag_coconut_latte",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+
+    // 珍珠奶茶：杯装奶茶，独立 pickup + eat 双动画，清负面 Buff（类似原版牛奶）
+    public static final RegistrySupplier<Item> PEARL_MILK_TEA = ITEMS.register("pearl_milk_tea",
             () -> new Item(new Item.Properties().stacksTo(16)));
     
     public static final RegistrySupplier<Item> BEEF_SLICE = ITEMS.register("beef_slice",
@@ -183,6 +185,9 @@ public class ModItems {
 
     public static final RegistrySupplier<Item> VENDING_MACHINE = ITEMS.register("vending_machine",
             () -> new BlockItem(ModBlocks.VENDING_MACHINE.get(), new Item.Properties()));
+
+    public static final RegistrySupplier<Item> SNACK_DISPLAY = ITEMS.register("snack_display",
+            () -> new BlockItem(ModBlocks.SNACK_DISPLAY.get(), new Item.Properties()));
 
     public static final RegistrySupplier<Item> PORK_PIECES = ITEMS.register("pork_pieces", 
             () -> new Item(new Item.Properties()));

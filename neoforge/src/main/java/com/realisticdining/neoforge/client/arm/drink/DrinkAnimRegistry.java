@@ -45,11 +45,6 @@ public class DrinkAnimRegistry {
     private static final String CAN_ANIM = "animations/mik_beer.animation.json";
     private static final String CAN_RAW_ANIM = "animation.unknown.new";
 
-    // CRISP：薯片袋动画
-    private static final String CRISP_GEO = "geo/crisp.geo.json";
-    private static final String CRISP_ANIM = "animations/crisp.animation.json";
-    private static final String CRISP_RAW_ANIM = "animation.unknown.new";
-
     // ENERGY_BAR：军用能量棒动画
     private static final String ENERGY_BAR_GEO = "geo/energy_bar.geo.json";
     private static final String ENERGY_BAR_ANIM = "animations/energy_bar.animation.json";
@@ -64,6 +59,11 @@ public class DrinkAnimRegistry {
     private static final String BISCUIT_GEO = "geo/biscuit.geo.json";
     private static final String BISCUIT_ANIM = "animations/biscuit.animation.json";
     private static final String BISCUIT_RAW_ANIM = "animation.unknown.new";
+
+    // MILKTEA：珍珠奶茶动画（独立 pickup + eat 双动画，pickup 定格持物）
+    private static final String MILKTEA_GEO = "geo/cooked_beef_milktea.geo.json";
+    private static final String MILKTEA_ANIM = "animations/cooked_beef_milktea.animation.json";
+    private static final String MILKTEA_RAW_ANIM = "eat";
 
     // === 音效组（与动画类型一一对应，可被同类型饮料复用） ===
     // 注：直接传递 RegistrySupplier 本身（不调用 .get()），由 DrinkSoundCue 在播放时懒解析，
@@ -99,143 +99,176 @@ public class DrinkAnimRegistry {
             DrinkSoundCue.once(ModSounds.DRINK_CAN_AHH, 6.5)
     );
 
+    // MILKTEA：珍珠奶茶（5.0833s，2 cue）—— 插吸管 1.0s + 喝水 1.75s
+    private static final List<DrinkSoundCue> MILKTEA_SOUNDS = List.of(
+            DrinkSoundCue.once(ModSounds.DRINK_MILKTEA_STRAW_INSERT, 1.0),
+            DrinkSoundCue.once(ModSounds.DRINK_MILKTEA_GULP, 1.75)
+    );
+
     // === 饮料实例 ===
+    // v2.1.4+ 持物前缀模式：holdDuration > 0 时物品进入主手自动播放 drink 动画前 N 秒并定格
+    // hideLeftArm：持物阶段隐藏 Left Arm 骨骼（瓶装/罐装/薯片需要）
     public static final DrinkAnimHandler MINERAL_WATER = register(
             "realisticdining", "mineral_water", 6.75,
             BOTTLE_GEO, BOTTLE_ANIM, BOTTLE_RAW_ANIM,
             "textures/block/mineralwaterbottle.png",
             "mineral_water_controller", "drink",
-            WATER_SOUNDS);
+            WATER_SOUNDS,
+            0.75, true);
 
     public static final DrinkAnimHandler MILK_BEER = register(
             "realisticdining", "milk_beer", 7.1667,
             CAN_GEO, CAN_ANIM, CAN_RAW_ANIM,
             "textures/block/milk_beer.png",
             "milk_beer_controller", "drink",
-            CAN_SOUNDS);
-
-    public static final DrinkAnimHandler CRISP = register(
-            "realisticdining", "crisp", 7.5,
-            CRISP_GEO, CRISP_ANIM, CRISP_RAW_ANIM,
-            "textures/block/chips_bag_texture.png",
-            "crisp_controller", "drink",
-            CRISP_SOUNDS);
+            CAN_SOUNDS,
+            0.75, true);
 
     public static final DrinkAnimHandler ENERGY_BAR = register(
             "realisticdining", "energy_bar", 5.0,
             ENERGY_BAR_GEO, ENERGY_BAR_ANIM, ENERGY_BAR_RAW_ANIM,
             "textures/block/energy_bar.png",
             "energy_bar_controller", "drink",
-            ENERGY_BAR_SOUNDS);
+            ENERGY_BAR_SOUNDS,
+            0.75, false);
 
-    // === 瓶装组（套用新瓶形动画 + WATER_SOUNDS） ===
+    // === 瓶装组（套用新瓶形动画 + WATER_SOUNDS，持物 0.5s 隐藏左臂） ===
     public static final DrinkAnimHandler PEACH_GRAPEFRUIT_TEA = register(
             "realisticdining", "peach_grapefruit_tea", 6.0,
             BOTTLED_DRINKS_GEO, BOTTLED_DRINKS_ANIM, BOTTLED_DRINKS_RAW_ANIM,
             "textures/item/peach_grapefruit_tea_64x64.png",
             "peach_grapefruit_tea_controller", "drink",
-            WATER_SOUNDS);
+            WATER_SOUNDS,
+            0.5, true);
 
     public static final DrinkAnimHandler SPORTS_DRINK = register(
             "realisticdining", "sports_drink", 6.0,
             BOTTLED_DRINKS_GEO, BOTTLED_DRINKS_ANIM, BOTTLED_DRINKS_RAW_ANIM,
             "textures/item/sports_drink_64x64.png",
             "sports_drink_controller", "drink",
-            WATER_SOUNDS);
+            WATER_SOUNDS,
+            0.5, true);
 
     public static final DrinkAnimHandler ICED_TEA = register(
             "realisticdining", "iced_tea", 6.0,
             BOTTLED_DRINKS_GEO, BOTTLED_DRINKS_ANIM, BOTTLED_DRINKS_RAW_ANIM,
             "textures/item/iced_tea_64x64.png",
             "iced_tea_controller", "drink",
-            WATER_SOUNDS);
+            WATER_SOUNDS,
+            0.5, true);
 
     public static final DrinkAnimHandler COCONUT_JUICE = register(
             "realisticdining", "coconut_juice", 6.0,
             BOTTLED_DRINKS_GEO, BOTTLED_DRINKS_ANIM, BOTTLED_DRINKS_RAW_ANIM,
             "textures/item/coconut_juice_64x64.png",
             "coconut_juice_controller", "drink",
-            WATER_SOUNDS);
+            WATER_SOUNDS,
+            0.5, true);
 
     public static final DrinkAnimHandler ORANGE_JUICE = register(
             "realisticdining", "orange_juice", 6.0,
             BOTTLED_DRINKS_GEO, BOTTLED_DRINKS_ANIM, BOTTLED_DRINKS_RAW_ANIM,
             "textures/item/orange_juice_64x64.png",
             "orange_juice_controller", "drink",
-            WATER_SOUNDS);
+            WATER_SOUNDS,
+            0.5, true);
 
-    // === 罐装组（套用罐装饮料动画 + CAN_SOUNDS） ===
+    // === 罐装组（套用罐装饮料动画 + CAN_SOUNDS，持物 0.75s 隐藏左臂） ===
     public static final DrinkAnimHandler SOYMILK = register(
             "realisticdining", "soymilk", 7.1667,
             CAN_GEO, CAN_ANIM, CAN_RAW_ANIM,
             "textures/item/soymilk_texture_64x64.png",
             "soymilk_controller", "drink",
-            CAN_SOUNDS);
+            CAN_SOUNDS,
+            0.75, true);
 
     public static final DrinkAnimHandler COLA = register(
             "realisticdining", "cola", 7.1667,
             CAN_GEO, CAN_ANIM, CAN_RAW_ANIM,
             "textures/item/cola_texture_64x64.png",
             "cola_controller", "drink",
-            CAN_SOUNDS);
+            CAN_SOUNDS,
+            0.75, true);
 
     public static final DrinkAnimHandler BEER = register(
             "realisticdining", "beer", 7.1667,
             CAN_GEO, CAN_ANIM, CAN_RAW_ANIM,
             "textures/item/beer_texture_64x64.png",
             "beer_controller", "drink",
-            CAN_SOUNDS);
+            CAN_SOUNDS,
+            0.75, true);
 
-    // === 薯片变体组（套用 crisp_1 动画 + CRISP_SOUNDS） ===
+    // === 薯片变体组（套用 crisp_1 动画 + CRISP_SOUNDS，持物 0.75s 隐藏左臂） ===
     public static final DrinkAnimHandler POTATO_CHIPS = register(
             "realisticdining", "potato_chips", 7.5,
             CRISP_1_GEO, CRISP_1_ANIM, CRISP_1_RAW_ANIM,
             "textures/item/potato_chips.png",
             "potato_chips_controller", "drink",
-            CRISP_SOUNDS);
+            CRISP_SOUNDS,
+            0.75, true);
 
     public static final DrinkAnimHandler POTATO_CHIPS_BBQ = register(
             "realisticdining", "potato_chips_bbq", 7.5,
             CRISP_1_GEO, CRISP_1_ANIM, CRISP_1_RAW_ANIM,
             "textures/item/potato_chips_bbq.png",
             "potato_chips_bbq_controller", "drink",
-            CRISP_SOUNDS);
+            CRISP_SOUNDS,
+            0.75, true);
 
     public static final DrinkAnimHandler POTATO_CHIPS_CUCUMBER = register(
             "realisticdining", "potato_chips_cucumber", 7.5,
             CRISP_1_GEO, CRISP_1_ANIM, CRISP_1_RAW_ANIM,
             "textures/item/potato_chips_cucumber.png",
             "potato_chips_cucumber_controller", "drink",
-            CRISP_SOUNDS);
+            CRISP_SOUNDS,
+            0.75, true);
 
     public static final DrinkAnimHandler POTATO_CHIPS_TOMATO = register(
             "realisticdining", "potato_chips_tomato", 7.5,
             CRISP_1_GEO, CRISP_1_ANIM, CRISP_1_RAW_ANIM,
             "textures/item/potato_chips_tomato.png",
             "potato_chips_tomato_controller", "drink",
-            CRISP_SOUNDS);
+            CRISP_SOUNDS,
+            0.75, true);
 
     public static final DrinkAnimHandler CRISPY_FISH_CHIPS = register(
             "realisticdining", "crispy_fish_chips", 7.5,
             CRISP_1_GEO, CRISP_1_ANIM, CRISP_1_RAW_ANIM,
             "textures/item/crispy_fish_chips.png",
             "crispy_fish_chips_controller", "drink",
-            CRISP_SOUNDS);
+            CRISP_SOUNDS,
+            0.75, true);
 
-    // === 饼干组（套用 biscuit 动画 + ENERGY_BAR_SOUNDS） ===
+    // === 饼干组（套用 biscuit 动画 + ENERGY_BAR_SOUNDS，持物 0.75s 不隐藏左臂） ===
     public static final DrinkAnimHandler COOKIE_BAG = register(
             "realisticdining", "cookie_bag", 5.0,
             BISCUIT_GEO, BISCUIT_ANIM, BISCUIT_RAW_ANIM,
             "textures/block/cookie_bag.png",
             "cookie_bag_controller", "drink",
-            ENERGY_BAR_SOUNDS);
+            ENERGY_BAR_SOUNDS,
+            0.75, false);
 
     public static final DrinkAnimHandler COOKIE_BAG_COCONUT_LATTE = register(
             "realisticdining", "cookie_bag_coconut_latte", 5.0,
             BISCUIT_GEO, BISCUIT_ANIM, BISCUIT_RAW_ANIM,
             "textures/block/cookie_bag_coconut_latte.png",
             "cookie_bag_coconut_latte_controller", "drink",
-            ENERGY_BAR_SOUNDS);
+            ENERGY_BAR_SOUNDS,
+            0.75, false);
+
+    // === 珍珠奶茶（独立 pickup + eat 双动画，holdDuration=0 走旧 pickup 路径，持物阶段隐藏左臂） ===
+    public static final DrinkAnimHandler PEARL_MILK_TEA = register(
+            "realisticdining", "pearl_milk_tea", 5.0833,
+            MILKTEA_GEO, MILKTEA_ANIM, MILKTEA_RAW_ANIM,
+            "textures/item/cooked_beef_milktea.png",
+            "pearl_milk_tea_controller", "drink",
+            MILKTEA_SOUNDS,
+            0, true);
+
+    static {
+        // 珍珠奶茶：配置独立 pickup 动画（0.5s，播完定格持物）；putdown 传 null（切物品瞬间消失）
+        registerPickup(PEARL_MILK_TEA, "pickup", 0.5, null, 0);
+    }
 
     // === 物品 → 饮料 id 绑定（供 U 键查询主手物品对应的动画） ===
     private static final Map<Supplier<Item>, String> ITEM_TO_DRINK = new HashMap<>();
@@ -243,7 +276,6 @@ public class DrinkAnimRegistry {
     static {
         bindItem(ModItems.MINERAL_WATER, "mineral_water");
         bindItem(ModItems.MILK_BEER, "milk_beer");
-        bindItem(ModItems.CRISP, "crisp");
         bindItem(ModItems.ENERGY_BAR, "energy_bar");
         // v2.0.6+ 新增物品绑定
         bindItem(ModItems.PEACH_GRAPEFRUIT_TEA, "peach_grapefruit_tea");
@@ -261,6 +293,7 @@ public class DrinkAnimRegistry {
         bindItem(ModItems.CRISPY_FISH_CHIPS, "crispy_fish_chips");
         bindItem(ModItems.COOKIE_BAG, "cookie_bag");
         bindItem(ModItems.COOKIE_BAG_COCONUT_LATTE, "cookie_bag_coconut_latte");
+        bindItem(ModItems.PEARL_MILK_TEA, "pearl_milk_tea");
     }
 
     /**
@@ -306,6 +339,24 @@ public class DrinkAnimRegistry {
     }
 
     /**
+     * v2.1.4+ 注册一个饮料动画 handler（带持物前缀 + 左臂隐藏配置，单贴图版本）。
+     *
+     * @param holdDuration  持物阶段时长（秒）；> 0 时启用持物前缀模式，物品进入主手时自动播放 drink 动画的
+     *                      0~holdDuration 秒并定格，U 键后从 holdDuration 继续播到结尾。传 0 走旧 IDLE↔DRINK 路径。
+     * @param hideLeftArm   持物阶段（PICKUP/HOLD）是否隐藏 Left Arm 骨骼
+     */
+    public static DrinkAnimHandler register(String modId, String id, double duration,
+                                              String geoPath, String animationPath, String rawAnimationName,
+                                              String texturePath,
+                                              String controllerName, String triggerName,
+                                              List<DrinkSoundCue> soundCues,
+                                              double holdDuration, boolean hideLeftArm) {
+        return register(modId, id, duration, geoPath, animationPath, rawAnimationName,
+                texturePath, controllerName, triggerName, soundCues, java.util.Collections.emptyMap(),
+                holdDuration, hideLeftArm);
+    }
+
+    /**
      * 注册一个饮料动画 handler（多贴图版本，单模型，向后兼容）。
      * 主模组传 modId = "realisticdining"；附属传自己的 mod id，
      * geo/animation/texture 资源会从附属自己的 namespace 下加载。
@@ -330,7 +381,25 @@ public class DrinkAnimRegistry {
         return register(modId, id, duration, geoPath, animationPath, rawAnimationName,
                 texturePath, controllerName, triggerName,
                 null, null, null, null, null, null,
-                soundCues, boneTextures, null);
+                soundCues, boneTextures, null,
+                0, false);
+    }
+
+    /**
+     * v2.1.4+ 注册一个饮料动画 handler（带持物前缀 + 左臂隐藏配置，多贴图版本）。
+     */
+    public static DrinkAnimHandler register(String modId, String id, double duration,
+                                              String geoPath, String animationPath, String rawAnimationName,
+                                              String texturePath,
+                                              String controllerName, String triggerName,
+                                              List<DrinkSoundCue> soundCues,
+                                              Map<String, String> boneTextures,
+                                              double holdDuration, boolean hideLeftArm) {
+        return register(modId, id, duration, geoPath, animationPath, rawAnimationName,
+                texturePath, controllerName, triggerName,
+                null, null, null, null, null, null,
+                soundCues, boneTextures, null,
+                holdDuration, hideLeftArm);
     }
 
     /**
@@ -383,12 +452,14 @@ public class DrinkAnimRegistry {
                                               String controllerName2, String triggerName2,
                                               List<DrinkSoundCue> soundCues,
                                               Map<String, String> boneTextures1,
-                                              Map<String, String> boneTextures2) {
+                                              Map<String, String> boneTextures2,
+                                              double holdDuration, boolean hideLeftArm) {
         DrinkAnimConfig cfg = new DrinkAnimConfig(modId, id, duration,
                 geoPath1, animationPath1, rawAnimationName1, texturePath1, controllerName1, triggerName1,
                 soundCues, boneTextures1,
                 geoPath2, animationPath2, rawAnimationName2, texturePath2, controllerName2, triggerName2,
-                boneTextures2);
+                boneTextures2,
+                holdDuration, hideLeftArm);
         DrinkAnimHandler handler = new DrinkAnimHandler(cfg);
         DRINKS.put(id, handler);
         return handler;

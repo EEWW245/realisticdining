@@ -2,6 +2,7 @@
 	"format_version": "1.8.0",
 	"animations": {
 		"animation.unknown.new": {
+			"loop": "hold_on_last_frame",
 			"animation_length": 7.5,
 			"bones": {
 				"Left Arm": {
@@ -56,11 +57,11 @@
 							"vector": [0, 0, 0]
 						},
 						"0.6667": {
-							"vector": [0.97, 11.06, -2.92],
+							"vector": [0.97, 1.06, -2.92],
 							"easing": "easeInElastic"
 						},
 						"1.0417": {
-							"vector": [0.67, 12.67, -2],
+							"vector": [0.67, 1.67, -2],
 							"easing": "easeInElastic"
 						},
 						"1.5": {

@@ -108,6 +108,12 @@ public class ModBlocks {
                     .strength(3.0f, 4.0f)
                     .noOcclusion()));
 
+    public static final RegistrySupplier<Block> SNACK_DISPLAY = BLOCKS.register("snack_display",
+            () -> new SnackDisplayBlock(BlockBehaviour.Properties.of()
+                    .strength(1.5f, 2.0f)
+                    .noOcclusion()
+                    .noCollission()));
+
     public static void init() {
         BLOCKS.register();
     }

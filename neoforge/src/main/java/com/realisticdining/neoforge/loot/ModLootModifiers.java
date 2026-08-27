@@ -17,6 +17,8 @@ public class ModLootModifiers {
                     GreenOnionSeedsModifier.CODEC);
             helper.register(ResourceLocation.fromNamespaceAndPath(RealisticDining.MOD_ID, "coriander_seeds_from_grass"),
                     CorianderSeedsModifier.CODEC);
+            helper.register(ResourceLocation.fromNamespaceAndPath(RealisticDining.MOD_ID, "add_snack"),
+                    AddSnackLootModifier.CODEC);
         });
     }
 }

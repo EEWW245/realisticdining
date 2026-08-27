@@ -41,8 +41,18 @@ public class PlatformHelper {
      * 客户端 → 服务端：饮料/零食动画播完后请求消耗物品。
      * @param drinkId 与 {@link com.realisticdining.common.DrinkItemMapping} 中登记的 drinkId 一致
      */
-    @ExpectPlatform
     public static void sendDrinkConsume(String drinkId) {
+        sendDrinkConsume(drinkId, false);
+    }
+
+    /**
+     * 客户端 → 服务端：饮料/零食动画状态同步。
+     * @param drinkId   与 {@link com.realisticdining.common.DrinkItemMapping} 中登记的 drinkId 一致
+     * @param startEating true=动画开始（pickup 触发），服务端仅标记 ServerEatingState；
+     *                    false=动画自然结束，服务端清状态并消耗物品
+     */
+    @ExpectPlatform
+    public static void sendDrinkConsume(String drinkId, boolean startEating) {
         throw new AssertionError();
     }
 

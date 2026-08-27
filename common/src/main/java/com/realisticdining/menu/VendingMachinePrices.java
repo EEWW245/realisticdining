@@ -11,7 +11,7 @@ import java.util.List;
  * - 其余饮料（含罐装）: 3 金粒
  * - 薯片类: 2 金粒
  * - 饼干类: 2 金粒
- * - crisp（脆片）/ energy_bar（能量棒）: 1 金粒
+ * - energy_bar（能量棒）: 1 金粒
  */
 public final class VendingMachinePrices {
 
@@ -30,9 +30,9 @@ public final class VendingMachinePrices {
         add("soymilk", 3);
         add("cola", 3);
         add("beer", 3);
+        add("pearl_milk_tea", 8);        // 珍珠奶茶：8 金粒
 
-        // === 零食（9 个） ===
-        add("crisp", 1);                 // 脆片
+        // === 零食（8 个） ===
         add("potato_chips", 2);
         add("potato_chips_bbq", 2);
         add("potato_chips_cucumber", 2);

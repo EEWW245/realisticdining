@@ -28,8 +28,8 @@ public class ModCreativeModeTabsFabric {
                     output.accept(new ItemStack(ModItems.SOYMILK.get()));
                     output.accept(new ItemStack(ModItems.COLA.get()));
                     output.accept(new ItemStack(ModItems.BEER.get()));
+                    output.accept(new ItemStack(ModItems.PEARL_MILK_TEA.get()));
                     // === 零食（9 个） ===
-                    output.accept(new ItemStack(ModItems.CRISP.get()));
                     output.accept(new ItemStack(ModItems.POTATO_CHIPS.get()));
                     output.accept(new ItemStack(ModItems.POTATO_CHIPS_BBQ.get()));
                     output.accept(new ItemStack(ModItems.POTATO_CHIPS_CUCUMBER.get()));

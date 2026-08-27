@@ -3,6 +3,7 @@ package com.realisticdining.registry;
 import com.realisticdining.RealisticDining;
 import com.realisticdining.blockentities.ChoppingBoardBlockEntity;
 import com.realisticdining.blockentities.FriedRiceEggBlockEntity;
+import com.realisticdining.blockentities.SnackDisplayBlockEntity;
 import com.realisticdining.blockentities.TomatoPoachedEggBlockEntity;
 import com.realisticdining.blockentities.WokBlockEntity;
 import com.realisticdining.blockentities.WokFriedEggBlockEntity;
@@ -32,6 +33,9 @@ public class ModBlockEntities {
 
     public static final RegistrySupplier<BlockEntityType<FriedRiceEggBlockEntity>> FRIED_RICE_EGG = BLOCK_ENTITIES.register("fried_rice_egg",
             () -> BlockEntityType.Builder.of(FriedRiceEggBlockEntity::new, ModBlocks.FRIED_RICE_EGG_BLOCK.get()).build(null));
+
+    public static final RegistrySupplier<BlockEntityType<SnackDisplayBlockEntity>> SNACK_DISPLAY = BLOCK_ENTITIES.register("snack_display",
+            () -> BlockEntityType.Builder.of(SnackDisplayBlockEntity::new, ModBlocks.SNACK_DISPLAY.get()).build(null));
 
     public static void init() {
         BLOCK_ENTITIES.register();

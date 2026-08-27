@@ -9,7 +9,10 @@
   "client": [
     "ItemInHandRendererMixin",
     "EpicFightRenderEngineMixin",
-    "FirstPersonModelLogicHandlerMixin"
+    "FirstPersonModelLogicHandlerMixin",
+    "PunchyCompatMixin",
+    "PackItemRendererMixin",
+    "ClientPackSourceMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -60,29 +60,24 @@ public class EatRiceGuideScreen extends AbstractContainerScreen<EatRiceGuideMenu
                 "=== 模组兼容性 ===",
                 List.of(
                         "进食动画已完成对以下模组的兼容：",
-                        "更真实的第一人称模型，史诗战斗。",
-                        "注意：fabric端对更真实的第一人称模型",
+                        "更真实的第一人称模型，史诗战斗，punchy，",
+                        "ysm（是，史蒂夫模型），",
+                        "Forge/NeoForge端的Hold My Items - Reforged",
+                        "注意：1.fabric端对更真实的第一人称模型",
                         "兼容效果不太好，可按按键绑定配置里的",
                         "更真实的第一人称模型切换第一人称按键。",
-                        "安装了改变手臂动画Punchy模组的，",
-                        "需要在按键绑定界面按对应按键",
-                        "打开punchy配置界面",
-                        "在Item Blacklist中",
-                        "搜索森罗物语的米饭，农夫乐事的米饭，",
-                        "和本模组的饮料和零食的id并禁用，",
-                        "才能触发进食动画。与Hold My Items不兼容。"
+                        "2.与fabric端Hold My Items 不兼容，与另一款",
+                        "Forge/NeoForge端的模组Hold My Items - ReFoxed不兼容"
                 )
         ));
 
         pages.add(new PageContent(
-                "=== 特别注意 ===",
+                "=== 装饰性 ===",
                 List.of(
-                        "与ysm模组手臂模形无法兼容，但是可以同时运行，",
-                        "也可以触发吃米饭的动画，",
-                        "但是就是本模组双手手臂和ysm的手臂无法同步，",
-                        "出现了视觉不太好的问题，",
-                        "你如果觉得那双手手臂不好看，可以更换更好看的原版史蒂夫皮肤，",
-                        "注意不是更换ysm的皮肤。"
+                        "可以把模组内的饮料、零食切换到右手，",
+                        "右键地面可放置展示3D模型，一个方块位置",
+                        "大小可放置的数量为4种任意饮料或零食。",
+                        "空手右键可以重新获得该物品。"
                 )
         ));
 

@@ -42,6 +42,9 @@ public class ModSounds {
     public static final RegistrySupplier<SoundEvent> DRINK_CAN_PULL_TAB = registerDrink("drink.can.pull_tab");
     public static final RegistrySupplier<SoundEvent> DRINK_CAN_GULP = registerDrink("drink.can.can_gulp");
     public static final RegistrySupplier<SoundEvent> DRINK_CAN_AHH = registerDrink("drink.can.can_ahh");
+    // 珍珠奶茶
+    public static final RegistrySupplier<SoundEvent> DRINK_MILKTEA_STRAW_INSERT = registerDrink("drink.milktea.straw_insert");
+    public static final RegistrySupplier<SoundEvent> DRINK_MILKTEA_GULP = registerDrink("drink.milktea.gulp");
 
     private static RegistrySupplier<SoundEvent> registerDrink(String path) {
         return SOUNDS.register(path,

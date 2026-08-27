@@ -1,0 +1,83 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "bone",
+					"pivot": [0, 0, 0],
+					"rotation": [-72.5, 0, 0]
+				},
+				{
+					"name": "Bottle",
+					"parent": "bone",
+					"pivot": [1.18741, -3.65732, -5.32077],
+					"rotation": [72.5, 0, 0]
+				},
+				{
+					"name": "Bottle2",
+					"parent": "Bottle",
+					"pivot": [3, 0.26619, -10.82077],
+					"cubes": [
+						{
+							"origin": [-2.12518, -7.58082, -1.32077],
+							"size": [3, 7, 3],
+							"uv": {
+								"north": {"uv": [20, 16], "uv_size": [24, 40]},
+								"east": {"uv": [20, 16], "uv_size": [24, 40]},
+								"south": {"uv": [44, 16], "uv_size": [-24, 40]},
+								"west": {"uv": [44, 16], "uv_size": [-24, 40]},
+								"up": {"uv": [34, 26], "uv_size": [-12, -12]},
+								"down": {"uv": [34, 60], "uv_size": [-12, -10]}
+							}
+						},
+						{
+							"origin": [-1.62518, -0.58082, -0.82077],
+							"size": [2, 1, 2],
+							"uv": {
+								"north": {"uv": [28, 10], "uv_size": [8, 6]},
+								"east": {"uv": [28, 10], "uv_size": [8, 6]},
+								"south": {"uv": [36, 10], "uv_size": [-8, 6]},
+								"west": {"uv": [36, 10], "uv_size": [-8, 6]},
+								"up": {"uv": [36, 14], "uv_size": [-8, -4]},
+								"down": {"uv": [36, 16], "uv_size": [-8, -4]}
+							}
+						}
+					]
+				},
+				{
+					"name": "BottleCap",
+					"parent": "Bottle",
+					"pivot": [-0.62518, -7.58082, 0.17923]
+				},
+				{
+					"name": "BottleCap2",
+					"parent": "BottleCap",
+					"pivot": [-6.62518, 2.41918, 1.17923],
+					"cubes": [
+						{
+							"origin": [-1.87518, 0.41918, -1.07077],
+							"size": [2.5, 1.5, 2.5],
+							"uv": {
+								"north": {"uv": [26, 4], "uv_size": [12, 6]},
+								"east": {"uv": [26, 4], "uv_size": [12, 6]},
+								"south": {"uv": [38, 4], "uv_size": [-12, 6]},
+								"west": {"uv": [38, 4], "uv_size": [-12, 6]},
+								"up": {"uv": [36, 10], "uv_size": [-8, -6]},
+								"down": {"uv": [36, 10], "uv_size": [-8, -6]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

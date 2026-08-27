@@ -3,6 +3,7 @@ package com.realisticdining.fabric.client.arm;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.realisticdining.RealisticDining;
+import com.realisticdining.fabric.client.arm.VanillaArmRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -11,18 +12,28 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;
-import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoObjectRenderer;
+import software.bernie.geckolib.util.RenderUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+/**
+ * 吃米饭左臂渲染器（v2.2.0+ 原版手臂版，MC 1.21.1）。
+ *
+ * <p>"Left Arm" 骨骼不再渲染自定义 cube，改为捕获矩阵后置渲染原版玩家手臂
+ * （参照 TaCZ 方案，见 {@link VanillaArmRenderer}）。
+ * 米饭/碗等其他骨骼照常贴图路由渲染。
+ */
 public class LeftArmRenderer extends GeoObjectRenderer<GeoAnimatable> {
 
     private static final Vector3f XP = new Vector3f(1, 0, 0);
@@ -36,8 +47,11 @@ public class LeftArmRenderer extends GeoObjectRenderer<GeoAnimatable> {
         TEXTURE_GROUPS.put("rice", ResourceLocation.fromNamespaceAndPath(RealisticDining.MOD_ID, "textures/item/white_rice.png"));
     }
 
+    /** fallback 贴图（非手臂、非米饭的未识别骨骼走玩家皮肤，保持旧行为）。 */
     private ResourceLocation playerSkinTexture = null;
-    private int currentPackedLight = 15728880;
+
+    /** 本次渲染 pass 捕获的手臂矩阵（模型 pass 后渲染原版手臂）。 */
+    private final List<VanillaArmRenderer.CapturedArm> capturedArms = new ArrayList<>();
 
     public LeftArmRenderer(GeoModel<GeoAnimatable> model) {
         super(model);
@@ -49,7 +63,7 @@ public class LeftArmRenderer extends GeoObjectRenderer<GeoAnimatable> {
         if (player == null || mc.level == null) {
             return 15728880;
         }
-        BlockPos blockPos = BlockPos.containing(player.getX(), player.getEyeY(), player.getZ());
+        BlockPos blockPos = new BlockPos((int) Math.floor(player.getX()), (int) Math.floor(player.getEyeY()), (int) Math.floor(player.getZ()));
         return LevelRenderer.getLightColor(mc.level, blockPos);
     }
 
@@ -61,8 +75,15 @@ public class LeftArmRenderer extends GeoObjectRenderer<GeoAnimatable> {
     public void renderLeftArm(PoseStack poseStack, GeoAnimatable animatable, MultiBufferSource bufferSource,
                                int packedLight, float partialTick) {
         updatePlayerSkin();
-        currentPackedLight = getPackedLightAtPlayer();
-        render(poseStack, animatable, bufferSource, null, null, currentPackedLight, partialTick);
+        int currentPackedLight = getPackedLightAtPlayer();
+        this.animatable = animatable;
+
+        capturedArms.clear();
+        defaultRender(poseStack, animatable, bufferSource, null, null, 0, partialTick, currentPackedLight);
+
+        // 模型 pass 完成：渲染原版左臂（自动玩家皮肤）
+        VanillaArmRenderer.renderCapturedArms(capturedArms, bufferSource, currentPackedLight);
+        capturedArms.clear();
     }
 
     private void updatePlayerSkin() {
@@ -70,61 +91,73 @@ public class LeftArmRenderer extends GeoObjectRenderer<GeoAnimatable> {
         if (mc.player != null) {
             playerSkinTexture = mc.player.getSkin().texture();
         } else {
-            playerSkinTexture = ResourceLocation.withDefaultNamespace("textures/entity/player/wide/steve.png");
+            playerSkinTexture = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/player/wide/steve.png");
         }
     }
 
-    @Override
-    public void render(PoseStack poseStack, GeoAnimatable animatable, @Nullable MultiBufferSource bufferSource, @Nullable RenderType renderType,
-                       @Nullable VertexConsumer buffer, int packedLight, float partialTick) {
-        this.animatable = animatable;
 
-        if (bufferSource == null)
-            bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-
-        defaultRender(poseStack, animatable, bufferSource, renderType, buffer, 0, partialTick, packedLight);
-    }
-
+    /**
+     * v2.2.0+ 重写递归渲染（参照 TaCZ 结构）：
+     * "Left Arm" 骨骼捕获矩阵不渲染 cube；米饭/碗等其他骨骼贴图路由正常渲染。
+     */
     @Override
     public void renderRecursively(PoseStack poseStack, GeoAnimatable animatable, GeoBone bone, RenderType renderType,
-                                   MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, 
-                                   float partialTick, int packedLight, int packedOverlay, int color) {
-        ResourceLocation texture = getTextureForBone(bone);
-        if (texture != null && bufferSource != null) {
-            RenderType newRenderType = RenderType.entityCutoutNoCull(texture);
-            VertexConsumer newBuffer = bufferSource.getBuffer(newRenderType);
-            super.renderRecursively(poseStack, animatable, bone, newRenderType, bufferSource, newBuffer, isReRender, partialTick, packedLight, packedOverlay, color);
+                                   MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender,
+                                   float partialTick, int packedLight, int packedOverlay, int colour) {
+        poseStack.pushPose();
+        RenderUtil.prepMatrixForBone(poseStack, bone);
+
+        boolean armBone = "Left Arm".equals(bone.getName()) && VanillaArmRenderer.isArmBone(bone);
+
+        if (armBone) {
+            // 手臂锚点骨骼：跳过自定义 cube 渲染，捕获矩阵供模型 pass 后渲染原版手臂
+            if (!isReRender) {
+                VanillaArmRenderer.CapturedArm capturedArm =
+                        VanillaArmRenderer.captureArmPose(poseStack, bone);
+                if (capturedArm != null) {
+                    capturedArms.add(capturedArm);
+                }
+            }
         } else {
-            super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, color);
+            ResourceLocation texture = getTextureForBone(bone);
+            VertexConsumer boneBuffer = buffer;
+            if (texture != null && bufferSource != null) {
+                boneBuffer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(texture));
+            }
+            renderCubesOfBone(poseStack, bone, boneBuffer, packedLight, packedOverlay, colour);
         }
+
+        renderChildBones(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
+        poseStack.popPose();
     }
 
     private ResourceLocation getTextureForBone(GeoBone bone) {
         String boneName = bone.getName();
-        
+
         if (boneName.equals("Left Arm")) {
-            return playerSkinTexture;
+            // 手臂骨骼已改为原版手臂渲染，不在此渲染自定义 cube
+            return null;
         }
-        
+
         if (boneName.equals("oak_planks")) {
             return OAK_PLANKS_TEXTURE;
         }
-        
+
         ResourceLocation direct = TEXTURE_GROUPS.get(boneName);
         if (direct != null) {
             return direct;
         }
-        
+
         if (boneName.startsWith("white_rice")) {
             return TEXTURE_GROUPS.get("white_rice");
         }
-        
+
         return playerSkinTexture;
     }
 
     @Override
-    public void preRender(PoseStack poseStack, GeoAnimatable animatable, software.bernie.geckolib.cache.object.BakedGeoModel model,
-                          @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer,
+    public void preRender(PoseStack poseStack, GeoAnimatable animatable, BakedGeoModel model,
+                          MultiBufferSource bufferSource, VertexConsumer buffer,
                           boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
         if (!isReRender) {
             applyFirstPersonTransforms(poseStack, partialTick);
@@ -162,7 +195,7 @@ public class LeftArmRenderer extends GeoObjectRenderer<GeoAnimatable> {
 
     @Override
     public RenderType getRenderType(GeoAnimatable animatable, ResourceLocation texture,
-                                    @Nullable MultiBufferSource bufferSource, float partialTick) {
+                                    MultiBufferSource bufferSource, float partialTick) {
         return RenderType.entityCutoutNoCull(texture);
     }
 }

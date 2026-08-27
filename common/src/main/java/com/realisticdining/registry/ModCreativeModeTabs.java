@@ -19,7 +19,6 @@ public class ModCreativeModeTabs {
                     .displayItems((params, output) -> {
                         output.accept(ModItems.MINERAL_WATER.get());
                         output.accept(ModItems.MILK_BEER.get());
-                        output.accept(ModItems.CRISP.get());
                         output.accept(ModItems.ENERGY_BAR.get());
                         output.accept(ModItems.PEACH_GRAPEFRUIT_TEA.get());
                         output.accept(ModItems.SPORTS_DRINK.get());
@@ -36,6 +35,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CRISPY_FISH_CHIPS.get());
                         output.accept(ModItems.COOKIE_BAG.get());
                         output.accept(ModItems.COOKIE_BAG_COCONUT_LATTE.get());
+                        output.accept(ModItems.PEARL_MILK_TEA.get());
                         output.accept(ModItems.GREEN_ONION.get());
                         output.accept(ModItems.GREEN_ONION_SEEDS.get());
                         output.accept(ModItems.CORIANDER.get());

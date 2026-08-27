@@ -127,7 +127,6 @@
 
   "item.realisticdining.mineral_water": "Mineral Water",
   "item.realisticdining.milk_beer": "Milk Beer",
-  "item.realisticdining.crisp": "Crisps",
   "item.realisticdining.energy_bar": "Energy Bar",
   "item.realisticdining.peach_grapefruit_tea": "Peach Grapefruit Tea",
   "item.realisticdining.sports_drink": "Sports Drink",
@@ -144,10 +143,18 @@
   "item.realisticdining.crispy_fish_chips": "Crispy Fish Chips",
   "item.realisticdining.cookie_bag": "Cookie Bag",
   "item.realisticdining.cookie_bag_coconut_latte": "Cookie Bag (Coconut Latte)",
+  "item.realisticdining.pearl_milk_tea": "Pearl Milk Tea",
 
   "block.realisticdining.vending_machine": "Vending Machine",
   "gui.realisticdining.vending_machine.close": "Close",
+  "tooltip.realisticdining.snack_place_hint": "Right-click with main hand to place model",
+  "tooltip.realisticdining.cure_negative_buff": "Cures negative effects",
+  "effect.realisticdining.tipsy": "Tipsy",
+  "effect.realisticdining.drunk": "Drunk",
+  "effect.realisticdining.wasted": "Wasted",
+  "tooltip.realisticdining.beer_drink_hint": "Drink 2 in a row: Tipsy; 4: Drunk; 6+: Wasted",
   "gui.realisticdining.vending_machine.insufficient_funds": "Not enough gold nuggets!",
   "gui.realisticdining.vending_machine.out_of_stock": "Out of stock",
-  "gui.realisticdining.vending_machine.subtitle": "(Each item can be purchased up to 6 times, restocked the next day)"
+  "gui.realisticdining.vending_machine.subtitle": "(Each item can be purchased up to 6 times, restocked the next day)",
+  "block.realisticdining.snack_display": "Snack Display"
 }

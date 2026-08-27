@@ -2,6 +2,7 @@ package com.realisticdining.neoforge.client;
 
 import com.realisticdining.RealisticDining;
 import com.realisticdining.neoforge.client.renderer.FriedRiceEggRenderer;
+import com.realisticdining.neoforge.client.renderer.SnackDisplayRenderer;
 import com.realisticdining.neoforge.client.renderer.TomatoPoachedEggRenderer;
 import com.realisticdining.neoforge.client.renderer.WokFriedEggRenderer;
 import com.realisticdining.neoforge.client.renderer.WokYellowSteakRenderer;
@@ -21,5 +22,6 @@ public class NeoForgeClientSetup {
         BlockEntityRenderers.register(ModBlockEntities.WOK_FRIED_EGG.get(), WokFriedEggRenderer::new);
         BlockEntityRenderers.register(ModBlockEntities.TOMATO_POACHED_EGG.get(), TomatoPoachedEggRenderer::new);
         BlockEntityRenderers.register(ModBlockEntities.FRIED_RICE_EGG.get(), FriedRiceEggRenderer::new);
+        BlockEntityRenderers.register(ModBlockEntities.SNACK_DISPLAY.get(), SnackDisplayRenderer::new);
     }
 }

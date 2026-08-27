@@ -1,0 +1,157 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bone",
+					"pivot": [5, 5, 4]
+				},
+				{
+					"name": "bar wrapper",
+					"parent": "bone",
+					"pivot": [4, 1.2, 0],
+					"rotation": [0, -90, 90],
+					"cubes": [
+						{
+							"origin": [1, -5.92232, -1.21691],
+							"size": [4, 3.5, 1.6],
+							"uv": {
+								"north": {"uv": [11, 11], "uv_size": [42, 15]},
+								"east": {"uv": [28, 13], "uv_size": [-13, 15]},
+								"south": {"uv": [11, 11], "uv_size": [42, 15]},
+								"west": {"uv": [42, 27], "uv_size": [10, 11]},
+								"up": {"uv": [29, 34], "uv_size": [4, 1]},
+								"down": {"uv": [33, 51], "uv_size": [17, -2]}
+							}
+						}
+					]
+				},
+				{
+					"name": "bar_wrapper2",
+					"parent": "bar wrapper",
+					"pivot": [3.98, 0.78768, -0.50691]
+				},
+				{
+					"name": "tear tab",
+					"parent": "bar wrapper",
+					"pivot": [4, 2.57768, -0.71691],
+					"cubes": [
+						{
+							"origin": [1, -2.42232, 0.28309],
+							"size": [4, 3.1, 0.1],
+							"uv": {
+								"north": {"uv": [39, 18], "uv_size": [2, 3]},
+								"east": {"uv": [39, 18], "uv_size": [0, 3]},
+								"south": {"uv": [9, 15], "uv_size": [45, 37]},
+								"west": {"uv": [41, 18], "uv_size": [0, 3]},
+								"up": {"uv": [39, 18], "uv_size": [2, 0]},
+								"down": {"uv": [41, 18], "uv_size": [2, 0]}
+							}
+						},
+						{
+							"origin": [1.1, -2.42232, -1.21691],
+							"size": [0, 3, 1.5],
+							"uv": {
+								"north": {"uv": [39, 18], "uv_size": [2, 3]},
+								"east": {"uv": [39, 18], "uv_size": [0, 3]},
+								"south": {"uv": [34, 18], "uv_size": [9, 9]},
+								"west": {"uv": [41, 18], "uv_size": [0, 3]},
+								"up": {"uv": [39, 18], "uv_size": [2, 0]},
+								"down": {"uv": [41, 18], "uv_size": [2, 0]}
+							}
+						},
+						{
+							"origin": [5, -2.42232, -1.21691],
+							"size": [0, 3, 1.5],
+							"uv": {
+								"north": {"uv": [39, 18], "uv_size": [2, 3]},
+								"east": {"uv": [39, 18], "uv_size": [0, 3]},
+								"south": {"uv": [14, 18], "uv_size": [29, 9]},
+								"west": {"uv": [41, 18], "uv_size": [0, 3]},
+								"up": {"uv": [39, 18], "uv_size": [2, 0]},
+								"down": {"uv": [41, 18], "uv_size": [2, 0]}
+							}
+						},
+						{
+							"origin": [1, -2.42232, -1.31691],
+							"size": [4, 3, 0.1],
+							"uv": {
+								"north": {"uv": [10, 11], "uv_size": [45, 15]},
+								"east": {"uv": [38, 10], "uv_size": [0, 3]},
+								"south": {"uv": [42, 10], "uv_size": [4, 3]},
+								"west": {"uv": [42, 10], "uv_size": [0, 3]},
+								"up": {"uv": [38, 10], "uv_size": [4, 0]},
+								"down": {"uv": [42, 10], "uv_size": [4, 0]}
+							}
+						},
+						{
+							"origin": [3, 0.57768, -0.61691],
+							"size": [2, 0.4, 0.3],
+							"uv": {
+								"north": {"uv": [38, 5], "uv_size": [4, -1]},
+								"east": {"uv": [38, 8], "uv_size": [0, 0]},
+								"south": {"uv": [24, 6], "uv_size": [22, -2]},
+								"west": {"uv": [42, 5], "uv_size": [-11, -1]},
+								"up": {"uv": [38, 4], "uv_size": [4, 1]},
+								"down": {"uv": [42, 8], "uv_size": [4, 0]}
+							}
+						},
+						{
+							"origin": [1, 0.57768, -0.61691],
+							"size": [2, 0.4, 0.3],
+							"uv": {
+								"north": {"uv": [40, 5], "uv_size": [-9, 0]},
+								"east": {"uv": [40, 5], "uv_size": [-23, -1]},
+								"south": {"uv": [41, 4], "uv_size": [3, 1]},
+								"west": {"uv": [42, 10], "uv_size": [0, 0]},
+								"up": {"uv": [40, 5], "uv_size": [3, 0]},
+								"down": {"uv": [42, 10], "uv_size": [2, 0]}
+							}
+						},
+						{
+							"origin": [1, 0.57768, -1.31691],
+							"size": [4, 0.1, 1.6],
+							"uv": {
+								"north": {"uv": [39, 11], "uv_size": [4, 0]},
+								"east": {"uv": [38, 11], "uv_size": [1, 0]},
+								"south": {"uv": [44, 11], "uv_size": [4, 0]},
+								"west": {"uv": [43, 11], "uv_size": [1, 0]},
+								"up": {"uv": [39, 10], "uv_size": [4, 1]},
+								"down": {"uv": [43, 11], "uv_size": [4, -1]}
+							}
+						},
+						{"origin": [3, 0.57768, -1.31691], "size": [2, 0.1, 1.6], "uv": [40, 10]}
+					]
+				},
+				{
+					"name": "energy bar",
+					"parent": "bar wrapper",
+					"pivot": [3.5, -0.42232, -1.01691],
+					"cubes": [
+						{
+							"origin": [1.5, -5.42232, -1.01691],
+							"size": [3, 5.8, 1],
+							"uv": {
+								"north": {"uv": [29, 35], "uv_size": [3, 5]},
+								"east": {"uv": [28, 35], "uv_size": [1, 5]},
+								"south": {"uv": [33, 35], "uv_size": [3, 5]},
+								"west": {"uv": [32, 35], "uv_size": [1, 5]},
+								"up": {"uv": [29, 34], "uv_size": [3, 1]},
+								"down": {"uv": [32, 35], "uv_size": [3, -1]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

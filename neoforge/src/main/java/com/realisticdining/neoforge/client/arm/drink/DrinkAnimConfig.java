@@ -45,7 +45,13 @@ public record DrinkAnimConfig(
         String texturePath2,
         String controllerName2,
         String triggerName2,
-        Map<String, String> boneTextures2
+        Map<String, String> boneTextures2,
+        // === v2.1.4+ 持物前缀模式 ===
+        // holdDuration > 0 时启用：物品进入主手时自动播放 drink 动画的 0~holdDuration 秒并定格（HOLD 态），
+        // U 键触发后从 holdDuration 继续播放到结尾。无需独立的 pickup 动画文件。
+        double holdDuration,
+        // 持物阶段（PICKUP/HOLD）是否隐藏 Left Arm 骨骼（瓶装/罐装/薯片等需要隐藏左臂的物品传 true）。
+        boolean hideLeftArm
 ) {
     /** 由各 Handler 自己持有 ResourceLocation，避免每次渲染重复构造。 */
     public ResourceLocation textureResource() {
