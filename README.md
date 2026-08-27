@@ -12,8 +12,6 @@ A mod that greatly enhances the Minecraft dining experience: from chopping, stir
 **Optional integrations (recommended)**:
 - **[Kaleidoscope Cookery](https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-cookery)** (森罗物语厨房)
 - **LegendarySurvivalOverhaul**: drinking also replenishes thirst when installed.
-- **FirstPersonModel / Hold My Items / Punchy**: compatibility handled.
-
 ---
 
 ## Resource Pack Extension (Custom 3D Food Animations)
