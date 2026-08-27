@@ -68,7 +68,8 @@ The number of sub-animations in an animation file depends on `mode`:
 
 - Animation names: `eat`; in `pickup` mode use `pickup` and `eat`.
 
-Press **U** to play the eating animation. See the two example resource packs in this repository.
+Press **U** to play the eating animation.
+See the two example resource packs in this repository.
 
 ---
 
