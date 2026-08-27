@@ -7,7 +7,7 @@ A mod that greatly enhances the Minecraft dining experience: from chopping, stir
 ## Installation & Dependencies
 
 1. Install the loader for your Minecraft version (Fabric / Forge / NeoForge);
-2. Install **GeckoLib** (animation engine, required). The 1.21.1 build also uses the **Architectury API** (bundled in the jar, no separate install needed).
+2. Install **GeckoLib** (animation engine, required). The 1.21.1 build also uses the **Architectury API** .
 
 **Optional integrations (recommended)**:
 - **[Kaleidoscope Cookery](https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-cookery)** (森罗物语厨房)
