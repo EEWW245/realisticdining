@@ -7,17 +7,15 @@ A mod that greatly enhances the Minecraft dining experience: from chopping, stir
 ## Installation & Dependencies
 
 1. Install the loader for your Minecraft version (Fabric / Forge / NeoForge);
-2. Install **GeckoLib** (animation engine, required). The 1.21.1 build also uses the **Architectury API** (bundled in the jar, no separate install needed).
+2. Install **GeckoLib** (animation engine, required). The 1.21.1 build also uses the **Architectury API** .
 
 **Optional integrations (recommended)**:
 - **[Kaleidoscope Cookery](https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-cookery)** (森罗物语厨房)
 - **LegendarySurvivalOverhaul**: drinking also replenishes thirst when installed.
-- **FirstPersonModel / Hold My Items / Punchy**: compatibility handled.
-
 ---
 
 ## Resource Pack Extension (Custom 3D Food Animations)
-
+See the two example resource packs in this repository.
 A food extension consists of a definition, model, animation, texture and sounds:
 
 ```text
@@ -70,7 +68,8 @@ The number of sub-animations in an animation file depends on `mode`:
 
 - Animation names: `eat`; in `pickup` mode use `pickup` and `eat`.
 
-Press **U** to play the eating animation. See the two example resource packs in this repository.
+Press **U** to play the eating animation.
+
 
 ---
 
