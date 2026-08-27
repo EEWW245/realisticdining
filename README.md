@@ -67,7 +67,7 @@ The number of sub-animations in an animation file depends on `mode`:
 | `pickup` | 2: `pickup` + `eat` | `pickup` picks up to the holding pose, press U to play `eat` |
 
 - Animation names: "eat"; in "pickup" mode use "pickup"and "eat".
-- At the end of the animation, add an Animation Effects → Instructions → Script entry named finished in the timeline
+- At the end of the animation, add an Animation Effects → Instructions → Script entry named" finished " in the timeline
 
 Press **U** to play the eating animation.
 
