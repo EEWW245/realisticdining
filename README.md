@@ -46,7 +46,7 @@ assets/realisticdining/
 ```
 
 - `item`: the item ID to override rendering for; items from any mod are supported.
-- `mode`: holding mode. "static",shows the model immediately on pickup with procedural sway; "pickup" ,automatically plays a "pick up" animation on pickup and holds the final pose.
+- `mode`: holding mode. "static",shows the model immediately on pickup with procedural sway; "pickup",automatically plays a "pick up" animation on pickup and holds the final pose.
 - `invisible`: bone names hidden during the idle (holding) stage. Hiding a parent bone also hides its children; they reappear during the eating animation.
 - `sounds`: maps animation sound keyframe names to game sound IDs. `realisticdining:eat` maps to `realisticdining/sounds/eat.ogg`.
 
