@@ -15,7 +15,7 @@ A mod that greatly enhances the Minecraft dining experience: from chopping, stir
 ---
 
 ## Resource Pack Extension (Custom 3D Food Animations)
-
+See the two example resource packs in this repository.
 A food extension consists of a definition, model, animation, texture and sounds:
 
 ```text
@@ -69,7 +69,7 @@ The number of sub-animations in an animation file depends on `mode`:
 - Animation names: `eat`; in `pickup` mode use `pickup` and `eat`.
 
 Press **U** to play the eating animation.
-See the two example resource packs in this repository.
+
 
 ---
 
