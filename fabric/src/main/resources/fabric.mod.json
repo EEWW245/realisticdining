@@ -24,7 +24,8 @@
         "geckolib": ">=4.0.0"
     },
     "suggests": {
-        "kaleidoscope_cookery": "*"
+        "kaleidoscope_cookery": "*",
+        "holdmyitems": "*"
     },
     "custom": {
         "modmenu": {

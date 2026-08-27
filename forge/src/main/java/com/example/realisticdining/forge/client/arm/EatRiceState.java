@@ -6,6 +6,9 @@ public class EatRiceState {
 
     public static final int TOTAL_BITES = 9;
     private static final double[] ANIMATION_LENGTHS = {1.3545, 1.3823, 1.2935, 1.3218, 1.3554, 1.316, 1.3083, 1.3889, 1.7641};
+    /** v2.x 动画结束判定缓冲（秒）：抵消 GeckoLib triggerAnim 起播延迟，
+     * 让右手筷子动画真正播到"回位"帧才切换渲染，消除低帧率下"饭粒停在嘴边"的定格。 */
+    private static final double END_BUFFER_SECONDS = 0.15;
 
     private int currentBiteIndex = 0;
     private double animationStartTime = -1;
@@ -99,7 +102,7 @@ public class EatRiceState {
             double elapsed = (currentGameTime - animationStartTime) / 20.0;
             double animLength = ANIMATION_LENGTHS[currentBiteIndex];
             
-            if (elapsed >= animLength) {
+            if (elapsed >= animLength + END_BUFFER_SECONDS) {
                 currentBiteIndex++;
                 animationStartTime = -1;
                 isAnimationPlaying = false;

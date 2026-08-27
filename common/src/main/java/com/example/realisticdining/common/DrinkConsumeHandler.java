@@ -2,9 +2,14 @@ package com.example.realisticdining.common;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 饮料/零食消耗服务端处理（1.20.1 版本，使用 ItemStack NBT）。
@@ -42,10 +47,32 @@ public final class DrinkConsumeHandler {
             player.getFoodData().eat(entry.nutrition(), entry.saturation());
         }
 
-        // 3. 施加 buff
+        // 3. 清除一切负面效果（奶啤酒/豆浆，v2.2.5：类似原版牛奶但只清负面、保留正面）
+        //    放在施加 buff 之前，饮料自身的正面 buff 不受影响
+        if (entry.clearHarmful()) {
+            List<MobEffect> harmful = new ArrayList<>();
+            for (MobEffectInstance instance : player.getActiveEffects()) {
+                if (instance.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
+                    harmful.add(instance.getEffect());
+                }
+            }
+            for (MobEffect effect : harmful) {
+                player.removeEffect(effect);
+            }
+        }
+
+        // 4. 施加 buff
         for (DrinkConsumeConfig.EffectSpec spec : entry.effects()) {
             player.addEffect(new MobEffectInstance(spec.effect(), spec.duration(), spec.amplifier()));
         }
+
+        // 5. 啤酒特殊：累积计数 + 醉酒 Buff（2 瓶微醺/4 瓶中度/6+ 瓶重度）
+        if ("beer".equals(drinkId)) {
+            BeerDrinkTracker.onBeerDrunk(player);
+        }
+
+        // 6. LegendarySurvivalOverhaul 联动：补充水分（饮料/零食统一补水，米饭等主食跳过）
+        LSOCompat.applyThirstByDrink(player, drinkId, entry.maxUses());
     }
 
     /** 遍历主物品栏 + 副手，返回第一个匹配 drinkId 的物品堆栈。 */

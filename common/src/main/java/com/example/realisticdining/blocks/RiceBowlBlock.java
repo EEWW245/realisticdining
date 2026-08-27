@@ -3,8 +3,6 @@ package com.example.realisticdining.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -40,10 +38,6 @@ public class RiceBowlBlock extends Block {
         Shapes.box(5.0/16.0, 4.0/16.0, 5.0/16.0, 11.0/16.0, 7.0/16.0, 11.0/16.0)
     );
     
-    private static final int TICKS_PER_BITE = 240;
-    private static final int FINISH_BONUS_TICKS = 1200;
-    private static final int MAX_DURATION = 3600;
-
     public RiceBowlBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(BITES, 0).setValue(HAS_CHOPSTICKS, false));
@@ -111,7 +105,7 @@ public class RiceBowlBlock extends Block {
                     level.setBlock(pos, state.setValue(BITES, newBites), 3);
                     level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
                     
-                    applyBuff(player, newBites == 15);
+                    applyBite(player);
                     
                     ItemStack riceOnChopsticks = new ItemStack(ModItems.CHOPSTICKS_RICE.get());
                     player.setItemInHand(hand, riceOnChopsticks);
@@ -123,18 +117,13 @@ public class RiceBowlBlock extends Block {
         return InteractionResult.PASS;
     }
     
-    private void applyBuff(Player player, boolean isFinished) {
-        int duration = TICKS_PER_BITE;
-        if (isFinished) {
-            duration += FINISH_BONUS_TICKS;
-        }
-        
-        MobEffectInstance currentEffect = player.getEffect(MobEffects.SATURATION);
-        if (currentEffect != null) {
-            duration = Math.min(duration + currentEffect.getDuration(), MAX_DURATION);
-        }
-        
-        player.addEffect(new MobEffectInstance(MobEffects.SATURATION, duration, 0, true, true));
+    /**
+     * 每咬一口恢复 1 点饱食度（v2.2.5）。
+     * 原 SATURATION 药水效果会瞬间拉满饱食度与饱和度，一咬全满不合理；
+     * 改为直接走 FoodData：每口 +1 food + 0.2 饱和度，整碗 16 口吃完。
+     */
+    private void applyBite(Player player) {
+        player.getFoodData().eat(1, 0.2f);
     }
 
     @Override

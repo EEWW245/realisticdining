@@ -70,7 +70,8 @@ public class DrinkAnimAnimatable implements SingletonGeoAnimatable {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, controllerName, 0, state -> PlayState.CONTINUE)
+        // v2.1.6+ 用 SeekableAnimationController 支持持物前缀模式的"冻结在指定帧/解冻续播"
+        controllers.add(new SeekableAnimationController<>(this, controllerName, 0, state -> PlayState.CONTINUE)
                 .triggerableAnim(triggerName,
                         RawAnimation.begin().thenPlay(rawAnimationName)));
     }
@@ -134,11 +135,53 @@ public class DrinkAnimAnimatable implements SingletonGeoAnimatable {
         triggerAnimInternal(PUTDOWN_TRIGGER);
     }
 
+    /**
+     * v2.1.6+ 冻结动画在指定秒数处（持物前缀模式 HOLD 态定格）。
+     * @param holdSeconds 动画位置（秒），如 0.75 表示定格在 0.75 秒帧
+     */
+    public void freezeAtHold(double holdSeconds) {
+        SeekableAnimationController<?> seekable = seekableController();
+        if (seekable != null) {
+            seekable.freezeAt(holdSeconds * 20.0);
+        }
+    }
+
+    /** v2.1.6+ 解冻：动画从冻结帧无缝继续播到结尾（U 键触发 DRINK 时调用）。 */
+    public void unfreezeAnimation() {
+        SeekableAnimationController<?> seekable = seekableController();
+        if (seekable != null) {
+            seekable.unfreeze();
+        }
+    }
+
+    /** v2.1.7+ 彻底重置 controller：清冻结 + 清所有残留状态（替代 forceAnimationReset + stop）。 */
+    public void resetAnimationState() {
+        SeekableAnimationController<?> seekable = seekableController();
+        if (seekable != null) {
+            seekable.fullReset();
+        }
+    }
+
+    /** 获取本 animatable 的 SeekableAnimationController（可能为 null 或类型不符）。 */
+    private SeekableAnimationController<?> seekableController() {
+        AnimatableManager<?> manager = this.cache.getManagerForId(INSTANCE_ID);
+        if (manager == null) return null;
+        AnimationController<?> controller = manager.getAnimationControllers().get(controllerName);
+        if (controller instanceof SeekableAnimationController<?> seekable) {
+            return seekable;
+        }
+        return null;
+    }
+
     private void triggerAnimInternal(String animTriggerName) {
         AnimatableManager<?> manager = this.cache.getManagerForId(INSTANCE_ID);
         if (manager == null) return;
         AnimationController<?> controller = manager.getAnimationControllers().get(controllerName);
-        if (controller != null) {
+        if (controller instanceof SeekableAnimationController<?> seekable) {
+            // v2.1.7+ 触发新动画前彻底清空 controller 残留（含冻结、triggeredAnimation 等），
+            // 确保 setAnimation 走重建队列分支从头播放，而不是走 stop() 分支只播 1 帧
+            seekable.fullReset();
+        } else if (controller != null) {
             controller.forceAnimationReset();
             controller.stop();
         }

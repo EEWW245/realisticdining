@@ -30,6 +30,11 @@ jar {
     }
 }
 
+remapJar {
+    archiveBaseName = "realisticdining"
+    archiveVersion = "${project.version}-forge-${minecraft_version}"
+}
+
 processResources {
     inputs.property 'version', project.version
     inputs.property 'mcversion', minecraft_version

@@ -106,5 +106,18 @@
     "sounds": [
       "realisticdining:04_can/can_ahh"
     ]
+  },
+
+  "drink.milktea.straw_insert": {
+    "category": "player",
+    "sounds": [
+      "realisticdining:cooked_beef_milktea/straw_insert"
+    ]
+  },
+  "drink.milktea.gulp": {
+    "category": "player",
+    "sounds": [
+      "realisticdining:cooked_beef_milktea/can_gulp"
+    ]
   }
 }

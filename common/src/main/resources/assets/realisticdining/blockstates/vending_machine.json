@@ -1,7 +1,8 @@
 {
     "variants": {
-        "": {
-            "model": "realisticdining:block/vending_machine"
-        }
+        "facing=north": { "model": "realisticdining:block/vending_machine", "y": 180 },
+        "facing=east": { "model": "realisticdining:block/vending_machine", "y": 270 },
+        "facing=south": { "model": "realisticdining:block/vending_machine" },
+        "facing=west": { "model": "realisticdining:block/vending_machine", "y": 90 }
     }
 }

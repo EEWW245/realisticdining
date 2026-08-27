@@ -14,22 +14,23 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.effect.MobEffect;
 import java.util.function.Supplier;
 
 public class FabricPlatformRegistry<T> implements PlatformRegistry<T> {
     private final ResourceKey<? extends Registry<T>> registryKey;
     private final String modId;
-    
+
     public FabricPlatformRegistry(ResourceKey<? extends Registry<T>> registryKey, String modId) {
         this.registryKey = registryKey;
         this.modId = modId;
     }
-    
+
     @Override
     @SuppressWarnings("unchecked")
     public <R extends T> Supplier<R> register(ResourceLocation location, Supplier<R> supplier) {
         R value = supplier.get();
-        
+
         // 根据注册表类型使用正确的注册方法
         if (registryKey.equals(Registries.BLOCK)) {
             Registry.register(BuiltInRegistries.BLOCK, location, (Block) value);
@@ -47,10 +48,12 @@ public class FabricPlatformRegistry<T> implements PlatformRegistry<T> {
             Registry.register(BuiltInRegistries.RECIPE_TYPE, location, (RecipeType<?>) value);
         } else if (registryKey.equals(Registries.CREATIVE_MODE_TAB)) {
             Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, location, (CreativeModeTab) value);
+        } else if (registryKey.equals(Registries.MOB_EFFECT)) {
+            Registry.register(BuiltInRegistries.MOB_EFFECT, location, (MobEffect) value);
         } else {
             throw new IllegalArgumentException("Unsupported registry: " + registryKey);
         }
-        
+
         return () -> value;
     }
     

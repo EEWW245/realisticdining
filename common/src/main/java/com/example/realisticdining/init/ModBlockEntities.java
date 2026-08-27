@@ -3,6 +3,7 @@ package com.example.realisticdining.init;
 import com.example.realisticdining.RealisticDining;
 import com.example.realisticdining.blockentities.ChoppingBoardBlockEntity;
 import com.example.realisticdining.blockentities.RoastChickenBlockEntity;
+import com.example.realisticdining.blockentities.SnackDisplayBlockEntity;
 import com.example.realisticdining.blockentities.WokBlockEntity;
 import com.example.realisticdining.blockentities.WokFriedEggBlockEntity;
 import com.example.realisticdining.blockentities.WokYellowSteakBlockEntity;
@@ -33,6 +34,10 @@ public class ModBlockEntities {
 
     public static final Supplier<BlockEntityType<RoastChickenBlockEntity>> ROAST_CHICKEN = register("roast_chicken",
         () -> BlockEntityType.Builder.of(RoastChickenBlockEntity::new, ModBlocks.ROAST_CHICKEN.get()).build(null)
+    );
+
+    public static final Supplier<BlockEntityType<SnackDisplayBlockEntity>> SNACK_DISPLAY = register("snack_display",
+        () -> BlockEntityType.Builder.of(SnackDisplayBlockEntity::new, ModBlocks.SNACK_DISPLAY.get()).build(null)
     );
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(String name, Supplier<T> blockEntity) {

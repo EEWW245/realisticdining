@@ -153,7 +153,6 @@
 
   "item.realisticdining.mineral_water": "矿泉水",
   "item.realisticdining.milk_beer": "奶啤",
-  "item.realisticdining.crisp": "薯片",
   "item.realisticdining.energy_bar": "思力架能量棒",
   "item.realisticdining.peach_grapefruit_tea": "蜜桃柚子茶",
   "item.realisticdining.sports_drink": "加得乐",
@@ -170,10 +169,18 @@
   "item.realisticdining.crispy_fish_chips": "香酥烤鱼味",
   "item.realisticdining.cookie_bag": "曲奇饼干",
   "item.realisticdining.cookie_bag_coconut_latte": "生椰拿铁饼干",
+  "item.realisticdining.pearl_milk_tea": "珍珠奶茶",
 
   "block.realisticdining.vending_machine": "自动售货机",
   "gui.realisticdining.vending_machine.close": "关闭",
+  "tooltip.realisticdining.snack_place_hint": "右手右键可放置模型",
+  "tooltip.realisticdining.cure_negative_buff": "可消除消极Buff",
+  "effect.realisticdining.tipsy": "微醺",
+  "effect.realisticdining.drunk": "中度醉酒",
+  "effect.realisticdining.wasted": "重度醉酒",
+  "tooltip.realisticdining.beer_drink_hint": "连续喝 2 瓶微醺，4 瓶中度醉酒，6 瓶以上重度醉酒",
   "gui.realisticdining.vending_machine.insufficient_funds": "金粒不足！",
   "gui.realisticdining.vending_machine.out_of_stock": "货物数量不足",
-  "gui.realisticdining.vending_machine.subtitle": "（每一种物品可购买次数为六次，到了第二天才补货）"
+  "gui.realisticdining.vending_machine.subtitle": "（每一种物品可购买次数为六次，到了第二天才补货）",
+  "block.realisticdining.snack_display": "零食饮料展示台"
 }

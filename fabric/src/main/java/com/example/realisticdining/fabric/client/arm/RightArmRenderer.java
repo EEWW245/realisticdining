@@ -1,8 +1,9 @@
 package com.example.realisticdining.fabric.client.arm;
 
+import com.example.realisticdining.RealisticDining;
+import com.example.realisticdining.client.arm.VanillaArmRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.example.realisticdining.RealisticDining;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -15,14 +16,24 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoObjectRenderer;
+import software.bernie.geckolib.util.RenderUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+/**
+ * 吃米饭右臂渲染器（v2.2.0+ 原版手臂版）。
+ *
+ * <p>"Right Arm" 骨骼不再渲染自定义 cube，改为捕获矩阵后置渲染原版玩家手臂
+ * （参照 TaCZ 方案，见 {@link VanillaArmRenderer}）。
+ * 筷子骨骼照常贴图路由渲染。
+ */
 public class RightArmRenderer extends GeoObjectRenderer<GeoAnimatable> {
 
     private static final Vector3f XP = new Vector3f(1, 0, 0);
@@ -36,8 +47,11 @@ public class RightArmRenderer extends GeoObjectRenderer<GeoAnimatable> {
         TEXTURE_GROUPS.put("chopstick3", new ResourceLocation(RealisticDining.MOD_ID, "textures/item/chopsticks.png"));
     }
 
+    /** fallback 贴图（非手臂、非筷子的未识别骨骼走玩家皮肤，保持旧行为）。 */
     private ResourceLocation playerSkinTexture = null;
-    private int currentPackedLight = 15728880;
+
+    /** 本次渲染 pass 捕获的手臂矩阵（模型 pass 后渲染原版手臂）。 */
+    private final List<VanillaArmRenderer.CapturedArm> capturedArms = new ArrayList<>();
 
     public RightArmRenderer(GeoModel<GeoAnimatable> model) {
         super(model);
@@ -61,9 +75,15 @@ public class RightArmRenderer extends GeoObjectRenderer<GeoAnimatable> {
     public void renderRightArm(PoseStack poseStack, GeoAnimatable animatable, MultiBufferSource bufferSource,
                                 int packedLight, float partialTick) {
         updatePlayerSkin();
-        currentPackedLight = getPackedLightAtPlayer();
+        int currentPackedLight = getPackedLightAtPlayer();
         this.animatable = animatable;
+
+        capturedArms.clear();
         defaultRender(poseStack, animatable, bufferSource, null, null, 0, partialTick, currentPackedLight);
+
+        // 模型 pass 完成：渲染原版右臂（自动玩家皮肤）
+        VanillaArmRenderer.renderCapturedArms(capturedArms, bufferSource, currentPackedLight);
+        capturedArms.clear();
     }
 
     private void updatePlayerSkin() {
@@ -88,36 +108,53 @@ public class RightArmRenderer extends GeoObjectRenderer<GeoAnimatable> {
         defaultRender(poseStack, animatable, bufferSource, renderType, buffer, 0, partialTick, packedLight);
     }
 
+    /**
+     * v2.2.0+ 重写递归渲染（参照 TaCZ 结构）：
+     * "Right Arm" 骨骼捕获矩阵不渲染 cube；筷子等其他骨骼贴图路由正常渲染。
+     */
     @Override
     public void renderRecursively(PoseStack poseStack, GeoAnimatable animatable, GeoBone bone, RenderType renderType,
                                    MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender,
                                    float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        ResourceLocation texture = getTextureForBone(bone);
-        if (texture != null && bufferSource != null) {
-            RenderType newRenderType = RenderType.entityCutoutNoCull(texture);
-            VertexConsumer newBuffer = bufferSource.getBuffer(newRenderType);
-            super.renderRecursively(poseStack, animatable, bone, newRenderType, bufferSource, newBuffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        poseStack.pushPose();
+        RenderUtils.prepMatrixForBone(poseStack, bone);
+
+        boolean armBone = "Right Arm".equals(bone.getName()) && VanillaArmRenderer.isArmBone(bone);
+
+        if (armBone) {
+            // 手臂锚点骨骼：跳过自定义 cube 渲染，捕获矩阵供模型 pass 后渲染原版手臂
+            if (!isReRender) {
+                VanillaArmRenderer.CapturedArm capturedArm =
+                        VanillaArmRenderer.captureArmPose(poseStack, bone);
+                if (capturedArm != null) {
+                    capturedArms.add(capturedArm);
+                }
+            }
         } else {
-            super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+            ResourceLocation texture = getTextureForBone(bone);
+            VertexConsumer boneBuffer = buffer;
+            if (texture != null && bufferSource != null) {
+                boneBuffer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(texture));
+            }
+            renderCubesOfBone(poseStack, bone, boneBuffer, packedLight, packedOverlay, red, green, blue, alpha);
         }
+
+        renderChildBones(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        poseStack.popPose();
     }
 
     private ResourceLocation getTextureForBone(GeoBone bone) {
         String boneName = bone.getName();
-        
+
         if (boneName.equals("Right Arm")) {
-            return playerSkinTexture;
+            // 手臂骨骼已改为原版手臂渲染，不在此渲染自定义 cube
+            return null;
         }
-        
-        ResourceLocation direct = TEXTURE_GROUPS.get(boneName);
-        if (direct != null) {
-            return direct;
-        }
-        
+
         if (boneName.startsWith("chopstick")) {
             return TEXTURE_GROUPS.get("chopstick");
         }
-        
+
         return playerSkinTexture;
     }
 
@@ -151,7 +188,6 @@ public class RightArmRenderer extends GeoObjectRenderer<GeoAnimatable> {
 
         poseStack.mulPose(new Quaternionf().rotationAxis(-85.0F * Mth.DEG_TO_RAD, XP));
         poseStack.mulPose(new Quaternionf().rotationAxis(0.0F * Mth.DEG_TO_RAD, YP));
-
         poseStack.mulPose(new Quaternionf().rotationAxis(90.0F * Mth.DEG_TO_RAD, XP));
 
         poseStack.scale(-1.0F, 1.0F, 1.0F);

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "realisticdining:block/snack_display" },
+    "facing=south": { "model": "realisticdining:block/snack_display" },
+    "facing=east":  { "model": "realisticdining:block/snack_display" },
+    "facing=west":  { "model": "realisticdining:block/snack_display" }
+  }
+}

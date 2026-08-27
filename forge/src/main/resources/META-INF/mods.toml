@@ -51,3 +51,12 @@ mandatory=false
 versionRange="[1.0,)"
 ordering="AFTER"
 side="BOTH"
+
+# Hold My Items - Reforged: 可选兼容。ordering=AFTER 让本模组的 Mixin 在其后应用，
+# 配合 ItemInHandRendererMixin 的 priority=500 + ci.cancel() 跳过其 HeldItemsMixin 渲染。
+[[dependencies.realisticdining]]
+modId="holdmyitems"
+mandatory=false
+versionRange="[2.0,)"
+ordering="AFTER"
+side="CLIENT"

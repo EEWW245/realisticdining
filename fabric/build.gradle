@@ -27,6 +27,11 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
+remapJar {
+    archiveBaseName = "realisticdining"
+    archiveVersion = "${project.version}-fabric-${minecraft_version}"
+}
+
 processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", minecraft_version

@@ -1,11 +1,12 @@
 package com.example.realisticdining.forge.client;
 
 import com.example.realisticdining.RealisticDining;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = RealisticDining.MOD_ID)
+@Mod.EventBusSubscriber(modid = RealisticDining.MOD_ID, value = Dist.CLIENT)
 public class ClientEventHandler {
 
     @SubscribeEvent

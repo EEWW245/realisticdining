@@ -32,7 +32,6 @@ public final class DrinkItemMapping {
         DRINK_TO_SUPPLIER.put("cola", ModItems.COLA);
         DRINK_TO_SUPPLIER.put("beer", ModItems.BEER);
         // 零食（1 次）
-        DRINK_TO_SUPPLIER.put("crisp", ModItems.CRISP);
         DRINK_TO_SUPPLIER.put("potato_chips", ModItems.POTATO_CHIPS);
         DRINK_TO_SUPPLIER.put("potato_chips_bbq", ModItems.POTATO_CHIPS_BBQ);
         DRINK_TO_SUPPLIER.put("potato_chips_cucumber", ModItems.POTATO_CHIPS_CUCUMBER);
@@ -41,6 +40,8 @@ public final class DrinkItemMapping {
         DRINK_TO_SUPPLIER.put("energy_bar", ModItems.ENERGY_BAR);
         DRINK_TO_SUPPLIER.put("cookie_bag", ModItems.COOKIE_BAG);
         DRINK_TO_SUPPLIER.put("cookie_bag_coconut_latte", ModItems.COOKIE_BAG_COCONUT_LATTE);
+        // 珍珠奶茶（1 次）
+        DRINK_TO_SUPPLIER.put("pearl_milk_tea", ModItems.PEARL_MILK_TEA);
     }
 
     private DrinkItemMapping() {}

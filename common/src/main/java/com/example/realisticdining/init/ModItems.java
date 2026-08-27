@@ -29,8 +29,6 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> MILK_BEER = register("milk_beer",
             () -> new Item(new Item.Properties().stacksTo(16)));
-    public static final Supplier<Item> CRISP = register("crisp",
-            () -> new Item(new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> ENERGY_BAR = register("energy_bar",
             () -> new Item(new Item.Properties().stacksTo(16)));
 
@@ -71,6 +69,9 @@ public class ModItems {
     public static final Supplier<Item> COOKIE_BAG = register("cookie_bag",
             () -> new Item(new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> COOKIE_BAG_COCONUT_LATTE = register("cookie_bag_coconut_latte",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    // 珍珠奶茶：杯装奶茶，独立 pickup + eat 双动画，清负面 Buff（类似原版牛奶）
+    public static final Supplier<Item> PEARL_MILK_TEA = register("pearl_milk_tea",
             () -> new Item(new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> NAPA_CABBAGE = register("napa_cabbage",
             () -> new Item(new Item.Properties()));
@@ -598,6 +599,11 @@ public class ModItems {
 
     public static final Supplier<Item> VENDING_MACHINE = register("vending_machine", () -> new BlockItem(
             ModBlocks.VENDING_MACHINE.get(),
+            new Item.Properties()
+    ));
+
+    public static final Supplier<Item> SNACK_DISPLAY = register("snack_display", () -> new BlockItem(
+            ModBlocks.SNACK_DISPLAY.get(),
             new Item.Properties()
     ));
 

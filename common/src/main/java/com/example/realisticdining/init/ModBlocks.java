@@ -102,6 +102,10 @@ public class ModBlocks {
     public static final Supplier<Block> VENDING_MACHINE = register("vending_machine", () -> new VendingMachineBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(3.0f).noOcclusion()
     ));
+
+    public static final Supplier<Block> SNACK_DISPLAY = register("snack_display", () -> new SnackDisplayBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(1.5f).noOcclusion().noCollission()
+    ));
     
     private static <T extends Block> Supplier<T> register(String name, Supplier<T> block) {
         return BLOCKS.register(new ResourceLocation(RealisticDining.MOD_ID, name), block);

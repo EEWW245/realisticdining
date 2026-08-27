@@ -3,6 +3,7 @@ package com.example.realisticdining.fabric.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.example.realisticdining.client.WokModeConfig;
 import com.example.realisticdining.fabric.client.arm.FpArmRenderSystem;
+import com.example.realisticdining.fabric.client.pack.PackKeyRouter;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
@@ -66,8 +67,29 @@ public class ModKeybinds {
                 WokModeConfig.disableSimplifiedMode();
             }
             while (triggerDrinkKey.consumeClick()) {
-                FpArmRenderSystem.triggerDrinkForMainHand();
+                // U 键路由：优先材质包扩展物品（单动画 + finished 指令），未命中再走原饮料/零食状态机
+                if (!PackKeyRouter.tryRoutePackAnimation()) {
+                    FpArmRenderSystem.triggerDrinkForMainHand();
+                }
             }
         });
+    }
+
+    /**
+     * 触发饮用键（默认 U）对应的动作：优先匹配材质包扩展物品，未命中走原饮用动画。
+     */
+    public static void triggerDrinkPressed() {
+        if (!PackKeyRouter.tryRoutePackAnimation()) {
+            FpArmRenderSystem.triggerDrinkForMainHand();
+        }
+    }
+
+    /**
+     * 判断「饮用键」（默认 U）当前是否绑定为鼠标右键。
+     * <p>供右键放置展示台失败时的兜底逻辑使用：只有玩家主动把饮用键改绑成右键时，
+     * 右键兜底才触发饮用动画，避免与 U 键默认绑定冲突。
+     */
+    public static boolean isDrinkKeyBoundToRightMouse() {
+        return triggerDrinkKey != null && triggerDrinkKey.matchesMouse(GLFW.GLFW_MOUSE_BUTTON_RIGHT);
     }
 }

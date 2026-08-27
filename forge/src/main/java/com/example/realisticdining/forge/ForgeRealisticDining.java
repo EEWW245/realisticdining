@@ -3,6 +3,7 @@ package com.example.realisticdining.forge;
 import com.example.realisticdining.RealisticDining;
 import com.example.realisticdining.client.renderer.ChoppingBoardRenderer;
 import com.example.realisticdining.client.renderer.RoastChickenRenderer;
+import com.example.realisticdining.client.renderer.SnackDisplayRenderer;
 import com.example.realisticdining.client.renderer.WokFriedEggRenderer;
 import com.example.realisticdining.client.renderer.WokRenderer;
 import com.example.realisticdining.client.renderer.WokYellowSteakRenderer;
@@ -13,6 +14,11 @@ import com.example.realisticdining.forge.network.ApplyHungerPacket;
 import com.example.realisticdining.forge.network.ConsumeRicePacket;
 import com.example.realisticdining.forge.network.ConsumeDrinkPacket;
 import com.example.realisticdining.forge.network.VendingMachinePurchasePacket;
+import com.example.realisticdining.forge.network.PackAnimationPacket;
+import com.example.realisticdining.forge.network.PackFinishPacket;
+import com.example.realisticdining.forge.network.PackSoundPacket;
+import com.example.realisticdining.forge.client.pack.PackItems;
+import com.example.realisticdining.forge.loot.ForgeLootModifiers;
 import com.example.realisticdining.forge.platform.ForgePlatformServices;
 import com.example.realisticdining.init.ModBlockEntities;
 import com.example.realisticdining.init.ModBlocks;
@@ -38,6 +44,12 @@ public class ForgeRealisticDining {
         ForgePlatformServices forgeServices = (ForgePlatformServices) ServiceHelper.getPlatformServices();
         forgeServices.registerAll(modEventBus);
 
+        // 材质包扩展：注册共用 pack_empty GeoItem
+        PackItems.register(modEventBus);
+
+        // 全局战利品修改器：往所有原版箱子追加零食/饮料
+        ForgeLootModifiers.register(modEventBus);
+
         modEventBus.addListener(ForgeRealisticDining::onCommonSetup);
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
@@ -51,6 +63,10 @@ public class ForgeRealisticDining {
         ConsumeDrinkPacket.register();
         ApplyHungerPacket.register();
         VendingMachinePurchasePacket.register();
+        // 材质包扩展网络包
+        PackAnimationPacket.register();
+        PackFinishPacket.register();
+        PackSoundPacket.register();
     }
 
     private static void onClientSetup(final FMLClientSetupEvent event) {
@@ -64,6 +80,8 @@ public class ForgeRealisticDining {
             net.minecraft.client.gui.screens.MenuScreens.register(ModMenus.EAT_RICE_GUIDE_MENU.get(), EatRiceGuideScreen::new);
             net.minecraft.client.gui.screens.MenuScreens.register(ModMenus.COOKBOOK_MENU.get(), CookbookScreen::new);
             net.minecraft.client.gui.screens.MenuScreens.register(ModMenus.VENDING_MACHINE_MENU.get(), VendingMachineScreen::new);
+            // 材质包扩展：客户端 setup 阶段绑定 PackEmpty 实例
+            PackItems.bindInstance();
         });
     }
 
@@ -73,6 +91,7 @@ public class ForgeRealisticDining {
         event.registerBlockEntityRenderer(ModBlockEntities.WOK_FRIED_EGG.get(), WokFriedEggRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.CHOPPING_BOARD.get(), ChoppingBoardRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.ROAST_CHICKEN.get(), RoastChickenRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.SNACK_DISPLAY.get(), SnackDisplayRenderer::new);
 
         RealisticDining.LOGGER.info("[烤鸡调试] Forge 渲染器注册完成");
     }

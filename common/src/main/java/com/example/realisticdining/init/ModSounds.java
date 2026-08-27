@@ -39,6 +39,9 @@ public class ModSounds {
     public static final Supplier<SoundEvent> DRINK_CAN_PULL_TAB = registerDrink("drink.can.pull_tab");
     public static final Supplier<SoundEvent> DRINK_CAN_GULP = registerDrink("drink.can.can_gulp");
     public static final Supplier<SoundEvent> DRINK_CAN_AHH = registerDrink("drink.can.can_ahh");
+    // 珍珠奶茶
+    public static final Supplier<SoundEvent> DRINK_MILKTEA_STRAW_INSERT = registerDrink("drink.milktea.straw_insert");
+    public static final Supplier<SoundEvent> DRINK_MILKTEA_GULP = registerDrink("drink.milktea.gulp");
 
     private static <T extends SoundEvent> Supplier<T> register(String name, Supplier<T> sound) {
         return SOUND_EVENTS.register(new ResourceLocation(RealisticDining.MOD_ID, name), sound);

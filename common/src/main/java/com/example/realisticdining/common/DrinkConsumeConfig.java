@@ -27,7 +27,10 @@ public final class DrinkConsumeConfig {
     /** effect 描述：effect、duration(ticks)、amplifier */
     public record EffectSpec(MobEffect effect, int duration, int amplifier) {}
 
-    public record Entry(int maxUses, int nutrition, float saturation, List<EffectSpec> effects, List<Double> hungerCues) {}
+    /**
+     * clearHarmful: 动画结束清除一切负面效果（奶啤酒/豆浆，类似原版牛奶但只清负面、保留正面）。
+     */
+    public record Entry(int maxUses, int nutrition, float saturation, List<EffectSpec> effects, List<Double> hungerCues, boolean clearHarmful) {}
 
     /** 所有饮料通用的 buff：生命恢复 I 10s, 迅捷 I 20s */
     private static final List<EffectSpec> DRINK_BUFFS = List.of(
@@ -60,28 +63,35 @@ public final class DrinkConsumeConfig {
         register("coconut_juice", 2, 1, 0.5f, DRINK_BUFFS, List.of());
         register("orange_juice", 2, 1, 0.5f, DRINK_BUFFS, List.of());
         // 罐装饮料（1 次，半点饱食度，饮料通用 buff）
-        register("milk_beer", 1, 1, 0.5f, DRINK_BUFFS, List.of());
-        register("soymilk", 1, 1, 0.5f, DRINK_BUFFS, List.of());
+        // 奶啤酒/豆浆（v2.2.5）：喝完清除一切负面效果（类似原版牛奶，但只清负面、保留正面）
+        register("milk_beer", 1, 1, 0.5f, DRINK_BUFFS, List.of(), true);
+        register("soymilk", 1, 1, 0.5f, DRINK_BUFFS, List.of(), true);
         register("cola", 1, 1, 0.5f, DRINK_BUFFS, List.of());
         register("beer", 1, 1, 0.5f, DRINK_BUFFS, List.of());
         // 薯片（1 次消耗，无 buff，饱食度靠 hungerCues 在 3/4/5/6 秒分时段触发）
-        register("crisp", 1, 0, 0.0f, List.of(), CRISP_HUNGER_CUES);
         register("potato_chips", 1, 0, 0.0f, List.of(), CRISP_HUNGER_CUES);
         register("potato_chips_bbq", 1, 0, 0.0f, List.of(), CRISP_HUNGER_CUES);
         register("potato_chips_cucumber", 1, 0, 0.0f, List.of(), CRISP_HUNGER_CUES);
         register("potato_chips_tomato", 1, 0, 0.0f, List.of(), CRISP_HUNGER_CUES);
         register("crispy_fish_chips", 1, 0, 0.0f, List.of(), CRISP_HUNGER_CUES);
-        // 饼干（1 次，2 点饱食度，无 buff）
-        register("cookie_bag", 1, 2, 0.3f, List.of(), List.of());
-        register("cookie_bag_coconut_latte", 1, 2, 0.3f, List.of(), List.of());
+        // 饼干（1 次，6 点饱食度，无 buff；v2.2.5 由 2 点上调）
+        register("cookie_bag", 1, 6, 0.6f, List.of(), List.of());
+        register("cookie_bag_coconut_latte", 1, 6, 0.6f, List.of(), List.of());
         // 能量棒（1 次，6 点饱食度，能量棒 buffs）
         register("energy_bar", 1, 6, 1.0f, ENERGY_BAR_BUFFS, List.of());
+        // 珍珠奶茶（1 次，1 点饱食度，清除负面 Buff，类似原版牛奶）
+        register("pearl_milk_tea", 1, 1, 0.5f, DRINK_BUFFS, List.of(), true);
     }
 
     private DrinkConsumeConfig() {}
 
     private static void register(String id, int maxUses, int nutrition, float saturation, List<EffectSpec> effects, List<Double> hungerCues) {
-        ENTRIES.put(id, new Entry(maxUses, nutrition, saturation, effects, hungerCues));
+        register(id, maxUses, nutrition, saturation, effects, hungerCues, false);
+    }
+
+    /** 带 clearHarmful 的注册重载（奶啤酒/豆浆）。 */
+    private static void register(String id, int maxUses, int nutrition, float saturation, List<EffectSpec> effects, List<Double> hungerCues, boolean clearHarmful) {
+        ENTRIES.put(id, new Entry(maxUses, nutrition, saturation, effects, hungerCues, clearHarmful));
     }
 
     private static List<EffectSpec> concat(List<EffectSpec> base, EffectSpec... more) {

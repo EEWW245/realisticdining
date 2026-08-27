@@ -3,6 +3,7 @@ package com.example.realisticdining;
 import com.example.realisticdining.init.ModBlocks;
 import com.example.realisticdining.init.ModBlockEntities;
 import com.example.realisticdining.init.ModCreativeModeTabs;
+import com.example.realisticdining.init.ModEffects;
 import com.example.realisticdining.init.ModItems;
 import com.example.realisticdining.init.ModMenus;
 import com.example.realisticdining.init.ModRecipes;
@@ -31,7 +32,10 @@ public class RealisticDining {
         
         ModItems.init();
         LOGGER.info("[Realistic Dining] ModItems registered");
-        
+
+        ModEffects.init();
+        LOGGER.info("[Realistic Dining] ModEffects registered");
+
         ModMenus.init();
         ModCreativeModeTabs.init();
         ModSounds.init();

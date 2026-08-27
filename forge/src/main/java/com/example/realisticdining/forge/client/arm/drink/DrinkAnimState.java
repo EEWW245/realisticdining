@@ -37,6 +37,13 @@ public class DrinkAnimState {
     private double pickupDuration = 0;
     private double putdownDuration = 0;
     private boolean pickupConfigured = false;
+    // === v2.1.4+ 持物前缀模式 ===
+    private double holdDuration = 0;
+    private boolean holdPrefixConfigured = false;
+    // === v2.1.6+ DRINK 起始偏移 ===
+    // HOLD 续播时 = holdDuration（动画从冻结帧继续，剩余时长 = duration - holdDuration）；
+    // IDLE 新播时 = 0（完整时长 duration）。
+    private double drinkStartOffset = 0;
 
     private Phase phase = Phase.IDLE;
     private double phaseStartTime = -1;        // gameTime
@@ -59,7 +66,25 @@ public class DrinkAnimState {
         this.pickupConfigured = true;
     }
 
-    public boolean isPickupConfigured() { return pickupConfigured; }
+    /**
+     * v2.1.4+ 配置持物前缀模式。
+     * <p>启用后，物品进入主手时播放 drink 动画的 0~holdDuration 秒并定格（PICKUP→HOLD），
+     * U 键触发后从 holdDuration 继续播放到结尾（DRINK）。
+     * 与 {@link #configurePickup} 互斥；两者都配置时 holdPrefix 优先。
+     */
+    public void configureHoldPrefix(double holdDur) {
+        this.holdDuration = holdDur;
+        this.holdPrefixConfigured = holdDur > 0;
+    }
+
+    /** 是否配置了任意形式的持物（独立 pickup 动画 或 持物前缀模式）。 */
+    public boolean isPickupConfigured() { return pickupConfigured || holdPrefixConfigured; }
+
+    /** v2.1.4+ 是否启用了持物前缀模式。 */
+    public boolean isHoldPrefixConfigured() { return holdPrefixConfigured; }
+
+    /** v2.1.4+ 持物前缀时长（秒）。 */
+    public double holdDuration() { return holdDuration; }
     public Phase phase() { return phase; }
 
     /** 开始 PICKUP 阶段。仅在 IDLE 态有效。 */
@@ -86,10 +111,14 @@ public class DrinkAnimState {
             return false;
         }
         if (phase == Phase.HOLD || phase == Phase.IDLE) {
+            boolean fromHold = (phase == Phase.HOLD);
             phase = Phase.DRINK;
             phaseStartTime = gameTime;
             phaseStartRealTimeMillis = Util.getMillis();
             drinkJustFinished = false;
+            // v2.1.6+ 持物前缀模式：HOLD 续播时动画从冻结帧继续（偏移 = holdDuration），
+            // IDLE 新播时从头开始（偏移 = 0）。音效 cue 与结束判定都基于动画时间轴。
+            this.drinkStartOffset = (fromHold && holdPrefixConfigured) ? holdDuration : 0;
             return true;
         }
         return false;
@@ -112,13 +141,17 @@ public class DrinkAnimState {
         double elapsed = (currentGameTime - phaseStartTime) / 20.0;
         switch (phase) {
             case PICKUP:
-                if (elapsed >= pickupDuration) {
+                // v2.1.4+ 持物前缀模式用 holdDuration；旧 pickup 模式用 pickupDuration
+                double pickupEnd = holdPrefixConfigured ? holdDuration : pickupDuration;
+                if (elapsed >= pickupEnd) {
                     phase = Phase.HOLD;
                     phaseStartTime = -1;
                 }
                 break;
             case DRINK:
-                if (elapsed >= drinkDuration) {
+                // v2.1.6+ 动画时间轴位置 = 已播放秒数 + drinkStartOffset；
+                // HOLD 续播时从 holdDuration 起算，IDLE 新播时从 0 起算，到达总时长结束
+                if (elapsed + drinkStartOffset >= drinkDuration) {
                     phase = Phase.IDLE;
                     phaseStartTime = -1;
                     drinkJustFinished = true;
@@ -162,6 +195,24 @@ public class DrinkAnimState {
         return (currentGameTime - phaseStartTime) / 20.0;
     }
 
+    /**
+     * v2.1.6+ 当前在 drink 动画时间轴上的位置（秒）。
+     * <p>DRINK 阶段 = 已播放秒数 + drinkStartOffset（HOLD 续播时为 holdDuration，IDLE 新播时为 0），
+     * 让音效 cue / 饥饿 cue 时间轴与原动画一致。
+     */
+    public double elapsedInAnimation(double currentGameTime) {
+        double e = elapsed(currentGameTime);
+        if (phase == Phase.DRINK) {
+            return e + drinkStartOffset;
+        }
+        return e;
+    }
+
+    /** v2.1.6+ 当前 DRINK 的动画时间轴起始偏移（秒）。 */
+    public double drinkStartOffset() {
+        return drinkStartOffset;
+    }
+
     /** 当前阶段已播放秒数（基于真实时间，供音效 cue 用）。 */
     public double elapsedRealSeconds() {
         if (phase == Phase.IDLE || phase == Phase.HOLD || phaseStartTime < 0) return 0.0;
@@ -192,5 +243,6 @@ public class DrinkAnimState {
         phaseStartRealTimeMillis = 0L;
         pendingDrink = false;
         drinkJustFinished = false;
+        drinkStartOffset = 0;
     }
 }

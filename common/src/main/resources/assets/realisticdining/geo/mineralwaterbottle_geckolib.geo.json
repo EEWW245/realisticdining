@@ -6,64 +6,64 @@
 				"identifier": "geometry.unknown",
 				"texture_width": 64,
 				"texture_height": 64,
-				"visible_bounds_width": 4,
-				"visible_bounds_height": 3,
-				"visible_bounds_offset": [0, 0.5, 0]
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2,
+				"visible_bounds_offset": [0, 0, 0]
 			},
 			"bones": [
 				{
 					"name": "bone",
-					"pivot": [19, -7, -15]
+					"pivot": [20, -6, -15]
 				},
 				{
 					"name": "Left Arm",
 					"parent": "bone",
-					"pivot": [7, -9, 3],
+					"pivot": [5.05369, -6.4621, 4.71875],
 					"rotation": [-124.41256, 28.93751, -14.23383],
 					"cubes": [
-						{"origin": [2, -16, -1], "size": [4, 12, 4], "uv": [32, 48], "mirror": true}
+						{"origin": [3.05369, -12.4621, 2.71875], "size": [4, 12, 4], "uv": [32, 48], "mirror": true}
 					]
 				},
 				{
 					"name": "Right Arm",
 					"parent": "bone",
-					"pivot": [16, 0, 3],
+					"pivot": [-4.64327, 0.68192, 0.45325],
 					"rotation": [-90, 0, 0]
 				},
 				{
 					"name": "Right_Arm2",
 					"parent": "Right Arm",
-					"pivot": [4, 4, 3],
+					"pivot": [-6.36636, 4.98615, -2.13036],
 					"cubes": [
-						{"origin": [-8.44474, -4.79146, -2.21752], "size": [4, 12, 4], "pivot": [4, 4, 3], "rotation": [36.54514, 9.06524, -12.0012], "uv": [40, 16]}
+						{"origin": [-8.44474, -1.56279, -4.08234], "size": [4, 12, 4], "pivot": [4, 7.22867, 1.13518], "rotation": [36.54514, 9.06524, -12.0012], "uv": [40, 16]}
 					]
 				},
 				{
 					"name": "Bottle",
 					"parent": "Right Arm",
-					"pivot": [-3.62518, -7.84701, 11],
+					"pivot": [-3.92018, -3.6223, 4.03687],
 					"rotation": [70.95812, 12.2703, -5.82972]
 				},
 				{
 					"name": "Bottle2",
 					"parent": "Bottle",
-					"pivot": [0, 0, 0],
+					"pivot": [-3.84368, 0.76377, 4.68355],
 					"cubes": [
 						{
-							"origin": [-5.12518, -7.84701, 9.5],
+							"origin": [-5.34368, -6.93623, 3.18355],
 							"size": [3, 7, 3],
 							"uv": {
-								"north": {"uv": [20, 16], "uv_size": [24, 40]},
-								"east": {"uv": [20, 16], "uv_size": [24, 40]},
-								"south": {"uv": [44, 16], "uv_size": [-24, 40]},
-								"west": {"uv": [44, 16], "uv_size": [-24, 40]},
+								"north": {"uv": [26, 32], "uv_size": [14, 8]},
+								"east": {"uv": [28, 40], "uv_size": [9, 7]},
+								"south": {"uv": [36, 17], "uv_size": [-8, 6]},
+								"west": {"uv": [39, 23], "uv_size": [-12, 8]},
 								"up": {"uv": [34, 26], "uv_size": [-12, -12]},
-								"down": {"uv": [34, 60], "uv_size": [-12, -10]}
+								"down": {"uv": [38, 25], "uv_size": [-12, -10]}
 							}
 						},
 						{
-							"origin": [-4.62518, -0.84701, 10],
-							"size": [2, 3, 2],
+							"origin": [-4.84368, 0.06377, 3.68355],
+							"size": [2, 1, 2],
 							"uv": {
 								"north": {"uv": [28, 10], "uv_size": [8, 6]},
 								"east": {"uv": [28, 10], "uv_size": [8, 6]},
@@ -78,23 +78,23 @@
 				{
 					"name": "BottleCap",
 					"parent": "Bottle",
-					"pivot": [-3.62518, -7.84701, 11]
+					"pivot": [-3.84368, 1.06377, 4.68355]
 				},
 				{
 					"name": "BottleCap2",
 					"parent": "BottleCap",
-					"pivot": [-9.62518, 2.15299, 12],
+					"pivot": [-3.84368, 1.81377, 4.68355],
 					"cubes": [
 						{
-							"origin": [-4.87518, 2.15299, 9.75],
+							"origin": [-5.09368, 1.06377, 3.43355],
 							"size": [2.5, 1.5, 2.5],
 							"uv": {
-								"north": {"uv": [26, 4], "uv_size": [12, 6]},
-								"east": {"uv": [26, 4], "uv_size": [12, 6]},
-								"south": {"uv": [38, 4], "uv_size": [-12, 6]},
-								"west": {"uv": [38, 4], "uv_size": [-12, 6]},
-								"up": {"uv": [36, 10], "uv_size": [-8, -6]},
-								"down": {"uv": [36, 10], "uv_size": [-8, -6]}
+								"north": {"uv": [28, 4], "uv_size": [9, 4]},
+								"east": {"uv": [27, 4], "uv_size": [10, 7]},
+								"south": {"uv": [38, 4], "uv_size": [-12, 5]},
+								"west": {"uv": [38, 4], "uv_size": [-12, 4]},
+								"up": {"uv": [35, 6], "uv_size": [-5, 1]},
+								"down": {"uv": [34, 34], "uv_size": [-8, -6]}
 							}
 						}
 					]
