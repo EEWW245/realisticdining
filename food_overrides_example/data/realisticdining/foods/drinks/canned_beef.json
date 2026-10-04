@@ -1,0 +1,12 @@
+{
+    "_comment": "牛肉罐头覆盖示例（默认 6 饱食度/0.6 饱和/无 buff）：提到 10 饱食度 + 1.0 饱和 + 力量 I 30s + 抗性提升 I 30s",
+    "max_uses": 1,
+    "nutrition": 10,
+    "saturation": 1.0,
+    "effects": [
+        {"effect": "minecraft:strength", "duration": 600, "amplifier": 0},
+        {"effect": "minecraft:resistance", "duration": 600, "amplifier": 0}
+    ],
+    "hunger_cues": [],
+    "clear_harmful": false
+}

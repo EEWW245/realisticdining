@@ -1,0 +1,9 @@
+{
+  "item": "kaleidoscope_tavern:sculk_special",
+  "mode": "pickup",
+  "sounds": {
+    "op": "realisticdining:op",
+    "eat": "realisticdining:eat",
+    "juju": "realisticdining:juju"
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "_comment": "尖啸运动饮料覆盖示例：把饱食度从 1 提到 8、饱和度 0.5→1.0、buff 增加生命恢复 II 30s + 力量 II 60s + 迅捷 II 30s",
+    "max_uses": 1,
+    "nutrition": 8,
+    "saturation": 1.0,
+    "effects": [
+        {"effect": "minecraft:regeneration", "duration": 600, "amplifier": 1},
+        {"effect": "minecraft:strength", "duration": 1200, "amplifier": 1},
+        {"effect": "minecraft:speed", "duration": 600, "amplifier": 1}
+    ],
+    "hunger_cues": [],
+    "clear_harmful": false
+}
