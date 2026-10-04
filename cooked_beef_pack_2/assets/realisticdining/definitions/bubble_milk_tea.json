@@ -1,0 +1,9 @@
+{
+  "item": "minecraft:cooked_beef",
+  "mode": "pickup",
+  "invisible": ["guan zi", "guan_zi2"],
+  "sounds": {
+    "straw_insert": "realisticdining:straw_insert",
+    "can_gulp": "realisticdining:can_gulp"
+  }
+}
