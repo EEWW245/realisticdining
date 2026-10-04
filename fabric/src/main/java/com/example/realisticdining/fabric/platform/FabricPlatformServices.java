@@ -16,7 +16,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -117,5 +119,11 @@ public class FabricPlatformServices implements PlatformServices {
     @Override
     public void sendDrinkConsume(String drinkId) {
         ConsumeDrinkPacket.sendToServer(drinkId);
+    }
+
+    /** Fabric 平台：SnackDisplayBlock 用完整 1 格碰撞箱，保证 3D 模型右键命中精度。 */
+    @Override
+    public VoxelShape getSnackDisplayShape() {
+        return Block.box(0, 0, 0, 16, 16, 16);
     }
 }

@@ -12,6 +12,7 @@ import com.example.realisticdining.client.screen.EatRiceGuideScreen;
 import com.example.realisticdining.client.screen.VendingMachineScreen;
 import com.example.realisticdining.fabric.client.pack.PackClientEvents;
 import com.example.realisticdining.fabric.client.pack.PackClientSetup;
+import com.example.realisticdining.fabric.compat.FirstPersonModHandler;
 import com.example.realisticdining.fabric.events.SnackTooltipHandler;
 import com.example.realisticdining.init.ModBlockEntities;
 import com.example.realisticdining.init.ModBlocks;
@@ -50,6 +51,9 @@ public class FabricClientRealisticDining implements ClientModInitializer {
         // 材质包扩展：注册客户端 tick 事件 + 资源重载监听器
         PackClientEvents.register();
         PackClientSetup.register();
+
+        // First-person Model 兼容性处理
+        FirstPersonModHandler.register();
 
         RealisticDining.LOGGER.info("[烤鸡调试] Fabric 渲染器注册完成");
     }

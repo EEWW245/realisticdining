@@ -73,6 +73,22 @@ public class ModItems {
     // 珍珠奶茶：杯装奶茶，独立 pickup + eat 双动画，清负面 Buff（类似原版牛奶）
     public static final Supplier<Item> PEARL_MILK_TEA = register("pearl_milk_tea",
             () -> new Item(new Item.Properties().stacksTo(16)));
+    // 罐头组：每个罐头独立 geo + animation（详见 DrinkAnimRegistry），独立 pickup + eat 双动画
+    public static final Supplier<Item> CANNED_HONEY_PEACH = register("canned_honey_peach",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> CANNED_MIXED_FRUIT = register("canned_mixed_fruit",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> CANNED_BEEF = register("canned_beef",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> CANNED_DICED_FISH = register("canned_diced_fish",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> EIGHT_TREASURE_CONGEE = register("eight_treasure_congee",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    // 尖啸运动饮料 + 辣条（单一动画，0.25s 持物前缀+隐藏左臂）
+    public static final Supplier<Item> SCREAM = register("scream",
+            () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final Supplier<Item> LATIAO = register("latiao",
+            () -> new Item(new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> NAPA_CABBAGE = register("napa_cabbage",
             () -> new Item(new Item.Properties()));
     public static final Supplier<Item> GREEN_ONION = register("green_onion",

@@ -67,6 +67,11 @@ public class DrinkAnimRegistry {
     private static final String MILKTEA_ANIM = "animations/cooked_beef_milktea.animation.json";
     private static final String MILKTEA_RAW_ANIM = "eat";
 
+    // CANNED：罐头动画（每个罐头独立 geo + animation，共享 pickup + eat 双动画结构）
+    // eat 动画时长 5.3366s（canned.animation.json、canned_beef.animation.json、canned_diced_fish.animation.json）
+    // 八宝粥 eat 动画时长 3.75s（eight_treasure_congee.animation.json）
+    private static final String CANNED_RAW_ANIM = "eat";
+
     // === 音效组（与动画类型一一对应，可被同类型饮料复用） ===
     // 注：直接传递 Supplier 本身（不调用 .get()），由 DrinkSoundCue 在播放时懒解析，
     //     避免 DrinkAnimRegistry 静态初始化时 registry 未填充导致拿到 null。
@@ -105,6 +110,31 @@ public class DrinkAnimRegistry {
     private static final List<DrinkSoundCue> MILKTEA_SOUNDS = List.of(
             DrinkSoundCue.once(ModSounds.DRINK_MILKTEA_STRAW_INSERT, 1.0),
             DrinkSoundCue.once(ModSounds.DRINK_MILKTEA_GULP, 1.75)
+    );
+
+    // CANNED：普通罐头（5.3366s，4 cue）—— 0.25s 拉开罐头 + 2.125/3.125/4s 勺食物
+    private static final List<DrinkSoundCue> CANNED_SOUNDS = List.of(
+            DrinkSoundCue.once(ModSounds.DRINK_CANNED_PULL_OPEN, 0.25),
+            DrinkSoundCue.once(ModSounds.DRINK_CANNED_SCOOPED_FOOD, 2.125),
+            DrinkSoundCue.once(ModSounds.DRINK_CANNED_SCOOPED_FOOD, 3.125),
+            DrinkSoundCue.once(ModSounds.DRINK_CANNED_SCOOPED_FOOD, 4.0)
+    );
+
+    // CANNED_PORRIDGE：八宝粥罐头（3.75s,1 cue）—— 0s 只播拉开罐头，不播勺食物
+    private static final List<DrinkSoundCue> CANNED_PORRIDGE_SOUNDS = List.of(
+            DrinkSoundCue.once(ModSounds.DRINK_CANNED_PULL_OPEN, 0.0)
+    );
+
+    // SCREAM：尖啸运动饮料（6.0s，2 cue）—— 0.325s 开盖 + 2.0s 喝水
+    private static final List<DrinkSoundCue> SCREAM_SOUNDS = List.of(
+            DrinkSoundCue.once(ModSounds.DRINK_SCREAM_CAP_OFF, 0.325),
+            DrinkSoundCue.once(ModSounds.DRINK_SCREAM_GULP, 2.0)
+    );
+
+    // LATIAO：辣条（4.0s，2 cue）—— 0.5s 撕带 + 1.5s 吃
+    private static final List<DrinkSoundCue> LATIAO_SOUNDS = List.of(
+            DrinkSoundCue.once(ModSounds.DRINK_LATIAO_BAG_OPEN, 0.5),
+            DrinkSoundCue.once(ModSounds.DRINK_LATIAO_CHEW, 1.5)
     );
 
     // === 饮料实例 ===
@@ -272,6 +302,74 @@ public class DrinkAnimRegistry {
         registerPickup(PEARL_MILK_TEA, "pickup", 0.5, null, 0);
     }
 
+    // === 罐头组（每个罐头独立 geo + animation，独立 pickup + eat 双动画，音效暂未配置，左手持罐不隐藏左臂） ===
+    public static final DrinkAnimHandler CANNED_HONEY_PEACH = register(
+            "realisticdining", "canned_honey_peach", 5.3366,
+            "geo/canned_honey_peach.geo.json", "animations/canned.animation.json", CANNED_RAW_ANIM,
+            "textures/block/canned_honey_peach.png",
+            "canned_honey_peach_controller", "drink",
+            CANNED_SOUNDS,
+            0, false);
+
+    public static final DrinkAnimHandler CANNED_MIXED_FRUIT = register(
+            "realisticdining", "canned_mixed_fruit", 5.3366,
+            "geo/canned_mixed_fruit.geo.json", "animations/canned.animation.json", CANNED_RAW_ANIM,
+            "textures/block/canned_mixed_fruit.png",
+            "canned_mixed_fruit_controller", "drink",
+            CANNED_SOUNDS,
+            0, false);
+
+    public static final DrinkAnimHandler CANNED_BEEF = register(
+            "realisticdining", "canned_beef", 5.3366,
+            "geo/canned_beef.geo.json", "animations/canned_beef.animation.json", CANNED_RAW_ANIM,
+            "textures/block/canned_beef.png",
+            "canned_beef_controller", "drink",
+            CANNED_SOUNDS,
+            0, false);
+
+    public static final DrinkAnimHandler CANNED_DICED_FISH = register(
+            "realisticdining", "canned_diced_fish", 5.3366,
+            "geo/canned_diced_fish.geo.json", "animations/canned_diced_fish.animation.json", CANNED_RAW_ANIM,
+            "textures/block/canned_diced_fish.png",
+            "canned_diced_fish_controller", "drink",
+            CANNED_SOUNDS,
+            0, false);
+
+    public static final DrinkAnimHandler EIGHT_TREASURE_CONGEE = register(
+            "realisticdining", "eight_treasure_congee", 3.75,
+            "geo/eight_treasure_congee.geo.json", "animations/eight_treasure_congee.animation.json", CANNED_RAW_ANIM,
+            "textures/block/eight_treasure_congee.png",
+            "eight_treasure_congee_controller", "drink",
+            CANNED_PORRIDGE_SOUNDS,
+            0, false);
+
+    static {
+        // 罐头：配置独立 pickup 动画（1.0s，播完定格持物）；putdown 传 null（切物品瞬间消失）
+        registerPickup(CANNED_HONEY_PEACH, "pickup", 1.0, null, 0);
+        registerPickup(CANNED_MIXED_FRUIT, "pickup", 1.0, null, 0);
+        registerPickup(CANNED_BEEF, "pickup", 1.0, null, 0);
+        registerPickup(CANNED_DICED_FISH, "pickup", 1.0, null, 0);
+        registerPickup(EIGHT_TREASURE_CONGEE, "pickup", 1.0, null, 0);
+    }
+
+    // === 尖啸运动饮料（单一动画，0.25s 持物前缀+隐藏左臂，类似瓶装饮料） ===
+    public static final DrinkAnimHandler SCREAM = register(
+            "realisticdining", "scream", 6.0,
+            "geo/scream.geo.json", "animations/scream.animation.json", "animation.unknown.new",
+            "textures/block/scream.png",
+            "scream_controller", "drink",
+            SCREAM_SOUNDS,
+            0.25, true);
+
+    // === 辣条（单一动画，0.25s 持物前缀+隐藏左臂，类似薯片） ===
+    public static final DrinkAnimHandler LATIAO = register(
+            "realisticdining", "latiao", 4.0,
+            "geo/latiao.geo.json", "animations/latiao.animation.json", "animation.unknown.new",
+            "textures/block/latiao.png",
+            "latiao_controller", "drink",
+            LATIAO_SOUNDS,
+            0.25, true);
+
     // === 物品 → 饮料 id 绑定（供 U 键查询主手物品对应的动画） ===
     private static final Map<Supplier<Item>, String> ITEM_TO_DRINK = new HashMap<>();
 
@@ -296,6 +394,13 @@ public class DrinkAnimRegistry {
         bindItem(ModItems.COOKIE_BAG, "cookie_bag");
         bindItem(ModItems.COOKIE_BAG_COCONUT_LATTE, "cookie_bag_coconut_latte");
         bindItem(ModItems.PEARL_MILK_TEA, "pearl_milk_tea");
+        bindItem(ModItems.CANNED_HONEY_PEACH, "canned_honey_peach");
+        bindItem(ModItems.CANNED_MIXED_FRUIT, "canned_mixed_fruit");
+        bindItem(ModItems.CANNED_BEEF, "canned_beef");
+        bindItem(ModItems.CANNED_DICED_FISH, "canned_diced_fish");
+        bindItem(ModItems.EIGHT_TREASURE_CONGEE, "eight_treasure_congee");
+        bindItem(ModItems.SCREAM, "scream");
+        bindItem(ModItems.LATIAO, "latiao");
     }
 
     /**

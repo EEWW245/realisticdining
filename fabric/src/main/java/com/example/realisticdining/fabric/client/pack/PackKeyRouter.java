@@ -30,7 +30,10 @@ public final class PackKeyRouter {
         if (mc.player == null) return false;
 
         // 动画锁定期间忽略按键，避免重复触发
-        if (PackAnimationLock.isLocked()) return true;
+        if (PackAnimationLock.isLocked()) {
+            com.example.realisticdining.RealisticDining.LOGGER.info("[RD诊断] KeyRouter: 动画锁定中，按键跳过");
+            return true;
+        }
 
         ItemStack mainHand = mc.player.getMainHandItem();
         if (mainHand.isEmpty()) return false;
@@ -42,6 +45,7 @@ public final class PackKeyRouter {
 
         // 命中材质包扩展物品 → 客户端先锁定快捷栏（防刷），再发动画触发包
         PackAnimationLock.lock();
+        com.example.realisticdining.RealisticDining.LOGGER.info("[RD诊断] KeyRouter: 命中 {} → 已锁定+发送eat触发包", id);
         PackAnimationPacket.sendToServer();
         return true;
     }

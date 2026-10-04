@@ -170,6 +170,13 @@
   "item.realisticdining.cookie_bag": "曲奇饼干",
   "item.realisticdining.cookie_bag_coconut_latte": "生椰拿铁饼干",
   "item.realisticdining.pearl_milk_tea": "珍珠奶茶",
+  "item.realisticdining.canned_honey_peach": "水蜜桃罐头",
+  "item.realisticdining.canned_mixed_fruit": "什锦水果罐头",
+  "item.realisticdining.canned_beef": "牛肉罐头",
+  "item.realisticdining.canned_diced_fish": "鱼丁肉罐头",
+  "item.realisticdining.eight_treasure_congee": "八宝粥罐头",
+  "item.realisticdining.scream": "尖啸运动饮料",
+  "item.realisticdining.latiao": "辣条",
 
   "block.realisticdining.vending_machine": "自动售货机",
   "gui.realisticdining.vending_machine.close": "关闭",
@@ -181,6 +188,6 @@
   "tooltip.realisticdining.beer_drink_hint": "连续喝 2 瓶微醺，4 瓶中度醉酒，6 瓶以上重度醉酒",
   "gui.realisticdining.vending_machine.insufficient_funds": "金粒不足！",
   "gui.realisticdining.vending_machine.out_of_stock": "货物数量不足",
-  "gui.realisticdining.vending_machine.subtitle": "（每一种物品可购买次数为六次，到了第二天才补货）",
+  "gui.realisticdining.vending_machine.subtitle": "（可用金粒购买，一种物品可购买的次数为6次，到了第二天才补货）",
   "block.realisticdining.snack_display": "零食饮料展示台"
 }

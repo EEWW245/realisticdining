@@ -10,6 +10,7 @@
     },
     "license": "MIT",
     "environment": "*",
+    "accessWidener": "realisticdining.accesswidener",
     "entrypoints": {
         "main": ["com.example.realisticdining.fabric.FabricRealisticDining"],
         "client": ["com.example.realisticdining.fabric.client.FabricClientRealisticDining"]

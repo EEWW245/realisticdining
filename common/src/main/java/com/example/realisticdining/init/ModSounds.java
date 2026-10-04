@@ -42,6 +42,15 @@ public class ModSounds {
     // 珍珠奶茶
     public static final Supplier<SoundEvent> DRINK_MILKTEA_STRAW_INSERT = registerDrink("drink.milktea.straw_insert");
     public static final Supplier<SoundEvent> DRINK_MILKTEA_GULP = registerDrink("drink.milktea.gulp");
+    // 罐头
+    public static final Supplier<SoundEvent> DRINK_CANNED_PULL_OPEN = registerDrink("drink.canned.pull_open");
+    public static final Supplier<SoundEvent> DRINK_CANNED_SCOOPED_FOOD = registerDrink("drink.canned.scooped_food");
+    // 尖啸运动饮料
+    public static final Supplier<SoundEvent> DRINK_SCREAM_CAP_OFF = registerDrink("drink.scream.cap_off");
+    public static final Supplier<SoundEvent> DRINK_SCREAM_GULP = registerDrink("drink.scream.gulp");
+    // 辣条
+    public static final Supplier<SoundEvent> DRINK_LATIAO_BAG_OPEN = registerDrink("drink.latiao.bag_open");
+    public static final Supplier<SoundEvent> DRINK_LATIAO_CHEW = registerDrink("drink.latiao.chew");
 
     private static <T extends SoundEvent> Supplier<T> register(String name, Supplier<T> sound) {
         return SOUND_EVENTS.register(new ResourceLocation(RealisticDining.MOD_ID, name), sound);

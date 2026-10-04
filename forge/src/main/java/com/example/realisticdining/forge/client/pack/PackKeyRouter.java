@@ -27,7 +27,10 @@ public final class PackKeyRouter {
         if (mc.player == null) return false;
 
         // 动画锁定期间忽略按键，避免重复触发
-        if (PackAnimationLock.isLocked()) return true;
+        if (PackAnimationLock.isLocked()) {
+            RealisticDining.LOGGER.info("[RD诊断] KeyRouter: 动画锁定中，按键跳过");
+            return true;
+        }
 
         ItemStack mainHand = mc.player.getMainHandItem();
         if (mainHand.isEmpty()) return false;

@@ -179,7 +179,8 @@ public class KaleidoscopeCompat {
         return false;
     }
 
-    public static boolean isRice(ItemStack stack) {
+    /** 判断物品是否为「米饭」。用于吃米饭动画与放置米饭碗。 */
+    public static boolean isCookedRice(ItemStack stack) {
         if (stack.isEmpty()) {
             return false;
         }
@@ -198,8 +199,9 @@ public class KaleidoscopeCompat {
         return FarmersDelightCompat.isCookedRice(stack);
     }
 
-    public static boolean isCookedRice(ItemStack stack) {
-        return isRice(stack);
+    /** 判断物品是否为「可放置的米饭」。 */
+    public static boolean isRice(ItemStack stack) {
+        return isCookedRice(stack);
     }
 
     private static Item getRice() {

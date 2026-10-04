@@ -62,7 +62,7 @@ public final class DrinkConsumeHandler {
         }
 
         // 4. 施加 buff
-        for (DrinkConsumeConfig.EffectSpec spec : entry.effects()) {
+        for (FoodConfigManager.EffectSpec spec : entry.effects()) {
             player.addEffect(new MobEffectInstance(spec.effect(), spec.duration(), spec.amplifier()));
         }
 
@@ -115,13 +115,13 @@ public final class DrinkConsumeHandler {
     /**
      * 动画播放中分时段触发饱食度（用于薯片等"一口一口吃"的零食）。
      *
-     * <p>不消耗物品，仅按 entry.saturation() 增加 1 点 food level。
+     * <p>不消耗物品，每个 cue 增加 2 点 food level、1 点饱和度（v2.3.2 调整）。
      * 物品消耗在动画结束时的 {@link #handle} 中处理。
      */
     public static void applyHunger(ServerPlayer player, String drinkId) {
         DrinkConsumeConfig.Entry entry = DrinkConsumeConfig.entry(drinkId);
         if (entry == null) return;
-        // 每个 cue +1 点饱食度；saturation 取 entry.saturation()（薯片 0.0），避免叠加过多饱和度
-        player.getFoodData().eat(1, entry.saturation());
+        // 每个 cue +2 点饱食度；saturation 取 entry.saturation()（薯片 0.25，即实际 +1 点饱和度，v2.3.2 调整）
+        player.getFoodData().eat(2, entry.saturation());
     }
 }

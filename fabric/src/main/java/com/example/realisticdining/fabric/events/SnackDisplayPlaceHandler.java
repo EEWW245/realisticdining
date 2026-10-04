@@ -36,7 +36,8 @@ public class SnackDisplayPlaceHandler {
                         com.example.realisticdining.fabric.client.arm.FpArmRenderSystem.triggerDrinkForMainHand();
                     }
                     // 材质包扩展物品：饮用键=右键时兜底触发材质包动画
-                    if (isPackItem(held)) {
+                    // 但 BlockItem（可放置 3D 方块模型，如原版橡树原木）右键地面应让原版放置方块，不触发动画
+                    if (isPackItem(held) && !(held.getItem() instanceof net.minecraft.world.item.BlockItem)) {
                         com.example.realisticdining.fabric.client.ModKeybinds.triggerDrinkPressed();
                     }
                 }

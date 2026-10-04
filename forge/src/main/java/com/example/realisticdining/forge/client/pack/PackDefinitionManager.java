@@ -28,6 +28,7 @@ import java.util.Set;
  *   <li>{@code nameByItemId}：物品 ID → 资源派生名（用于定位 model/texture/animation）</li>
  *   <li>{@code soundMappings}：物品 ID → (keyframe → soundId) 映射</li>
  *   <li>{@code invisibleMappings}：物品 ID → 隐藏骨骼集合</li>
+ *   <li>{@code translucentSet}：物品 ID → 是否半透明渲染（用于玻璃酒杯等）</li>
  * </ul>
  */
 public class PackDefinitionManager extends SimpleJsonResourceReloadListener {
@@ -46,6 +47,8 @@ public class PackDefinitionManager extends SimpleJsonResourceReloadListener {
     private static final Map<String, Set<String>> invisibleMappings = new HashMap<>();
     /** 物品 ID → 持物模式（static 或 pickup），mixin/hand-change-tracker 用 */
     private static final Map<String, PackMode> modeMappings = new HashMap<>();
+    /** 物品 ID → 是否半透明渲染（玻璃酒杯等用），PackCustomRenderer.getRenderType 用 */
+    private static final Set<String> translucentSet = new HashSet<>();
 
     public PackDefinitionManager() {
         super(GSON, "definitions");
@@ -60,6 +63,7 @@ public class PackDefinitionManager extends SimpleJsonResourceReloadListener {
         soundMappings.clear();
         invisibleMappings.clear();
         modeMappings.clear();
+        translucentSet.clear();
 
         for (Map.Entry<ResourceLocation, JsonElement> entry : objectIn.entrySet()) {
             // 只加载 realisticdining 命名空间的 definitions，过滤掉其他模组（如 Kaleidoscope ImmersiveEating 的 food 命名空间），
@@ -101,6 +105,9 @@ public class PackDefinitionManager extends SimpleJsonResourceReloadListener {
                 }
             }
             modeMappings.put(itemId, definition.getMode());
+            if (definition.isTranslucent()) {
+                translucentSet.add(itemId);
+            }
         }
 
         RealisticDining.LOGGER.info("[材质包扩展] 已加载 {} 个扩展物品定义", DEFINITIONS.size());
@@ -139,5 +146,16 @@ public class PackDefinitionManager extends SimpleJsonResourceReloadListener {
     public static PackMode getMode(String itemId) {
         PackMode mode = modeMappings.get(itemId);
         return mode == null ? PackMode.STATIC : mode;
+    }
+
+    /**
+     * 查询物品是否启用半透明渲染（半透明 + 不剔除背面）。
+     *
+     * @param itemId 物品 ID 字符串（如 "minecraft:apple"）
+     * @return true 表示该物品在 JSON 定义文件中写了 "translucent": true，
+     *         渲染时使用 translucentNoCull；false 表示默认 cutout no cull 渲染
+     */
+    public static boolean isTranslucent(String itemId) {
+        return itemId != null && translucentSet.contains(itemId);
     }
 }

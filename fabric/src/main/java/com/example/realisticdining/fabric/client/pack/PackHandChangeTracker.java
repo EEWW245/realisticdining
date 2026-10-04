@@ -74,6 +74,12 @@ public final class PackHandChangeTracker {
     /**
      * 尝试为指定物品触发 pickup 动画。
      * 仅当物品是扩展物品 + mode = PICKUP + 当前未在 eat 动画锁定中时才触发。
+     *
+     * <p>两个 pickup 模式物品直切手臂乱跑的根治：每个 itemId 分配独立 GeckoLib
+     * animatable id（{@link PackEmpty#getIdForItem}），渲染与触发都按该 id 定位
+     * 专属 AnimatableManager。上一个物品的定格姿态、骨骼快照、插值队列残留在
+     * 它自己的 manager 里，物理上无法成为新物品 pickup 动画的过渡起点。
+     * <p>触发推迟到下一帧（tell），给 GeckoLib 一完整帧清理旧渲染状态。
      */
     private static void tryTriggerPickup(Item item) {
         if (item == null) return;
@@ -83,7 +89,10 @@ public final class PackHandChangeTracker {
         if (PackDefinitionManager.getMode(id.toString()) != PackMode.PICKUP) return;
         // eat 动画播放中（locked）→ 不打断，等 eat 播完自然回到 pickup 定格
         if (PackAnimationLock.isLocked()) return;
-        PackEmpty.triggerPickupAnimation();
+        // 推迟到下一帧触发，给 GeckoLib 一完整帧清理旧渲染状态；
+        // 显式捕获 itemId：触发只作用于该物品专属的 AnimatableManager（状态按物品隔离）
+        String packItemId = id.toString();
+        Minecraft.getInstance().tell(() -> PackEmpty.triggerPickupAnimation(packItemId));
     }
 
     /**
@@ -96,7 +105,9 @@ public final class PackHandChangeTracker {
         if (id == null) return;
         if (!PackDefinitionManager.containsItem(id.toString())) return;
         if (PackDefinitionManager.getMode(id.toString()) != PackMode.PICKUP) return;
-        PackEmpty.stopEatAnimation();
+        // 停止旧物品定格动画（只作用于旧物品专属 manager；新物品的 manager 独立，
+        // 不会被旧定格姿态/插值队列污染 → 切换不乱跑）
+        PackEmpty.stopEatAnimation(id.toString());
     }
 
     /** 重置状态（玩家退出世界时调用，避免跨世界残留）。 */

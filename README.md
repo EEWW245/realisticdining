@@ -10,7 +10,7 @@ A mod that greatly enhances the Minecraft dining experience: from chopping, stir
 2. Install **GeckoLib** (animation engine, required). The 1.21.1 build also uses the **Architectury API** .
 
 **Optional integrations (recommended)**:
-- **[Kaleidoscope Cookery](https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-cookery)** (森罗物语厨房)
+- **[Kaleidoscope Cookery](https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-cookery)**
 - **LegendarySurvivalOverhaul**: drinking also replenishes thirst when installed.
 ---
 
@@ -82,13 +82,15 @@ Press **U** to play the eating animation.
 | `T` | Trigger rice-eating animation |
 | `Y` | Toggle first-person arm animation rendering |
 
+If you want to modify the nutrition, saturation, and buffs of the mod's snacks and drinks (eating-animation items) via a datapack, refer to the example datapack in the repository.
+
 ---
 
 ## Credits
 
 - **Mod ID**: `realisticdining`
 - **Version**: 2.3.0
-- **Dependencies**: GeckoLib, Kaleidoscope Cookery (森罗物语厨房). 1.21.1 build: Architectury API + GeckoLib.
+- **Dependencies**: GeckoLib, Kaleidoscope Cookery. 1.21.1 build: Architectury API + GeckoLib.
 
 ---
 

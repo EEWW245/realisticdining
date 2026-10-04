@@ -32,7 +32,10 @@ public class SnackItemRegistry {
         CRISP("geo/put_crisp.geo.json"),
         ENERGY_BAR("geo/put_energy_bar.geo.json"),
         BISCUIT("geo/put_biscuit.geo.json"),
-        MILKTEA("geo/put_cooked_beef_milktea.geo.json");
+        MILKTEA("geo/put_cooked_beef_milktea.geo.json"),
+        CANNED("geo/put_canned.geo.json"),
+        SCREAM("geo/put_scream.geo.json"),
+        LATIAO("geo/put_latiao.geo.json");
 
         public final String geoPath;
         ModelType(String geoPath) { this.geoPath = geoPath; }
@@ -69,6 +72,15 @@ public class SnackItemRegistry {
         register("realisticdining:cookie_bag_coconut_latte", ModelType.BISCUIT, "textures/block/cookie_bag_coconut_latte.png");
         // === 珍珠奶茶 ===
         register("realisticdining:pearl_milk_tea", ModelType.MILKTEA, "textures/item/cooked_beef_milktea.png");
+        // === 罐头组（5 个，共享 put_canned.geo.json 放置模型，各自不同 block 贴图） ===
+        register("realisticdining:canned_honey_peach", ModelType.CANNED, "textures/block/canned_honey_peach.png");
+        register("realisticdining:canned_mixed_fruit", ModelType.CANNED, "textures/block/canned_mixed_fruit.png");
+        register("realisticdining:canned_beef", ModelType.CANNED, "textures/block/canned_beef.png");
+        register("realisticdining:canned_diced_fish", ModelType.CANNED, "textures/block/canned_diced_fish.png");
+        register("realisticdining:eight_treasure_congee", ModelType.CANNED, "textures/block/eight_treasure_congee.png");
+        // === 尖啸运动饮料 + 辣条 ===
+        register("realisticdining:scream", ModelType.SCREAM, "textures/block/scream.png");
+        register("realisticdining:latiao", ModelType.LATIAO, "textures/block/latiao.png");
     }
 
     public static void register(String itemId, ModelType type, String texturePath) {

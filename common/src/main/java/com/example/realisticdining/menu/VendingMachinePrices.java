@@ -31,6 +31,13 @@ public final class VendingMachinePrices {
         add("cola", 3);
         add("beer", 3);
         add("pearl_milk_tea", 8);        // 珍珠奶茶：8 金粒
+        add("canned_honey_peach", 5);    // 水蜜桃罐头：5 金粒
+        add("canned_mixed_fruit", 5);    // 什锦水果罐头：5 金粒
+        add("canned_beef", 5);            // 牛肉罐头：5 金粒
+        add("canned_diced_fish", 5);      // 鱼丁肉罐头：5 金粒
+        add("eight_treasure_congee", 5); // 八宝粥罐头：5 金粒
+        add("scream", 5);                // 尖啸运动饮料：5 金粒
+        add("latiao", 2);                // 辣条：2 金粒
 
         // === 零食（8 个） ===
         add("potato_chips", 2);

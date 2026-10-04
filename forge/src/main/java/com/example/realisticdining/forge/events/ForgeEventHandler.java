@@ -8,6 +8,7 @@ import com.example.realisticdining.events.SnackDisplayPlacement;
 import com.example.realisticdining.init.ModBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -28,6 +29,25 @@ public class ForgeEventHandler {
             event.setCanceled(true);
             return;
         }
+        // 材质包扩展物品：右键空气时触发材质包动画（改键为右键后必须处理并 cancel 事件，
+        // 否则原版 Item.use() 会执行，创造模式下会让玩家进入 usingItem 状态导致主手被锁）
+        if (event.getLevel().isClientSide) {
+            ItemStack held = event.getEntity().getItemInHand(event.getHand());
+            if (!held.isEmpty()) {
+                ResourceLocation packId = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(held.getItem());
+                if (packId != null && com.example.realisticdining.forge.client.pack.PackDefinitionManager.containsItem(packId.toString())) {
+                    DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                            () -> () -> {
+                                if (com.example.realisticdining.forge.client.ModKeybinds.isDrinkKeyBoundToRightMouse()) {
+                                    com.example.realisticdining.forge.client.pack.PackKeyRouter.tryRoutePackAnimation();
+                                }
+                            });
+                    event.setCancellationResult(InteractionResult.CONSUME);
+                    event.setCanceled(true);
+                    return;
+                }
+            }
+        }
         // 对准空气右键：主手持零食/饮料时直接触发饮用动画（仅客户端）
         // 仅当饮用键已改绑为右键时才触发，避免与默认 U 键冲突
         if (event.getLevel().isClientSide) {
@@ -46,6 +66,26 @@ public class ForgeEventHandler {
     /** 手持零食/饮料右键地面 → 自动创建展示台并放入第一件物品；放置失败（位置放不下）时兜底触发饮用动画 */
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        // 材质包扩展物品：右键地面时触发材质包动画（改键为右键后必须处理，否则原版 Block.use() 会执行导致主手死锁）
+        // 必须在展示台放置之前处理，并 cancel 事件
+        if (event.getLevel().isClientSide) {
+            ItemStack held = event.getEntity().getItemInHand(event.getHand());
+            if (!held.isEmpty()) {
+                ResourceLocation packId = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(held.getItem());
+                if (packId != null && com.example.realisticdining.forge.client.pack.PackDefinitionManager.containsItem(packId.toString())) {
+                    net.minecraftforge.fml.DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                            () -> () -> {
+                                if (com.example.realisticdining.forge.client.ModKeybinds.isDrinkKeyBoundToRightMouse()) {
+                                    com.example.realisticdining.forge.client.pack.PackKeyRouter.tryRoutePackAnimation();
+                                }
+                            });
+                    event.setCancellationResult(InteractionResult.CONSUME);
+                    event.setCanceled(true);
+                    return;
+                }
+            }
+        }
+
         // 双端执行：客户端必须取消事件，否则原版 Block.use() 会先执行，
         // 导致森罗物语桌子先在客户端放置 2D 物品贴图（即使服务端取消也来不及）。
         InteractionResult result = SnackDisplayPlacement.tryPlace(

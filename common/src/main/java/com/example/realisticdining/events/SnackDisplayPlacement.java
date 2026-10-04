@@ -57,9 +57,13 @@ public final class SnackDisplayPlacement {
             return InteractionResult.FAIL;
         }
 
-        // 右键已有展示台：交给方块自身交互（放入槽位）
+        // 右键已有展示台：直接在事件中 tryPlace + SUCCESS（取消 vanilla + 发包），
+        // 阻止 vanilla Block.use → SnackDisplayBlockEntity.tryPlace 二次 shrink。
         if (level.getBlockState(hitPos).getBlock() == ModBlocks.SNACK_DISPLAY.get()) {
-            return InteractionResult.PASS;
+            if (!level.isClientSide && level.getBlockEntity(hitPos) instanceof SnackDisplayBlockEntity be) {
+                be.tryPlace(player, held, hand);
+            }
+            return InteractionResult.SUCCESS;
         }
 
         // 右键森罗物语桌子：在桌面上方一格放置展示台（若上方已有展示台则放入下一槽）
@@ -75,6 +79,11 @@ public final class SnackDisplayPlacement {
         BlockPos placePos = hitPos.relative(hitFace);
         if (!level.getBlockState(placePos).canBeReplaced()) {
             return InteractionResult.PASS;
+        }
+
+        // 客户端返回 SUCCESS（取消 vanilla + 发包给服务端），服务端权威放置 + tryPlace。
+        if (level.isClientSide) {
+            return InteractionResult.SUCCESS;
         }
 
         BlockState state = ModBlocks.SNACK_DISPLAY.get().defaultBlockState()
@@ -102,7 +111,8 @@ public final class SnackDisplayPlacement {
 
         // 桌子上方已有展示台 → 直接放入下一槽
         if (aboveState.getBlock() == ModBlocks.SNACK_DISPLAY.get()) {
-            if (level.getBlockEntity(abovePos) instanceof SnackDisplayBlockEntity be) {
+            // 已有展示台：SUCCESS 取消 vanilla + 发包，服务端 tryPlace。
+            if (!level.isClientSide && level.getBlockEntity(abovePos) instanceof SnackDisplayBlockEntity be) {
                 be.tryPlace(player, held, hand);
             }
             return InteractionResult.SUCCESS;
@@ -111,6 +121,11 @@ public final class SnackDisplayPlacement {
         // 桌子上方必须可替换
         if (!aboveState.canBeReplaced()) {
             return InteractionResult.PASS;
+        }
+
+        // 客户端返回 SUCCESS（取消 vanilla + 发包）。
+        if (level.isClientSide) {
+            return InteractionResult.SUCCESS;
         }
 
         BlockState state = ModBlocks.SNACK_DISPLAY.get().defaultBlockState()

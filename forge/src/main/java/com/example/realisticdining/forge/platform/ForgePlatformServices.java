@@ -16,7 +16,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -180,5 +182,11 @@ public class ForgePlatformServices implements PlatformServices {
     @Override
     public void sendDrinkConsume(String drinkId) {
         ConsumeDrinkPacket.sendToServer(drinkId);
+    }
+
+    /** Forge 平台：SnackDisplayBlock 用 0.25 格薄板，玩家可越过展示台上方瞄准/放置方块。 */
+    @Override
+    public VoxelShape getSnackDisplayShape() {
+        return Block.box(0, 0, 0, 16, 4, 16);
     }
 }

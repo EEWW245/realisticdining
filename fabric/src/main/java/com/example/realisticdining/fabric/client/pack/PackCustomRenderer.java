@@ -106,7 +106,13 @@ public class PackCustomRenderer extends GeoItemRenderer<PackEmpty> {
 
     @Override
     public RenderType getRenderType(PackEmpty animatable, ResourceLocation texture, @Nullable MultiBufferSource bufferSource, float partialTick) {
-        return RenderType.entityTranslucentCull(texture);
+        // 按 JSON 定义文件的 translucent 字段切换渲染类型：
+        // - translucent: true  → translucentNoCull（半透明 + 不剔除背面，适合玻璃酒杯）
+        // - 默认            → entityCutoutNoCull（不透明/cutout 像素 + 不剔除背面，与 DrinkAnimRenderer 一致）
+        if (PackDefinitionManager.isTranslucent(itemId)) {
+            return PackRenderTypes.translucentNoCull(texture);
+        }
+        return RenderType.entityCutoutNoCull(texture);
     }
 
     /** 持物阶段（非动画播放）隐藏的骨骼：定义文件 invisible 字段或父骨骼命中即隐藏。 */
@@ -122,9 +128,10 @@ public class PackCustomRenderer extends GeoItemRenderer<PackEmpty> {
 
     /** 当前是否在播放 eat 触发动画。 */
     private boolean isPlayingAnimation() {
+        // 按本物品专属 id 定位 manager（与其他扩展物品的动画状态隔离）
+        long instanceId = PackEmpty.getIdForItem(itemId);
         PackEmpty empty = PackItems.EMPTY_ITEM;
         if (empty == null) return false;
-        long instanceId = software.bernie.geckolib.animatable.GeoItem.getId(empty.getRenderStack());
         software.bernie.geckolib.core.animation.AnimationController<?> controller = empty.getAnimatableInstanceCache()
                 .getManagerForId(instanceId)
                 .getAnimationControllers()

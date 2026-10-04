@@ -18,6 +18,7 @@ import com.example.realisticdining.forge.network.PackAnimationPacket;
 import com.example.realisticdining.forge.network.PackFinishPacket;
 import com.example.realisticdining.forge.network.PackSoundPacket;
 import com.example.realisticdining.forge.client.pack.PackItems;
+import com.example.realisticdining.forge.loot.FoodConfigReloadListener;
 import com.example.realisticdining.forge.loot.ForgeLootModifiers;
 import com.example.realisticdining.forge.platform.ForgePlatformServices;
 import com.example.realisticdining.init.ModBlockEntities;
@@ -27,6 +28,7 @@ import com.example.realisticdining.platform.ServiceHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -49,6 +51,15 @@ public class ForgeRealisticDining {
 
         // 全局战利品修改器：往所有原版箱子追加零食/饮料
         ForgeLootModifiers.register(modEventBus);
+
+        // 食物配置数据包 ReloadListener：扫描 data/<任意 ns>/foods/drinks/*.json 和 dishes/*.json
+        // 玩家可写数据包覆盖任意饮料/零食/菜品的饱食度、饱和度、buff
+        // 注意：AddReloadListenerEvent 是 GameEvent，必须注册到 Forge Bus（MinecraftForge.EVENT_BUS），
+        // 不能注册到 modEventBus（mod bus 只接受 IModBusEvent 子类），否则会在 mod 加载阶段抛
+        // IllegalArgumentException: Listener for event class ...AddReloadListenerEvent takes an argument
+        // that is not a subtype of the base type interface ...IModBusEvent
+        MinecraftForge.EVENT_BUS.addListener((AddReloadListenerEvent event) ->
+                event.addListener(new FoodConfigReloadListener()));
 
         modEventBus.addListener(ForgeRealisticDining::onCommonSetup);
 

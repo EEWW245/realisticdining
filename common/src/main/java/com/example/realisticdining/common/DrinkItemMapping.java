@@ -42,6 +42,15 @@ public final class DrinkItemMapping {
         DRINK_TO_SUPPLIER.put("cookie_bag_coconut_latte", ModItems.COOKIE_BAG_COCONUT_LATTE);
         // 珍珠奶茶（1 次）
         DRINK_TO_SUPPLIER.put("pearl_milk_tea", ModItems.PEARL_MILK_TEA);
+        // 罐头组（1 次，无 buff，6 点饱食度）
+        DRINK_TO_SUPPLIER.put("canned_honey_peach", ModItems.CANNED_HONEY_PEACH);
+        DRINK_TO_SUPPLIER.put("canned_mixed_fruit", ModItems.CANNED_MIXED_FRUIT);
+        DRINK_TO_SUPPLIER.put("canned_beef", ModItems.CANNED_BEEF);
+        DRINK_TO_SUPPLIER.put("canned_diced_fish", ModItems.CANNED_DICED_FISH);
+        DRINK_TO_SUPPLIER.put("eight_treasure_congee", ModItems.EIGHT_TREASURE_CONGEE);
+        // 尖啸运动饮料 + 辣条（1 次）
+        DRINK_TO_SUPPLIER.put("scream", ModItems.SCREAM);
+        DRINK_TO_SUPPLIER.put("latiao", ModItems.LATIAO);
     }
 
     private DrinkItemMapping() {}

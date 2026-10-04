@@ -28,6 +28,9 @@ public final class PackAnimationLock {
         if (mc.player == null) return;
         lockedStack = mc.player.getMainHandItem().copy();
         lockedHotbarSlot = mc.player.getInventory().selected;
+        com.example.realisticdining.RealisticDining.LOGGER.info("[RD诊断] Lock: lock() 物品={} 数量={} 槽位={}",
+                net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(lockedStack.getItem()),
+                lockedStack.getCount(), lockedHotbarSlot);
     }
 
     /** 强制保持锁定的槽位（每帧调用）。 */
@@ -38,7 +41,27 @@ public final class PackAnimationLock {
             unlock();
             return;
         }
+        // 先强制切回锁定槽位：玩家滚轮/数字键切走后必须先切回，
+        // 否则后续 mainHand 检查的是新槽位物品 → 误解锁
         mc.player.getInventory().selected = lockedHotbarSlot;
+
+        // 原版使用状态冲突（极早期，动画未开始）→ 中断+解锁防死锁
+        if (mc.player.isUsingItem() && !PackEmpty.isEatAnimationPlaying(PackEmpty.getCurrentRenderItemId())) {
+            mc.player.stopUsingItem();
+            PackEmpty.stopEatAnimation(PackEmpty.getCurrentRenderItemId());
+            unlock();
+            return;
+        }
+        // 锁定期间主手物品被丢弃/移除（Q 丢单个、Ctrl+Q 丢整组等）→ 中断动画并解锁
+        // 只比较物品类型，不比较数量：动画期间服务端可能已消耗 1 个（数量减 1），
+        // 若用 ItemStack.matches 会误解锁 → PackEatFinishWatcher 不再调用 finishEatAnimation → 不消耗
+        net.minecraft.world.item.ItemStack mainHand = mc.player.getMainHandItem();
+        if (mainHand.isEmpty() || !net.minecraft.world.item.ItemStack.isSameItem(mainHand, lockedStack)) {
+            com.example.realisticdining.RealisticDining.LOGGER.info("[RD诊断] Lock: 主手物品类型不匹配(丢弃/放置/移除) → 中断+解锁");
+            PackEmpty.stopEatAnimation(PackEmpty.getCurrentRenderItemId());
+            unlock();
+            return;
+        }
     }
 
     /** 解除锁定。 */

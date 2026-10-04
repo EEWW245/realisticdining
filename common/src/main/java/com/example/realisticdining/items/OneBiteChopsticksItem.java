@@ -44,6 +44,7 @@ public class OneBiteChopsticksItem extends Item {
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if (entity instanceof Player player) {
             if (!level.isClientSide) {
+                // 硬编码默认值 3/0.4（菜品不支持数据包覆盖）
                 player.getFoodData().eat(3, 0.4f);
                 level.playSound(null, player.getX(), player.getY(), player.getZ(),
                         SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 1.0F, 1.0F);

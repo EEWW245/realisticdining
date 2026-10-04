@@ -42,14 +42,26 @@ public final class PackClientEvents {
         }
         // 动画锁定期间强制保持槽位
         if (PackAnimationLock.isLocked()) {
-            if (mc.screen != null) {
-                // 玩家打开背包等界面 → 强制中止动画
-                PackEmpty.stopEatAnimation();
+            if (mc.screen instanceof net.minecraft.client.gui.screens.PauseScreen) {
+                // 玩家按 ESC 打开暂停菜单 → 强制中止动画（作用于当前渲染物品的专属 manager）
+                // 只对 ESC 暂停菜单中断，打开背包/箱子/合成等 GUI 时动画继续播放
+                String itemId = PackEmpty.getCurrentRenderItemId();
+                PackEmpty.stopEatAnimation(itemId);
+                // PICKUP 模式：controller.stop() 会让骨骼 lerp 回 geo.json 初始姿态,
+                // 表现为"静态模型残留"（如 canned_food 的初始罐头模型）。
+                // 补一次 triggerPickupAnimation 让 hold_on_last_frame 重新定格在持物姿态,
+                // 与正常播完路径 finishEatAnimation 末尾的重新定格逻辑保持一致。
+                if (itemId != null
+                        && PackDefinitionManager.getMode(itemId) == PackMode.PICKUP) {
+                    PackEmpty.triggerPickupAnimation(itemId);
+                }
                 PackAnimationLock.unlock();
                 return;
             }
             PackAnimationLock.tickKeepSlot();
         }
+        // eat 动画播完自动消耗（材质包无需手写 finished 指令）
+        PackEatFinishWatcher.tick();
     }
 
     @SubscribeEvent

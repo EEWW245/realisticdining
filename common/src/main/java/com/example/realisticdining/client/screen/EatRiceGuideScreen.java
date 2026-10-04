@@ -37,7 +37,10 @@ public class EatRiceGuideScreen extends AbstractContainerScreen<EatRiceGuideMenu
                         "把森罗物语的米饭物品切换到副手，会显示手臂拿着米饭的3D模型，",
                         "然后主手拿着本模组的筷子物品，按一次T建可播放一次吃饭动画，",
                         "T键是默认的，可在按键绑定配置那里更改。",
-                        "也可以按y键（默认）关闭本模组手臂以及吃米饭动画。"
+                        "也可以按F8键（默认）关闭本模组手臂以及吃米饭动画。",
+                        "fabric端在原版只有我模组的情况下，把T键改为右键可能会",
+                        "导致右键放不了方块，但在一些整合包中，这个问题可以解决，",
+                        "如果你想把T键改为右键可以在你的整合包试一下。"
                 )
         ));
 
@@ -64,10 +67,8 @@ public class EatRiceGuideScreen extends AbstractContainerScreen<EatRiceGuideMenu
                         "更真实的第一人称模型，史诗战斗，punchy，",
                         "ysm（是，史蒂夫模型），",
                         "Forge/NeoForge端的Hold My Items - Reforged",
-                        "注意：1.fabric端对更真实的第一人称模型",
-                        "兼容效果不太好，可按按键绑定配置里的",
-                        "更真实的第一人称模型切换第一人称按键。",
-                        "2.与fabric端Hold My Items 不兼容，与另一款",
+                        "注意：",
+                        "与fabric端Hold My Items 不兼容，与另一款",
                         "Forge/NeoForge端的模组Hold My Items - ReFoxed不兼容"
                 )
         ));
@@ -88,6 +89,8 @@ public class EatRiceGuideScreen extends AbstractContainerScreen<EatRiceGuideMenu
                         "如果把森罗物语的米饭物品切换到副手，如果不显示手臂模型，",
                         "按对应的按键无法触发动画的话，",
                         "检查是否安装了我以上说的没有兼容到的其他手臂动画模组。",
+                        "或者如果没有饮料零食和米饭进动画的话，检查是否按到了关闭吃米饭动画按键。",
+                        "（再按一次可恢复）",
                         "",
                         "如果有问题，可以在mc百科，b站上反馈。"
                 )

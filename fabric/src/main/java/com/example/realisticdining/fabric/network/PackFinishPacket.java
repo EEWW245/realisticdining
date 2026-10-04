@@ -59,9 +59,10 @@ public class PackFinishPacket {
             // 食物等可使用物品：走原版 finishUsingItem
             result = stack.finishUsingItem(player.level(), player);
         } else {
-            // 非食物或不可使用：仍清状态，避免卡死，不消耗
-            ServerEatingState.setEating(player.getUUID(), false);
-            return;
+            // 非食物或不可使用物品（定义文件绑定的任意物品）：手动减 1
+            // 与 Forge 端逻辑一致，确保材质包扩展的非原版食物物品也能消耗
+            stack.shrink(1);
+            result = stack;
         }
         player.setItemInHand(hand, result);
         ServerEatingState.setEating(player.getUUID(), false);

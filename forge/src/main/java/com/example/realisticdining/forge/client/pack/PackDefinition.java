@@ -14,6 +14,9 @@ import java.util.Map;
  *       pickup 模式拿到物品自动播放 pickup 动画并定格在持物姿态。</li>
  *   <li>{@code invisible}：持物状态隐藏的骨骼名（可选，空数组或不写表示不隐藏）</li>
  *   <li>{@code sounds}：音效关键帧 → 音效 ID 映射（可选，如 {"eating": "realisticdining:eat"})</li>
+ *   <li>{@code translucent}：是否使用半透明渲染（可选，默认 false）。
+ *       true 时改用半透明 + 不剔除背面的渲染类型，适合玻璃酒杯等半透明物体；
+ *       false 时保持默认的 cutout 不剔除渲染（不透明像素或全透明像素）。</li>
  * </ul>
  *
  * <p>资源路径约定（约定优于配置）：
@@ -31,6 +34,8 @@ public class PackDefinition {
     private String mode;
     private Map<String, String> sounds;
     private List<String> invisible;
+    /** 是否使用半透明渲染（半透明 + 不剔除背面），适合玻璃酒杯。默认 false。 */
+    private boolean translucent;
 
     public String getItem() {
         return item;
@@ -47,5 +52,10 @@ public class PackDefinition {
 
     public List<String> getInvisible() {
         return invisible;
+    }
+
+    /** 是否启用半透明渲染（半透明 + 不剔除背面）。 */
+    public boolean isTranslucent() {
+        return translucent;
     }
 }

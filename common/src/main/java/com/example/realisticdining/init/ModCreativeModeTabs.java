@@ -37,6 +37,14 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.COOKIE_BAG.get());
                         output.accept(ModItems.COOKIE_BAG_COCONUT_LATTE.get());
                         output.accept(ModItems.PEARL_MILK_TEA.get());
+                        // 罐头组
+                        output.accept(ModItems.CANNED_HONEY_PEACH.get());
+                        output.accept(ModItems.CANNED_MIXED_FRUIT.get());
+                        output.accept(ModItems.CANNED_BEEF.get());
+                        output.accept(ModItems.CANNED_DICED_FISH.get());
+                        output.accept(ModItems.EIGHT_TREASURE_CONGEE.get());
+                        output.accept(ModItems.SCREAM.get());
+                        output.accept(ModItems.LATIAO.get());
                         output.accept(ModItems.GREEN_ONION.get());
                         output.accept(ModItems.GREEN_ONION_SEEDS.get());
                         output.accept(ModItems.CORIANDER.get());

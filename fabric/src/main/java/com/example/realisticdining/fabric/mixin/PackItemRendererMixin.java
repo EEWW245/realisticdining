@@ -44,6 +44,8 @@ import java.util.Map;
 public class PackItemRendererMixin {
 
     private static final Map<String, PackCustomRenderer> rendererCache = new HashMap<>();
+    /** 上次渲染决策（诊断日志限流：决策变化才打印）。 */
+    private static String lastDecision = "";
 
     @Inject(method = "renderStatic(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/level/Level;III)V",
             at = @At("HEAD"), cancellable = true)
@@ -72,6 +74,7 @@ public class PackItemRendererMixin {
         if (mc.player != null && mc.player.isUsingItem()
                 && ItemStack.isSameItem(mc.player.getUseItem(), stack)) {
             // 正在吃/喝（原版使用动画中）→ 放行让原版处理
+            logDecision("放行:原版使用中(isUsingItem)");
             return;
         }
         if (stack.isEmpty()) {
@@ -87,13 +90,24 @@ public class PackItemRendererMixin {
         if (PackItems.EMPTY_ITEM == null) {
             return;
         }
+        logDecision("拦截:渲染材质包模型(" + id + ")");
 
         PackCustomRenderer renderer = rendererCache.computeIfAbsent(id.toString(), PackCustomRenderer::new);
         poseStack.pushPose();
         // 第一人称手持位置修正（参考 ImmersiveEating）
         poseStack.translate(-1.05F, -0.35F, -0.8F);
-        renderer.renderByItem(PackItems.EMPTY_ITEM.getRenderStack(), context, poseStack, buffer, light, overlay);
+        // 渲染传 per-item 代理 stack（附加 GeckoLib 独立 animatable id NBT）：
+        // GeckoLib 据此为每个物品定位独立的 AnimatableManager，动画状态互不污染
+        renderer.renderByItem(PackItems.EMPTY_ITEM.getRenderStackFor(id.toString()), context, poseStack, buffer, light, overlay);
         poseStack.popPose();
         ci.cancel();
+    }
+
+    /** 诊断日志：第一人称渲染决策变化时打印（避免每帧刷屏）。 */
+    private static void logDecision(String decision) {
+        if (!decision.equals(lastDecision)) {
+            lastDecision = decision;
+            com.example.realisticdining.RealisticDining.LOGGER.info("[RD诊断] RendererMixin: {}", decision);
+        }
     }
 }

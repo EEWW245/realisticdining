@@ -10,7 +10,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
-import software.bernie.geckolib.animatable.GeoItem;
 
 import java.util.function.Supplier;
 
@@ -60,7 +59,9 @@ public class PackAnimationPacket {
                 com.example.realisticdining.RealisticDining.LOGGER.warn("[材质包扩展调试] 服务端 EMPTY_ITEM 为 null，触发包被丢弃");
                 return;
             }
-            long geoId = GeoItem.getOrAssignId(empty.getRenderStack(), player.serverLevel());
+            // id 按 itemId 派生，与客户端渲染用的 AnimatableManager 一致
+            // （原 getOrAssignId 分配的随机 id 与渲染端不匹配）
+            long geoId = PackEmpty.getIdForItem(id.toString());
             com.example.realisticdining.RealisticDining.LOGGER.info("[材质包扩展调试] 服务端收到触发包，物品 {}，geoId={}，发送 triggerAnim", id, geoId);
             empty.triggerAnim(player, geoId, "eat", "eat");
         });

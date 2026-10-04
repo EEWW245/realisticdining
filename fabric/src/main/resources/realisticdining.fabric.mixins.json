@@ -5,12 +5,13 @@
   "minVersion": "0.8",
   "refmap": "realisticdining.fabric.refmap.json",
   "client": [
+    "Accessor.ItemInHandRendererAccessor",
     "ItemInHandRendererMixin",
-    "FirstPersonModelLogicHandlerMixin",
     "ItemInHandLayerMixin",
     "PunchyCompatMixin",
     "PackItemRendererMixin",
-    "ClientPackSourceMixin"
+    "ClientPackSourceMixin",
+    "MouseHandlerMixin"
   ],
   "mixins": [],
   "server": [],

@@ -1,6 +1,7 @@
 package com.example.realisticdining.blocks;
 
 import com.example.realisticdining.blockentities.SnackDisplayBlockEntity;
+import com.example.realisticdining.platform.ServiceHelper;
 import com.example.realisticdining.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -43,7 +44,8 @@ public class SnackDisplayBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 4, 16);
+    // SHAPE 由 ServiceHelper.getPlatformServices().getSnackDisplayShape() 按平台返回：
+    // Fabric = 完整 1 格（命中精度）；Forge = 0.25 格薄板（可越过上方放置）。
 
     public SnackDisplayBlock(Properties properties) {
         super(properties);
@@ -68,7 +70,7 @@ public class SnackDisplayBlock extends BaseEntityBlock {
     @Override
     public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level,
                                         @NotNull BlockPos pos, @NotNull CollisionContext context) {
-        return SHAPE;
+        return ServiceHelper.getPlatformServices().getSnackDisplayShape();
     }
 
     @Nullable

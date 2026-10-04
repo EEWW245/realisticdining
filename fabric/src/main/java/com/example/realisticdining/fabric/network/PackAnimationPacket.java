@@ -11,7 +11,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import software.bernie.geckolib.animatable.GeoItem;
 
 /**
  * 材质包扩展动画触发 C2S 网络包（Fabric 1.20.1）。
@@ -47,14 +46,22 @@ public class PackAnimationPacket {
         if (player == null) return;
         // 校验主手物品确实是材质包扩展物品（防伪造）
         net.minecraft.world.item.ItemStack stack = player.getMainHandItem();
-        if (stack.isEmpty()) return;
+        if (stack.isEmpty()) {
+            com.example.realisticdining.RealisticDining.LOGGER.info("[RD诊断] Packet服务端: 收到触发包但主手为空 → 忽略");
+            return;
+        }
         ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
-        if (id == null || !PackDefinitionManager.containsItem(id.toString())) return;
+        if (id == null || !PackDefinitionManager.containsItem(id.toString())) {
+            com.example.realisticdining.RealisticDining.LOGGER.info("[RD诊断] Packet服务端: 主手 {} 非扩展物品 → 忽略", id);
+            return;
+        }
 
-        // 触发 GeckoLib 同步动画
+        // 触发 GeckoLib 同步动画。id 按 itemId 派生，与客户端渲染用的
+        // AnimatableManager 一致（原 getOrAssignId 分配的随机 id 与渲染端不匹配）
         PackEmpty empty = PackItems.EMPTY_ITEM;
         if (empty == null) return;
-        long geoId = GeoItem.getOrAssignId(empty.getRenderStack(), player.serverLevel());
+        long geoId = PackEmpty.getIdForItem(id.toString());
+        com.example.realisticdining.RealisticDining.LOGGER.info("[RD诊断] Packet服务端: 物品 {} → triggerAnim(geoId={})", id, geoId);
         empty.triggerAnim(player, geoId, "eat", "eat");
     }
 }

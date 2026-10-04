@@ -20,6 +20,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
@@ -92,4 +93,10 @@ public interface PlatformServices {
      * @param drinkId 与 {@link com.example.realisticdining.common.DrinkItemMapping} 中登记的 drinkId 一致
      */
     void sendDrinkConsume(String drinkId);
+
+    /**
+     * 返回 SnackDisplayBlock 的视线检测箱（SHAPE）。
+     * Fabric 平台 = 完整 1 格（16,16,16）；Forge/NeoForge 平台 = 0.25 格薄板（16,4,16）。
+     */
+    VoxelShape getSnackDisplayShape();
 }

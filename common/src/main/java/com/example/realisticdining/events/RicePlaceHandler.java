@@ -27,9 +27,12 @@ public class RicePlaceHandler {
                 }
                 
                 if (world.getBlockState(pos.above()).getBlock() == Blocks.AIR) {
-                    world.setBlock(pos.above(), ModBlocks.RICE_BOWL.get().defaultBlockState(), 3);
-                    if (!player.isCreative()) {
-                        heldItem.shrink(1);
+                    // 客户端只返回 SUCCESS 阻止原版，服务端权威放置 + 消耗（避免双端重复 setBlock/shrink）
+                    if (!world.isClientSide) {
+                        world.setBlock(pos.above(), ModBlocks.RICE_BOWL.get().defaultBlockState(), 3);
+                        if (!player.isCreative()) {
+                            heldItem.shrink(1);
+                        }
                     }
                     return InteractionResult.SUCCESS;
                 }
