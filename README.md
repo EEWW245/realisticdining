@@ -12,7 +12,6 @@ A mod that greatly enhances the Minecraft dining experience: from chopping, stir
 **Optional integrations (recommended)**:
 - **[Kaleidoscope Cookery](https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-cookery)**
 - **LegendarySurvivalOverhaul**: drinking also replenishes thirst when installed.
-
 ---
 
 ## Resource Pack Extension (Custom 3D Food Animations)
@@ -46,7 +45,7 @@ assets/realisticdining/
 ```
 
 - `item`: the item ID to override rendering for; items from any mod are supported.
-- `mode`: holding mode. "static" ,shows the model immediately on pickup with procedural sway; "pickup" ,automatically plays a "pick up" animation on pickup and holds the final pose.
+- `mode`: holding mode. "static",shows the model immediately on pickup with procedural sway; "pickup" ,automatically plays a "pick up" animation on pickup and holds the final pose.
 - `invisible`: bone names hidden during the idle (holding) stage. Hiding a parent bone also hides its children; they reappear during the eating animation.
 - `sounds`: maps animation sound keyframe names to game sound IDs. `realisticdining:eat` maps to `realisticdining/sounds/eat.ogg`.
 
@@ -68,9 +67,11 @@ The number of sub-animations in an animation file depends on `mode`:
 | `pickup` | 2: `pickup` + `eat` | `pickup` picks up to the holding pose, press U to play `eat` |
 
 - Animation names: "eat"; in "pickup" mode use "pickup"and "eat".
-- At the end of the animation, add an Animation Effects → Instructions → Script entry named`finished`in the timeline
+- The eat animation must play once and cannot be set to hold on the last frame, otherwise the arms will be misaligned after the animation finishes.
 
 Press **U** to play the eating animation.
+
+
 ---
 
 ## Keybinds
@@ -80,7 +81,7 @@ Press **U** to play the eating animation.
 | `U` | Trigger drink/eat animation (holding a snack or drink) |
 | `T` | Trigger rice-eating animation |
 | `Y` | Toggle first-person arm animation rendering |
-  
+
 If you want to modify the nutrition, saturation, and buffs of the mod's snacks and drinks (eating-animation items) via a datapack, refer to the example datapack in the repository.
 
 ---
@@ -88,7 +89,7 @@ If you want to modify the nutrition, saturation, and buffs of the mod's snacks a
 ## Credits
 
 - **Mod ID**: `realisticdining`
-- **Version**: 2.3.0
+- **Version**: 2.4.0
 - **Dependencies**: GeckoLib, Kaleidoscope Cookery. 1.21.1 build: Architectury API + GeckoLib.
 
 ---
