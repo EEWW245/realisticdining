@@ -109,12 +109,18 @@ public class KaleidoscopeCookeryCompat {
     /**
      * 检查物品是否是主模组的米饭(或农夫乐事熟米饭)
      */
+    /** 判断物品是否为「米饭」。用于吃米饭动画与放置米饭碗。 */
     public static boolean isCookedRice(ItemStack stack) {
         // Tag 优先：覆盖森罗/农夫乐事/整合包统一物品
         if (!stack.isEmpty() && stack.is(ModTags.Items.RICE)) {
             return true;
         }
         return isItem(stack, COOKED_RICE) || FarmersDelightCompat.isCookedRice(stack);
+    }
+
+    /** 判断物品是否为「可放置的米饭」。 */
+    public static boolean isRice(ItemStack stack) {
+        return isCookedRice(stack);
     }
 
     /**

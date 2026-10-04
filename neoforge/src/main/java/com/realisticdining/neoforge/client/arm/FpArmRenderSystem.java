@@ -392,17 +392,32 @@ public class FpArmRenderSystem {
         
         EatRiceState state = EatRiceState.getInstance();
         
+        // 主手非筷子：暂停吃米饭动画（保留进度），不触发
+        if (!hasChopsticks) {
+            if (state.isEating() || state.isAnimationPlaying()) {
+                state.stopAnimation();
+                LEFT_ARM_ANIMATABLE.stopBiteAnimation();
+                RIGHT_ARM_ANIMATABLE.stopBiteAnimation();
+                ServerEatingState.setEating(player.getUUID(), false);
+            }
+            return;
+        }
+
         if (state.isEating()) {
+            // v2.3.x+ 继续吃下一口时重新标记进食：切走筷子后 updateState 已清理过，切回需恢复放置拦截
+            ServerEatingState.setEating(player.getUUID(), true);
             LEFT_ARM_ANIMATABLE.triggerBiteAnimation();
             RIGHT_ARM_ANIMATABLE.triggerBiteAnimation();
             if (mc.level != null) {
                 state.startBite(mc.level.getGameTime());
             }
-        } else if (hasRice && hasChopsticks) {
+        } else if (hasRice) {
             if (!startEatingPacketSent) {
                 ConsumeRicePacket.sendStartEatingToServer();
                 startEatingPacketSent = true;
             }
+            // 客户端本地同步 eating 状态（对齐喝饮料 triggerDrink）
+            ServerEatingState.setEating(player.getUUID(), true);
             LEFT_ARM_ANIMATABLE.triggerBiteAnimation();
             RIGHT_ARM_ANIMATABLE.triggerBiteAnimation();
             if (mc.level != null) {
@@ -448,6 +463,18 @@ public class FpArmRenderSystem {
             state.update(mc.level.getGameTime());
         }
         
+        // v2.3.x+ 主手切走筷子：正确清理吃米饭进食状态（允许正常放置展示台），
+        // 保留吃米饭进度（state.isEating 不变，切回可继续吃下一口）。
+        // isDrinkPlaying() 保护：正在喝零食/饮料时不清理，避免误伤喝饮料的 ServerEatingState。
+        if (!hasChopsticks && state.isEating()) {
+            state.stopAnimation();
+            LEFT_ARM_ANIMATABLE.stopBiteAnimation();
+            RIGHT_ARM_ANIMATABLE.stopBiteAnimation();
+            if (!isDrinkPlaying()) {
+                ServerEatingState.setEating(player.getUUID(), false);
+            }
+        }
+
         if (hasRice && state.isFinished() && !state.shouldConsumeRice()) {
             state.reset();
             consumePacketSent = false;
@@ -458,6 +485,7 @@ public class FpArmRenderSystem {
             ConsumeRicePacket.sendConsumeToServer();
             consumePacketSent = true;
             state.onRiceConsumed();
+            ServerEatingState.setEating(player.getUUID(), false);
         }
 
         if (state.shouldPlayEatSound()) {

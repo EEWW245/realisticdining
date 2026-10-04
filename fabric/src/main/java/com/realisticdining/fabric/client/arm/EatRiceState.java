@@ -117,6 +117,12 @@ public class EatRiceState {
         }
     }
 
+    /** 暂停咬动画但保留进度（currentBiteIndex 不变）。主手切走筷子时调用，切回后可继续吃下一口。 */
+    public void stopAnimation() {
+        animationStartTime = -1;
+        isAnimationPlaying = false;
+    }
+
     public void reset() {
         currentBiteIndex = 0;
         animationStartTime = -1;

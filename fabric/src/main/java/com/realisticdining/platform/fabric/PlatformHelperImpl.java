@@ -11,6 +11,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PlatformHelperImpl {
 
@@ -62,6 +64,11 @@ public class PlatformHelperImpl {
 
     public static void sendVendingPurchase(ResourceLocation itemId) {
         VendingMachinePurchasePacket.sendPurchaseToServer(itemId);
+    }
+
+    /** Fabric 平台：SnackDisplayBlock 用完整 1 格碰撞箱，保证 3D 模型右键命中精度。 */
+    public static VoxelShape getSnackDisplayShape() {
+        return Block.box(0, 0, 0, 16, 16, 16);
     }
 
     public static void sendDrinkConsume(String drinkId, boolean startEating) {

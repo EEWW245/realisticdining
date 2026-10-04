@@ -29,7 +29,15 @@ public class ModCreativeModeTabsFabric {
                     output.accept(new ItemStack(ModItems.COLA.get()));
                     output.accept(new ItemStack(ModItems.BEER.get()));
                     output.accept(new ItemStack(ModItems.PEARL_MILK_TEA.get()));
-                    // === 零食（9 个） ===
+                    // 罐头组（5 个）
+                    output.accept(new ItemStack(ModItems.CANNED_HONEY_PEACH.get()));
+                    output.accept(new ItemStack(ModItems.CANNED_MIXED_FRUIT.get()));
+                    output.accept(new ItemStack(ModItems.CANNED_BEEF.get()));
+                    output.accept(new ItemStack(ModItems.CANNED_DICED_FISH.get()));
+                    output.accept(new ItemStack(ModItems.EIGHT_TREASURE_CONGEE.get()));
+                        output.accept(new ItemStack(ModItems.SCREAM.get()));
+                        output.accept(new ItemStack(ModItems.LATIAO.get()));
+                        // === 零食（9 个） ===
                     output.accept(new ItemStack(ModItems.POTATO_CHIPS.get()));
                     output.accept(new ItemStack(ModItems.POTATO_CHIPS_BBQ.get()));
                     output.accept(new ItemStack(ModItems.POTATO_CHIPS_CUCUMBER.get()));

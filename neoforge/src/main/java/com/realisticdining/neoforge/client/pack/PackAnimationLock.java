@@ -39,7 +39,26 @@ public final class PackAnimationLock {
             unlock();
             return;
         }
+        // 先强制切回锁定槽位：玩家滚轮/数字键切走后必须先切回，
+        // 否则后续 mainHand 检查的是新槽位物品 → 误解锁
         mc.player.getInventory().selected = lockedHotbarSlot;
+
+        // 原版使用状态冲突（极早期，动画未开始）→ 中断+解锁防死锁
+        if (mc.player.isUsingItem() && !PackEmpty.isEatAnimationPlaying(PackEmpty.getCurrentRenderItemId())) {
+            mc.player.stopUsingItem();
+            PackEmpty.stopEatAnimation(PackEmpty.getCurrentRenderItemId());
+            unlock();
+            return;
+        }
+        // 锁定期间主手物品被丢弃/移除（Q 丢单个、Ctrl+Q 丢整组等）→ 中断动画并解锁
+        // 只比较物品类型，不比较数量：动画期间服务端可能已消耗 1 个（数量减 1），
+        // 若用 ItemStack.matches 会误解锁 → PackEatFinishWatcher 不再调用 finishEatAnimation → 不消耗
+        ItemStack mainHand = mc.player.getMainHandItem();
+        if (mainHand.isEmpty() || !ItemStack.isSameItem(mainHand, lockedStack)) {
+            PackEmpty.stopEatAnimation(PackEmpty.getCurrentRenderItemId());
+            unlock();
+            return;
+        }
     }
 
     /** 解除锁定。 */

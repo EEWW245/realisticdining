@@ -8,6 +8,9 @@ import com.realisticdining.neoforge.client.arm.FpArmRenderSystem;
 import com.realisticdining.neoforge.client.pack.PackKeyRouter;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -40,7 +43,7 @@ public class ModKeybinds {
                 "key.realisticdining.toggle_arm_render",
                 KeyConflictContext.IN_GAME,
                 InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_Y,
+                GLFW.GLFW_KEY_F8,
                 "key.categories.realisticdining"
         );
         event.register(toggleArmRenderKey);
@@ -75,7 +78,11 @@ public class ModKeybinds {
 
     public static void checkKeybindings() {
         if (triggerEatRiceKey != null && triggerEatRiceKey.consumeClick()) {
-            FpArmRenderSystem.triggerEatRiceAnimation();
+            // 吃米饭键=右键 且 主手是零食/饮料时，让位给右键事件（放置展示台/兜底饮用），
+            // 避免 triggerEatRiceAnimation 的"主手非筷子"分支误清 ServerEatingState（与喝饮料键让位机制一致）。
+            if (!(isEatRiceKeyBoundToRightMouse() && isMainHandSnack())) {
+                FpArmRenderSystem.triggerEatRiceAnimation();
+            }
         }
         if (toggleArmRenderKey != null && toggleArmRenderKey.consumeClick()) {
             FpArmRenderSystem.toggleArmRender();
@@ -90,6 +97,11 @@ public class ModKeybinds {
             // 饮用键=右键 且 主手是零食/饮料时，交给右键事件（放置展示台/兜底饮用），跳过，避免重复；
             // Pack 扩展物品不受右键事件处理，需正常触发材质包动画
             if (isDrinkKeyBoundToRightMouse() && isMainHandSnack()) {
+                return;
+            }
+            // 饮用键=右键 且 主手是 BlockItem 材质包扩展物品时，让位给原版右键放置方块（生成 3D 模型）。
+            // 不触发动画——右键空气时由 RightClickItem 兜底触发动画。
+            if (isDrinkKeyBoundToRightMouse() && isMainHandBlockPackItem()) {
                 return;
             }
             triggerDrinkPressed();
@@ -114,11 +126,35 @@ public class ModKeybinds {
         return triggerDrinkKey != null && triggerDrinkKey.matchesMouse(GLFW.GLFW_MOUSE_BUTTON_RIGHT);
     }
 
+    /**
+     * 判断「吃米饭键」（默认 T）当前是否绑定为鼠标右键。
+     * <p>供右键时让位逻辑使用：吃米饭键=右键且主手零食/饮料时，让位给右键事件，
+     * 避免 triggerEatRiceAnimation 的"主手非筷子"分支误清 ServerEatingState。
+     */
+    public static boolean isEatRiceKeyBoundToRightMouse() {
+        return triggerEatRiceKey != null && triggerEatRiceKey.matchesMouse(GLFW.GLFW_MOUSE_BUTTON_RIGHT);
+    }
+
     /** 主手物品是否为主模组零食/饮料（这类物品右键会走放置展示台/兜底饮用逻辑）。 */
     public static boolean isMainHandSnack() {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return false;
         ItemStack mainHand = mc.player.getMainHandItem();
         return !mainHand.isEmpty() && SnackItemRegistry.isSnackItem(mainHand.getItem());
+    }
+
+    /**
+     * 主手物品是否是 BlockItem 材质包扩展物品（可放置 3D 方块模型，如原版橡树原木/石头等）。
+     * <p>用于「饮用键=右键」时让位给原版右键放置方块——BlockItem 右键地面应放置方块而非播放动画。
+     */
+    public static boolean isMainHandBlockPackItem() {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null) return false;
+        ItemStack mainHand = mc.player.getMainHandItem();
+        if (mainHand.isEmpty()) return false;
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(mainHand.getItem());
+        return id != null
+                && com.realisticdining.neoforge.client.pack.PackDefinitionManager.containsItem(id.toString())
+                && mainHand.getItem() instanceof BlockItem;
     }
 }

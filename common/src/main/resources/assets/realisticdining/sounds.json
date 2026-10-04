@@ -119,5 +119,44 @@
     "sounds": [
       "realisticdining:cooked_beef_milktea/can_gulp"
     ]
+  },
+
+  "drink.canned.pull_open": {
+    "category": "player",
+    "sounds": [
+      "realisticdining:05_canned/pull_open"
+    ]
+  },
+  "drink.canned.scooped_food": {
+    "category": "player",
+    "sounds": [
+      "realisticdining:05_canned/scooped_food"
+    ]
+  },
+
+  "drink.scream.cap_off": {
+    "category": "player",
+    "sounds": [
+      "realisticdining:06_scream/cap_off"
+    ]
+  },
+  "drink.scream.gulp": {
+    "category": "player",
+    "sounds": [
+      "realisticdining:06_scream/gulp"
+    ]
+  },
+
+  "drink.latiao.bag_open": {
+    "category": "player",
+    "sounds": [
+      "realisticdining:07_latiao/bag_open"
+    ]
+  },
+  "drink.latiao.chew": {
+    "category": "player",
+    "sounds": [
+      "realisticdining:07_latiao/chew"
+    ]
   }
 }

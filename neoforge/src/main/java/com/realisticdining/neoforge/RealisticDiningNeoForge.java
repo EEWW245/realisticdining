@@ -2,6 +2,7 @@ package com.realisticdining.neoforge;
 
 import com.realisticdining.RealisticDining;
 import com.realisticdining.neoforge.client.pack.PackItems;
+import com.realisticdining.neoforge.loot.FoodConfigReloadListener;
 import com.realisticdining.neoforge.loot.ModLootModifiers;
 import com.realisticdining.neoforge.network.ApplyHungerPacket;
 import com.realisticdining.neoforge.network.ConsumeRicePacket;
@@ -19,6 +20,8 @@ import com.realisticdining.registry.ModItems;
 import com.realisticdining.registry.ModSounds;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 @Mod(RealisticDining.MOD_ID)
@@ -39,6 +42,15 @@ public class RealisticDiningNeoForge {
         PackItems.register(modEventBus);
 
         modEventBus.register(ModLootModifiers.class);
+
+        // 食物配置数据包 ReloadListener：扫描 data/<任意 ns>/foods/drinks/*.json 和 dishes/*.json
+        // 玩家可写数据包覆盖任意饮料/零食/菜品的饱食度、饱和度、buff
+        // 注意：AddReloadListenerEvent 是 game bus 事件，必须注册到 NeoForge.EVENT_BUS，
+        // 不能注册到 modEventBus（mod bus 只接受 IModBusEvent 子类），否则会在 mod 加载阶段抛
+        // IllegalArgumentException: Listener for event class ...AddReloadListenerEvent takes an argument
+        // that is not a subtype of the base type interface ...IModBusEvent
+        NeoForge.EVENT_BUS.addListener((AddReloadListenerEvent event) ->
+                event.addListener(new FoodConfigReloadListener()));
 
         modEventBus.addListener(ConsumeRicePacket::register);
         modEventBus.addListener(ConsumeDrinkPacket::register);

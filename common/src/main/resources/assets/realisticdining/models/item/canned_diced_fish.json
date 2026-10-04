@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "realisticdining:item/canned_diced_fish"
+	}
+}

@@ -1,0 +1,118 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "all",
+					"pivot": [-3, 7, 2],
+					"rotation": [0, 90, 0]
+				},
+				{
+					"name": "Right Arm",
+					"parent": "all",
+					"pivot": [6, 14, -4],
+					"cubes": [
+						{"origin": [4, 2, -6], "size": [4, 12, 4], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "spoon",
+					"parent": "Right Arm",
+					"pivot": [6.75, 1.75, -4],
+					"cubes": [
+						{"origin": [5, 1.25, -4.5], "size": [3, 1, 1], "uv": [17, 26]},
+						{"origin": [8, 1.25, -5], "size": [2, 1, 2], "uv": [17, 22]}
+					]
+				},
+				{
+					"name": "Left Arm",
+					"parent": "all",
+					"pivot": [6, 14, 8],
+					"cubes": [
+						{"origin": [4, 2, 6], "size": [4, 12, 4], "uv": [0, 17]}
+					]
+				},
+				{
+					"name": "cannedfood",
+					"parent": "Left Arm",
+					"pivot": [6, 3, 2],
+					"cubes": [
+						{"origin": [4, 2, 0], "size": [4, 2, 4], "uv": [17, 0]}
+					]
+				},
+				{
+					"name": "cup",
+					"parent": "cannedfood",
+					"pivot": [8, 4, 2],
+					"cubes": [
+						{"origin": [6, 4, 0], "size": [2, 0, 4], "uv": [17, 12]}
+					]
+				},
+				{
+					"name": "cup2",
+					"parent": "cup",
+					"pivot": [6, 4, 2],
+					"cubes": [
+						{"origin": [4, 4, 0], "size": [2, 0, 4], "uv": [17, 17]},
+						{"origin": [4, 4.01, 1.5], "size": [2, 0, 1], "uv": [26, 22]}
+					]
+				},
+				{
+					"name": "soup",
+					"parent": "cannedfood",
+					"pivot": [6, 3, 2],
+					"cubes": [
+						{"origin": [4, 3.25, 0], "size": [4, 0, 4], "uv": [17, 7]}
+					]
+				},
+				{
+					"name": "food2",
+					"parent": "cannedfood",
+					"pivot": [7, 3.5, 3],
+					"rotation": [0, 77.5, 0],
+					"cubes": [
+						{"origin": [6.5, 3, 2.25], "size": [1.25, 1, 1.25], "uv": [26, 24]}
+					]
+				},
+				{
+					"name": "food1",
+					"parent": "cannedfood",
+					"pivot": [5, 3.5, 2.75],
+					"rotation": [0, 30, 0],
+					"cubes": [
+						{"origin": [4.5, 3, 2.25], "size": [1, 1, 1], "uv": [26, 27]}
+					]
+				},
+				{
+					"name": "food3",
+					"parent": "cannedfood",
+					"pivot": [6.5, 3.5, 1],
+					"rotation": [-179.99995, -80.00005, 179.99995],
+					"cubes": [
+						{
+							"origin": [5.75, 3, 0.25],
+							"size": [1.5, 1, 1.5],
+							"uv": {
+								"north": {"uv": [23, 29], "uv_size": [1.5, 1]},
+								"east": {"uv": [30, 12], "uv_size": [1.5, 1]},
+								"south": {"uv": [30, 14], "uv_size": [1.5, 1]},
+								"west": {"uv": [30, 16], "uv_size": [1.5, 1]},
+								"up": {"uv": [17, 29], "uv_size": [1.5, 1.5]},
+								"down": {"uv": [20, 30.5], "uv_size": [1.5, -1.5]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

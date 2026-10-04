@@ -93,7 +93,9 @@ public class PackItemRendererMixin {
         poseStack.pushPose();
         // 第一人称手持位置修正（参考 ImmersiveEating）
         poseStack.translate(-1.05F, -0.35F, -0.8F);
-        renderer.renderByItem(PackItems.EMPTY_ITEM.getRenderStack(), context, poseStack, buffer, light, overlay);
+        // 渲染传 per-item 代理 stack（附加 GeckoLib 独立 animatable id）：
+        // GeckoLib 据此为每个物品定位独立的 AnimatableManager，动画状态互不污染
+        renderer.renderByItem(PackItems.EMPTY_ITEM.getRenderStackFor(id.toString()), context, poseStack, buffer, light, overlay);
         poseStack.popPose();
         ci.cancel();
     }

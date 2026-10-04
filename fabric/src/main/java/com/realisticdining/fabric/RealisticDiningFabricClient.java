@@ -9,6 +9,7 @@ import com.realisticdining.fabric.client.renderer.TomatoPoachedEggRenderer;
 import com.realisticdining.fabric.client.renderer.WokFriedEggRenderer;
 import com.realisticdining.fabric.client.renderer.WokRenderer;
 import com.realisticdining.fabric.client.renderer.WokYellowSteakRenderer;
+import com.realisticdining.fabric.compat.FirstPersonModHandler;
 import com.realisticdining.fabric.event.SnackTooltipHandler;
 import com.realisticdining.fabric.registry.ModMenuTypes;
 import com.realisticdining.menu.CookbookScreen;
@@ -52,5 +53,8 @@ public class RealisticDiningFabricClient implements ClientModInitializer {
 
         // 材质包扩展：注册 pack_empty GeoItem + 资源重载监听器 + 客户端事件
         PackClientSetup.register();
+
+        // First-person Model 兼容性处理
+        FirstPersonModHandler.register();
     }
 }

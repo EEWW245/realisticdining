@@ -4,6 +4,7 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PlatformHelper {
 
@@ -34,6 +35,16 @@ public class PlatformHelper {
 
     @ExpectPlatform
     public static void sendVendingPurchase(ResourceLocation itemId) {
+        throw new AssertionError();
+    }
+
+    /**
+     * 返回 SnackDisplayBlock 的视线检测箱（SHAPE）。
+     * Fabric 平台使用完整 1 格（16,16,16），NeoForge/Forge 平台使用 0.25 格薄板（16,4,16）。
+     * 按用户偏好：Fabric 端追求右键命中精度，NeoForge/Forge 端追求可越过展示台上方放置方块。
+     */
+    @ExpectPlatform
+    public static VoxelShape getSnackDisplayShape() {
         throw new AssertionError();
     }
 

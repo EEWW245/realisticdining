@@ -28,7 +28,7 @@ public class RicePlaceHandler {
         
         ItemStack heldItem = player.getItemInHand(event.getHand());
         
-        if (KaleidoscopeCookeryCompat.isCookedRice(heldItem)) {
+        if (KaleidoscopeCookeryCompat.isRice(heldItem)) {
             if (ServerEatingState.isEating(player.getUUID())) {
                 event.setCancellationResult(InteractionResult.FAIL);
                 event.setCanceled(true);
@@ -36,9 +36,12 @@ public class RicePlaceHandler {
             }
             
             if (level.getBlockState(pos.above()).getBlock() == Blocks.AIR) {
-                level.setBlock(pos.above(), ModBlocks.RICE_BOWL.get().defaultBlockState(), 3);
-                if (!player.isCreative()) {
-                    heldItem.shrink(1);
+                // 客户端只取消事件，服务端权威放置 + 消耗（避免双端重复 setBlock/shrink）
+                if (!level.isClientSide) {
+                    level.setBlock(pos.above(), ModBlocks.RICE_BOWL.get().defaultBlockState(), 3);
+                    if (!player.isCreative()) {
+                        heldItem.shrink(1);
+                    }
                 }
                 event.setCancellationResult(InteractionResult.SUCCESS);
                 event.setCanceled(true);

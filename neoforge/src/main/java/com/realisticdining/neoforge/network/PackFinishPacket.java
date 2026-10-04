@@ -86,12 +86,15 @@ public class PackFinishPacket {
                 result = new ItemStack(Items.BUCKET);
             } else {
                 FoodProperties food = stack.get(DataComponents.FOOD);
-                if (food == null) {
-                    // 非食物：仍清状态，避免卡死
-                    ServerEatingState.setEating(player.getUUID(), false);
-                    return;
+                if (food != null) {
+                    // 食物等可使用物品：走原版 finishUsingItem
+                    result = stack.finishUsingItem(player.level(), player);
+                } else {
+                    // 非食物或不可使用物品（定义文件绑定的任意物品）：手动减 1
+                    // 与 Forge 端逻辑一致，确保材质包扩展的非原版食物物品也能消耗
+                    stack.shrink(1);
+                    result = stack;
                 }
-                result = stack.finishUsingItem(player.level(), player);
             }
             player.setItemInHand(hand, result);
             ServerEatingState.setEating(player.getUUID(), false);

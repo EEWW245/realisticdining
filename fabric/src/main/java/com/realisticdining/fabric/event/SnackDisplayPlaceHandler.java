@@ -45,7 +45,24 @@ public class SnackDisplayPlaceHandler {
                 return InteractionResult.PASS;
             }
             ItemStack held = player.getItemInHand(hand);
-            if (held.isEmpty() || !SnackItemRegistry.isSnackItem(held.getItem())) {
+            if (held.isEmpty()) {
+                return InteractionResult.PASS;
+            }
+
+            // 材质包扩展物品：右键地面时根据是否 BlockItem 分流
+            // - BlockItem（可放置 3D 方块模型，如原版橡树原木）→ 返回 PASS 让原版放置方块，不播放动画
+            // - 非 BlockItem（普通物品，如苹果/罐头）→ 触发材质包动画 + 返回 SUCCESS 取消原版（避免主手死锁）
+            if (isPackItem(held)) {
+                if (held.getItem() instanceof net.minecraft.world.item.BlockItem) {
+                    return InteractionResult.PASS;
+                }
+                if (level.isClientSide) {
+                    triggerDrinkFallback(level);
+                }
+                return InteractionResult.SUCCESS;
+            }
+
+            if (!SnackItemRegistry.isSnackItem(held.getItem())) {
                 return InteractionResult.PASS;
             }
 
@@ -57,9 +74,15 @@ public class SnackDisplayPlaceHandler {
             }
 
             BlockPos hitPos = hitResult.getBlockPos();
-            // 右键已有展示台：交给方块自身交互（放入槽位）
+
+            // 右键已有展示台：直接在 UseBlockCallback 中 tryPlace + SUCCESS（取消 vanilla + 发包），
+            // 阻止 vanilla Block.useItemOn → SnackDisplayBlockEntity.tryPlace 二次 shrink。
+            // Fabric API 文档明确：SUCCESS = 取消后续处理 + 客户端发包给服务端。
             if (level.getBlockState(hitPos).getBlock() == ModBlocks.SNACK_DISPLAY.get()) {
-                return InteractionResult.PASS;
+                if (!level.isClientSide && level.getBlockEntity(hitPos) instanceof SnackDisplayBlockEntity be) {
+                    be.tryPlace(player, held, hand);
+                }
+                return InteractionResult.SUCCESS;
             }
 
             // 右键森罗物语桌子：在桌面上方一格放置展示台
@@ -84,6 +107,12 @@ public class SnackDisplayPlaceHandler {
                 // 位置放不下 → 兜底触发饮用动画
                 triggerDrinkFallback(level);
                 return InteractionResult.PASS;
+            }
+
+            // 客户端返回 SUCCESS（取消 vanilla + 发包给服务端），服务端权威放置 + tryPlace。
+            // Fabric API 文档：SUCCESS = cancels further processing and, on the client, sends a packet to the server.
+            if (level.isClientSide) {
+                return InteractionResult.SUCCESS;
             }
 
             BlockState state = ModBlocks.SNACK_DISPLAY.get().defaultBlockState()
@@ -153,7 +182,8 @@ public class SnackDisplayPlaceHandler {
         BlockState aboveState = level.getBlockState(abovePos);
 
         if (aboveState.getBlock() == ModBlocks.SNACK_DISPLAY.get()) {
-            if (level.getBlockEntity(abovePos) instanceof SnackDisplayBlockEntity be) {
+            // 已有展示台：SUCCESS 取消 vanilla + 发包，服务端 tryPlace。
+            if (!level.isClientSide && level.getBlockEntity(abovePos) instanceof SnackDisplayBlockEntity be) {
                 be.tryPlace(player, held, hand);
             }
             return InteractionResult.SUCCESS;
@@ -161,6 +191,11 @@ public class SnackDisplayPlaceHandler {
 
         if (!aboveState.canBeReplaced()) {
             return InteractionResult.PASS;
+        }
+
+        // 客户端返回 SUCCESS（取消 vanilla + 发包）。
+        if (level.isClientSide) {
+            return InteractionResult.SUCCESS;
         }
 
         BlockState state = ModBlocks.SNACK_DISPLAY.get().defaultBlockState()

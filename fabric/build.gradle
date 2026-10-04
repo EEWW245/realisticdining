@@ -11,6 +11,7 @@ loom {
     mixin {
         defaultRefmapName.set("realisticdining-fabric-refmap.json")
     }
+    accessWidenerPath = file("src/main/resources/realisticdining-fabric.accesswidener")
 }
 
 configurations {

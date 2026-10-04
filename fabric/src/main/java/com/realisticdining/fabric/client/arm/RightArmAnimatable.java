@@ -78,4 +78,15 @@ public class RightArmAnimatable implements SingletonGeoAnimatable {
             triggerAnim(mc.player, INSTANCE_ID, CONTROLLER_NAME, animName);
         }
     }
+
+    /** 停止当前咬动画并复位 pose，清除挂嘴边的米饭粒。 */
+    public void stopBiteAnimation() {
+        AnimatableManager<?> manager = this.cache.getManagerForId(INSTANCE_ID);
+        if (manager != null) {
+            AnimationController<?> controller = manager.getAnimationControllers().get(CONTROLLER_NAME);
+            if (controller != null) {
+                controller.forceAnimationReset();
+            }
+        }
+    }
 }

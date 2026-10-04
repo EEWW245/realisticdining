@@ -24,7 +24,7 @@ public class RicePlaceHandler {
                 return InteractionResult.PASS;
             }
             
-            if (!KaleidoscopeCookeryCompat.isCookedRice(heldItem)) {
+            if (!KaleidoscopeCookeryCompat.isRice(heldItem)) {
                 return InteractionResult.PASS;
             }
             
@@ -34,9 +34,12 @@ public class RicePlaceHandler {
             
             BlockPos pos = hitResult.getBlockPos();
             if (level.getBlockState(pos.above()).isAir()) {
-                level.setBlock(pos.above(), ModBlocks.RICE_BOWL.get().defaultBlockState(), 3);
-                if (!player.isCreative()) {
-                    heldItem.shrink(1);
+                // 客户端只返回 SUCCESS 阻止原版，服务端权威放置 + 消耗（避免双端重复 setBlock/shrink）
+                if (!level.isClientSide) {
+                    level.setBlock(pos.above(), ModBlocks.RICE_BOWL.get().defaultBlockState(), 3);
+                    if (!player.isCreative()) {
+                        heldItem.shrink(1);
+                    }
                 }
                 return InteractionResult.SUCCESS;
             }

@@ -48,7 +48,24 @@ public class SnackDisplayPlaceHandler {
         if (hand != InteractionHand.MAIN_HAND) return;
 
         ItemStack held = player.getItemInHand(hand);
-        if (held.isEmpty() || !SnackItemRegistry.isSnackItem(held.getItem())) return;
+        if (held.isEmpty()) return;
+
+        // 材质包扩展物品：右键地面时根据是否 BlockItem 分流
+        // - BlockItem（可放置 3D 方块模型，如原版橡树原木）→ 不 cancel，让原版放置方块，不播放动画
+        // - 非 BlockItem（普通物品，如苹果/罐头）→ 触发材质包动画 + cancel 事件（避免主手死锁）
+        if (isPackItem(held)) {
+            if (held.getItem() instanceof net.minecraft.world.item.BlockItem) {
+                return;
+            }
+            if (level.isClientSide) {
+                triggerDrinkFallback(level);
+            }
+            event.setCancellationResult(InteractionResult.CONSUME);
+            event.setCanceled(true);
+            return;
+        }
+
+        if (!SnackItemRegistry.isSnackItem(held.getItem())) return;
 
         // v2.3.0+ 防无限刷：动画播放期间禁止右键地面/桌子放置展示台
         if (ServerEatingState.isEating(player.getUUID())) {
@@ -88,25 +105,39 @@ public class SnackDisplayPlaceHandler {
             return;
         }
 
-        BlockState state = ModBlocks.SNACK_DISPLAY.get().defaultBlockState()
-                .setValue(SnackDisplayBlock.FACING, player.getDirection());
-        level.setBlock(placePos, state, 3);
+        // 客户端只取消事件，服务端权威放置（避免双端重复 setBlock/shrink）
+        if (!level.isClientSide) {
+            BlockState state = ModBlocks.SNACK_DISPLAY.get().defaultBlockState()
+                    .setValue(SnackDisplayBlock.FACING, player.getDirection());
+            level.setBlock(placePos, state, 3);
 
-        if (level.getBlockEntity(placePos) instanceof SnackDisplayBlockEntity be) {
-            be.tryPlace(player, held, hand);
+            if (level.getBlockEntity(placePos) instanceof SnackDisplayBlockEntity be) {
+                be.tryPlace(player, held, hand);
+            }
         }
         event.setCancellationResult(InteractionResult.SUCCESS);
         event.setCanceled(true);
     }
 
-    /** 对准空气右键：主手持零食/饮料时直接触发饮用动画（仅客户端） */
+    /** 对准空气右键：主手持零食/饮料 或 材质包扩展物品时触发动画（仅客户端） */
     @SubscribeEvent
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
         Level level = event.getLevel();
         if (!level.isClientSide) return;
         if (event.getHand() != InteractionHand.MAIN_HAND) return;
         ItemStack held = event.getEntity().getItemInHand(event.getHand());
-        if (held.isEmpty() || !SnackItemRegistry.isSnackItem(held.getItem())) return;
+        if (held.isEmpty()) return;
+
+        // 材质包扩展物品：右键空气时触发材质包动画（改键为右键后必须处理并 cancel 事件，
+        // 否则原版 Item.use() 会执行，创造模式下会让玩家进入 usingItem 状态导致主手被锁）
+        if (isPackItem(held)) {
+            triggerDrinkFallback(level);
+            event.setCancellationResult(InteractionResult.CONSUME);
+            event.setCanceled(true);
+            return;
+        }
+
+        if (!SnackItemRegistry.isSnackItem(held.getItem())) return;
         triggerDrinkFallback(level);
     }
 
@@ -131,7 +162,7 @@ public class SnackDisplayPlaceHandler {
         BlockState aboveState = level.getBlockState(abovePos);
 
         if (aboveState.getBlock() == ModBlocks.SNACK_DISPLAY.get()) {
-            if (level.getBlockEntity(abovePos) instanceof SnackDisplayBlockEntity be) {
+            if (!level.isClientSide && level.getBlockEntity(abovePos) instanceof SnackDisplayBlockEntity be) {
                 be.tryPlace(player, held, hand);
             }
             return true;
@@ -141,12 +172,15 @@ public class SnackDisplayPlaceHandler {
             return false;
         }
 
-        BlockState state = ModBlocks.SNACK_DISPLAY.get().defaultBlockState()
-                .setValue(SnackDisplayBlock.FACING, player.getDirection());
-        level.setBlock(abovePos, state, 3);
+        // 客户端只返回 true 取消事件，服务端权威放置
+        if (!level.isClientSide) {
+            BlockState state = ModBlocks.SNACK_DISPLAY.get().defaultBlockState()
+                    .setValue(SnackDisplayBlock.FACING, player.getDirection());
+            level.setBlock(abovePos, state, 3);
 
-        if (level.getBlockEntity(abovePos) instanceof SnackDisplayBlockEntity be) {
-            be.tryPlace(player, held, hand);
+            if (level.getBlockEntity(abovePos) instanceof SnackDisplayBlockEntity be) {
+                be.tryPlace(player, held, hand);
+            }
         }
         return true;
     }
@@ -159,5 +193,12 @@ public class SnackDisplayPlaceHandler {
         return key != null
                 && key.getNamespace().equals(KALEIDOSCOPE_COOKERY_MODID)
                 && key.getPath().startsWith("table");
+    }
+
+    /** 判断物品是否是材质包扩展物品（Pack）。 */
+    private static boolean isPackItem(ItemStack stack) {
+        if (stack == null || stack.isEmpty()) return false;
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        return id != null && com.realisticdining.neoforge.client.pack.PackDefinitionManager.containsItem(id.toString());
     }
 }

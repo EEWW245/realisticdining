@@ -11,6 +11,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PlatformHelperImpl {
 
@@ -62,6 +64,11 @@ public class PlatformHelperImpl {
 
     public static void sendVendingPurchase(ResourceLocation itemId) {
         VendingMachinePurchasePacket.sendPurchaseToServer(itemId);
+    }
+
+    /** NeoForge 平台：SnackDisplayBlock 用 0.25 格薄板，玩家可越过展示台上方瞄准/放置方块。 */
+    public static VoxelShape getSnackDisplayShape() {
+        return Block.box(0, 0, 0, 16, 4, 16);
     }
 
     public static void sendDrinkConsume(String drinkId, boolean startEating) {

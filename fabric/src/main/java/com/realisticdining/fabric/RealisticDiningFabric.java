@@ -3,6 +3,7 @@ package com.realisticdining.fabric;
 import com.realisticdining.RealisticDining;
 import com.realisticdining.common.ServerEatingState;
 import com.realisticdining.fabric.event.CorianderSeedsLootHandler;
+import com.realisticdining.fabric.event.FoodConfigReloadListener;
 import com.realisticdining.fabric.event.FriedRiceEggPlaceHandler;
 import com.realisticdining.fabric.event.GreenOnionSeedsLootHandler;
 import com.realisticdining.fabric.event.RandomChanceCondition;
@@ -26,6 +27,8 @@ import com.realisticdining.registry.ModItems;
 import com.realisticdining.registry.ModSounds;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.server.packs.PackType;
 
 public class RealisticDiningFabric implements ModInitializer {
     
@@ -54,6 +57,11 @@ public class RealisticDiningFabric implements ModInitializer {
         // 先注册自定义 loot condition type（必须在注册表冻结前）
         RandomChanceCondition.register();
         SnackLootInjector.register();
+
+        // 食物配置数据包 ReloadListener：扫描 data/<任意 ns>/foods/drinks/*.json 和 dishes/*.json
+        // 玩家可写数据包覆盖任意饮料/零食/菜品的饱食度、饱和度、buff
+        ResourceManagerHelper.get(PackType.SERVER_DATA)
+                .registerReloadListener(new FoodConfigReloadListener());
         
         ConsumeRicePacket.registerServer();
         ConsumeDrinkPacket.registerServer();

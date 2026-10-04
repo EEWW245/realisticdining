@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.function.Supplier;
 
 /**
- * Fabric 1.21.1 战利品表注入：往所有原版箱子（minecraft:chests/*）追加随机零食/饮料。
+ * Fabric 1.21.1 战利品表注入：往所有箱子（任意模组的 *:chests/* 表）追加随机零食/饮料。
  *
  * <p>每次开箱以「30%~50% 区间随机抽取」的概率（由 {@link RandomChanceCondition} 控制）
- * 追加 1~2 个零食/饮料，18 种零食/饮料平等随机（等权重）。
+ * 追加 1~2 个零食/饮料，19 种零食/饮料平等随机（等权重）。
  */
 public class SnackLootInjector {
 
-    /** 18 个可饮用/可放置的零食/饮料（与 SnackItemRegistry 一致）。 */
+    /** 19 个可饮用/可放置的零食/饮料（与 SnackItemRegistry 一致）。 */
     private static final List<Supplier<Item>> SNACKS = List.of(
             ModItems.MINERAL_WATER,
             ModItems.MILK_BEER,
@@ -40,15 +40,24 @@ public class SnackLootInjector {
             ModItems.CRISPY_FISH_CHIPS,
             ModItems.COOKIE_BAG,
             ModItems.COOKIE_BAG_COCONUT_LATTE,
-            ModItems.PEARL_MILK_TEA
+            ModItems.PEARL_MILK_TEA,
+            // 罐头组（5 个）
+            ModItems.CANNED_HONEY_PEACH,
+            ModItems.CANNED_MIXED_FRUIT,
+            ModItems.CANNED_BEEF,
+            ModItems.CANNED_DICED_FISH,
+            ModItems.EIGHT_TREASURE_CONGEE,
+            // 尖啸运动饮料 + 辣条
+            ModItems.SCREAM,
+            ModItems.LATIAO
     );
 
     private static final int SNACK_WEIGHT = 1;
 
     public static void register() {
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-            if (!"minecraft".equals(key.location().getNamespace())
-                    || !key.location().getPath().startsWith("chests/")) {
+            // 所有模组的 chests/* 表都注入（不限 minecraft 命名空间）
+            if (!key.location().getPath().startsWith("chests/")) {
                 return;
             }
 

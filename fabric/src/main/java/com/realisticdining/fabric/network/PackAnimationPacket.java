@@ -15,7 +15,6 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import software.bernie.geckolib.animatable.GeoItem;
 
 /**
  * 材质包扩展动画触发 C2S 网络包（Fabric 1.21.1）。
@@ -44,17 +43,26 @@ public class PackAnimationPacket {
                     context.player().getServer().execute(() -> {
                         // 校验主手物品确实是材质包扩展物品（防伪造）
                         ItemStack stack = player.getMainHandItem();
-                        if (stack.isEmpty()) return;
+                        if (stack.isEmpty()) {
+                            com.realisticdining.RealisticDining.LOGGER.info("[RD诊断] Packet服务端: 收到触发包但主手为空 → 忽略");
+                            return;
+                        }
                         ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
-                        if (id == null || !PackDefinitionManager.containsItem(id.toString())) return;
+                        if (id == null || !PackDefinitionManager.containsItem(id.toString())) {
+                            com.realisticdining.RealisticDining.LOGGER.info("[RD诊断] Packet服务端: 主手 {} 非扩展物品 → 忽略", id);
+                            return;
+                        }
 
                         // 标记正在吃/喝，让 SnackDisplayPlaceHandler 等防无限刷逻辑生效
                         ServerEatingState.setEating(player.getUUID(), true);
 
-                        // 触发 GeckoLib 同步动画（与 1.20.1 一致：服务端 triggerAnim → 客户端播放）
+                        // 触发 GeckoLib 同步动画（服务端 triggerAnim → 客户端播放）。
+                        // id 按 itemId 派生，与客户端渲染用的 AnimatableManager 一致
+                        // （原 getOrAssignId 分配的随机 id 与渲染端不匹配）
                         PackEmpty empty = PackItems.EMPTY_ITEM;
                         if (empty == null) return;
-                        long geoId = GeoItem.getOrAssignId(empty.getRenderStack(), player.serverLevel());
+                        long geoId = PackEmpty.getIdForItem(id.toString());
+                        com.realisticdining.RealisticDining.LOGGER.info("[RD诊断] Packet服务端: 物品 {} → triggerAnim(geoId={})", id, geoId);
                         empty.triggerAnim(player, geoId, "eat", "eat");
                     });
                 }

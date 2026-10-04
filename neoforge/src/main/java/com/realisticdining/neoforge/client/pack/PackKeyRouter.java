@@ -38,8 +38,9 @@ public final class PackKeyRouter {
         }
 
         // 命中材质包扩展物品 → 锁定 + 本地触发动画 + 发服务端防刷包
+        // 触发按 itemId 定位该物品专属的 AnimatableManager（与其他扩展物品隔离）
         PackAnimationLock.lock();
-        PackEmpty.triggerEatAnimation();
+        PackEmpty.triggerEatAnimation(id.toString());
         PackAnimationPacket.sendToServer();
         return true;
     }
