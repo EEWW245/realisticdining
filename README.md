@@ -89,7 +89,7 @@ If you want to modify the nutrition, saturation, and buffs of the mod's snacks a
 ## Credits
 
 - **Mod ID**: `realisticdining`
-- **Version**: 2.3.0
+- **Version**: 2.4.0
 - **Dependencies**: GeckoLib, Kaleidoscope Cookery. 1.21.1 build: Architectury API + GeckoLib.
 
 ---
