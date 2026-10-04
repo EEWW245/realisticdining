@@ -67,7 +67,7 @@ The number of sub-animations in an animation file depends on `mode`:
 | `pickup` | 2: `pickup` + `eat` | `pickup` picks up to the holding pose, press U to play `eat` |
 
 - Animation names: "eat"; in "pickup" mode use "pickup"and "eat".
-- The eat animation must play once and cannot be set to hold on the last frame, otherwise the arms will be misaligned after the animation finishes.
+- The "eat" animation must play once and cannot be set to hold on the last frame, otherwise the arms will be misaligned after the animation finishes.
 
 Press **U** to play the eating animation.
 
