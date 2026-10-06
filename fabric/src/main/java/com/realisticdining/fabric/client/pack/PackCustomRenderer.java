@@ -43,6 +43,8 @@ public class PackCustomRenderer extends GeoItemRenderer<PackEmpty> {
     private final String derivedName;
     /** 捕获的手臂姿态列表（renderRecursively 填充，renderByItem 结尾用原版贴图渲染）。 */
     private final List<VanillaArmRenderer.CapturedArm> capturedArms = new ArrayList<>();
+    /** 是否已输出过"资源缺失"警告（reload 期间可能连续多帧命中，只警告一次避免刷屏）。 */
+    private boolean warnedMissingResource = false;
 
     public PackCustomRenderer(String itemId) {
         super(new Model(PackDefinitionManager.getDerivedName(itemId)));
@@ -57,27 +59,41 @@ public class PackCustomRenderer extends GeoItemRenderer<PackEmpty> {
         PackEmpty.setCurrentRenderItemId(itemId);
         capturedArms.clear();
 
-        if (PackDefinitionManager.getMode(itemId) == PackMode.PICKUP) {
-            // PICKUP 模式：让 GeckoLib 动画（pickup + hold_on_last_frame）接管渲染
-            super.renderByItem(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
+        try {
+            if (PackDefinitionManager.getMode(itemId) == PackMode.PICKUP) {
+                // PICKUP 模式：让 GeckoLib 动画（pickup + hold_on_last_frame）接管渲染
+                super.renderByItem(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
+                // 模型渲染完成后，用原版玩家皮肤贴图渲染捕获的手臂
+                VanillaArmRenderer.renderCapturedArms(capturedArms, bufferSource, packedLight);
+                return;
+            }
+            // STATIC 模式：叠加 4 种程序化晃动
+            poseStack.pushPose();
+            try {
+                // partialTick：1.21.1 getFrameTime 已移除，暂用 0
+                float partialTick = 0.0F;
+                PackHeldItemMotion.applyIdleMotion(poseStack, partialTick);
+                PackHeldItemMotion.applyWalkMotion(poseStack, partialTick);
+                PackHeldItemMotion.applyInertiaMotion(poseStack, partialTick);
+                PackHeldItemMotion.applyJumpMotion(poseStack, partialTick);
+                super.renderByItem(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
+            } finally {
+                poseStack.popPose();
+            }
             // 模型渲染完成后，用原版玩家皮肤贴图渲染捕获的手臂
             VanillaArmRenderer.renderCapturedArms(capturedArms, bufferSource, packedLight);
+        } catch (RuntimeException e) {
+            // 兜底：资源 reload 期间（典型场景：存档内移除材质包），GeckoLib 模型缓存已被清空，
+            // 但 PackDefinitionManager 尚未重载完成，getBakedModel 找不到模型会抛
+            // GeckoLibException 直接崩客户端。此处捕获并跳过本帧渲染；reload 完成后定义失效，
+            // mixin 不再拦截，自动回退原版渲染，玩家最多看到一帧闪烁而非崩溃。
+            if (!warnedMissingResource) {
+                warnedMissingResource = true;
+                RealisticDining.LOGGER.warn("[材质包扩展] 渲染 {} 时资源缺失，已跳过本帧渲染: {}", itemId, e.getMessage());
+            }
+        } finally {
             capturedArms.clear();
-            return;
         }
-        // STATIC 模式：叠加 4 种程序化晃动
-        poseStack.pushPose();
-        // partialTick：1.21.1 getFrameTime 已移除，暂用 0
-        float partialTick = 0.0F;
-        PackHeldItemMotion.applyIdleMotion(poseStack, partialTick);
-        PackHeldItemMotion.applyWalkMotion(poseStack, partialTick);
-        PackHeldItemMotion.applyInertiaMotion(poseStack, partialTick);
-        PackHeldItemMotion.applyJumpMotion(poseStack, partialTick);
-        super.renderByItem(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
-        poseStack.popPose();
-        // 模型渲染完成后，用原版玩家皮肤贴图渲染捕获的手臂
-        VanillaArmRenderer.renderCapturedArms(capturedArms, bufferSource, packedLight);
-        capturedArms.clear();
     }
 
     @Override
