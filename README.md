@@ -71,7 +71,8 @@ The number of sub-animations in an animation file depends on `mode`:
 
 Press **U** to play the eating animation.
 
-Resource Pack Creators: The main hand is locked during animations and normally unlocks on completion. A known Creative‑mode testing bug may prevent it from unlocking afterward; mouse left‑click fixes it. No problem in Survival, and Survival players are not impacted.
+Note for Resource Pack Creators:
+Your main hand will be locked during animation playback and unlock once the animation finishes. When testing animations in Creative mode, however, the main hand may sometimes fail to unlock after the animation ends. Left‑clicking with the mouse will unlock it. This issue does not happen in Survival mode and will not affect other Survival‑mode players..
 
 ---
 
