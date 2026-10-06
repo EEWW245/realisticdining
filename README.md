@@ -69,9 +69,9 @@ The number of sub-animations in an animation file depends on `mode`:
 - Animation names: "eat"; in "pickup" mode use "pickup"and "eat".
 - The"eat" animation must play once and cannot be set to hold on the last frame, otherwise the arms will be misaligned after the animation finishes.
 
-Press **U** to play the eating animation.
+- Press **U** to play the eating animation.
 
-Note for Resource Pack Creators:
+- Note for Resource Pack Creators:
 Your main hand will be locked during animation playback and unlock once the animation finishes. When testing animations in Creative mode, however, the main hand may sometimes fail to unlock after the animation ends. Left‑clicking with the mouse will unlock it. This issue does not happen in Survival mode and will not affect other Survival‑mode players..
 
 ---
