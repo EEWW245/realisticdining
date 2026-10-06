@@ -71,6 +71,7 @@ The number of sub-animations in an animation file depends on `mode`:
 
 Press **U** to play the eating animation.
 
+Note for Resource Pack Creators: When testing animations in Creative mode, you may encounter an issue where the main hand fails to unlock. Left‑clicking with your mouse will unlock it. This does not occur in Survival mode and does not affect other Survival‑mode players.
 
 ---
 
