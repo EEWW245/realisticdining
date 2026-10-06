@@ -1,9 +1,9 @@
-package com.realisticdining.neoforge.client.pack;
+package com.example.realisticdining.forge.client.pack;
 
+import com.example.realisticdining.RealisticDining;
+import com.example.realisticdining.client.arm.VanillaArmRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.realisticdining.RealisticDining;
-import com.realisticdining.neoforge.client.arm.VanillaArmRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -11,19 +11,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
 import software.bernie.geckolib.cache.object.GeoBone;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
-import software.bernie.geckolib.util.RenderUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 材质包扩展物品的渲染器（NeoForge 1.21.1）。
+ * 材质包扩展物品的渲染器（Forge 1.20.1）。
  *
  * <p>每个扩展物品共用同一个 {@link PackEmpty} GeoItem，但渲染时根据
  * {@link PackDefinitionManager#getDerivedName} 取对应 name，用 name 派生
@@ -69,7 +65,7 @@ public class PackCustomRenderer extends GeoItemRenderer<PackEmpty> {
             // STATIC 模式：叠加 4 种程序化晃动
             poseStack.pushPose();
             try {
-                float partialTick = 0.0F;
+                float partialTick = Minecraft.getInstance().getFrameTime();
                 PackHeldItemMotion.applyIdleMotion(poseStack, partialTick);
                 PackHeldItemMotion.applyWalkMotion(poseStack, partialTick);
                 PackHeldItemMotion.applyInertiaMotion(poseStack, partialTick);
@@ -96,10 +92,11 @@ public class PackCustomRenderer extends GeoItemRenderer<PackEmpty> {
 
     @Override
     public void renderRecursively(PoseStack poseStack, PackEmpty animatable, GeoBone bone, RenderType renderType,
-                                   MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender,
-                                   float partialTick, int packedLight, int packedOverlay, int colour) {
+                                  MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender,
+                                  float partialTick, int packedLight, int packedOverlay,
+                                  float red, float green, float blue, float alpha) {
         poseStack.pushPose();
-        RenderUtil.prepMatrixForBone(poseStack, bone);
+        software.bernie.geckolib.util.RenderUtils.prepMatrixForBone(poseStack, bone);
 
         boolean armBone = VanillaArmRenderer.isArmBone(bone);
         boolean hiddenInModelStage = isHiddenInModelStage(bone);
@@ -114,12 +111,12 @@ public class PackCustomRenderer extends GeoItemRenderer<PackEmpty> {
             }
         } else if (!hiddenInModelStage) {
             // 普通骨骼：正常渲染 cube
-            renderCubesOfBone(poseStack, bone, buffer, packedLight, packedOverlay, colour);
+            renderCubesOfBone(poseStack, bone, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         }
         if (!isReRender && !armBone && !hiddenInModelStage) {
             applyRenderLayersForBone(poseStack, animatable, bone, renderType, bufferSource, buffer, partialTick, packedLight, packedOverlay);
         }
-        renderChildBones(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
+        renderChildBones(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
         poseStack.popPose();
     }
 
@@ -151,11 +148,10 @@ public class PackCustomRenderer extends GeoItemRenderer<PackEmpty> {
         long instanceId = PackEmpty.getIdForItem(itemId);
         PackEmpty empty = PackItems.EMPTY_ITEM;
         if (empty == null) return false;
-        AnimatableInstanceCache cache = empty.getAnimatableInstanceCache();
-        if (cache == null) return false;
-        AnimatableManager<?> manager = cache.getManagerForId(instanceId);
-        if (manager == null) return false;
-        AnimationController<?> controller = manager.getAnimationControllers().get("eat");
+        software.bernie.geckolib.core.animation.AnimationController<?> controller = empty.getAnimatableInstanceCache()
+                .getManagerForId(instanceId)
+                .getAnimationControllers()
+                .get("eat");
         return controller != null && controller.isPlayingTriggeredAnimation();
     }
 
@@ -172,17 +168,17 @@ public class PackCustomRenderer extends GeoItemRenderer<PackEmpty> {
 
         @Override
         public ResourceLocation getModelResource(PackEmpty animatable) {
-            return ResourceLocation.fromNamespaceAndPath(RealisticDining.MOD_ID, "geo/" + name + ".geo.json");
+            return new ResourceLocation(RealisticDining.MOD_ID, "geo/" + name + ".geo.json");
         }
 
         @Override
         public ResourceLocation getTextureResource(PackEmpty animatable) {
-            return ResourceLocation.fromNamespaceAndPath(RealisticDining.MOD_ID, "textures/item/" + name + ".png");
+            return new ResourceLocation(RealisticDining.MOD_ID, "textures/item/" + name + ".png");
         }
 
         @Override
         public ResourceLocation getAnimationResource(PackEmpty animatable) {
-            return ResourceLocation.fromNamespaceAndPath(RealisticDining.MOD_ID, "animations/" + name + ".animation.json");
+            return new ResourceLocation(RealisticDining.MOD_ID, "animations/" + name + ".animation.json");
         }
     }
 }
